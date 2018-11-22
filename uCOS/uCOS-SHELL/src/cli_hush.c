@@ -506,98 +506,7 @@ static char **make_list_in(char **inp, char *name)
 	return list;
 }
 
-/* run_pipe_real() starts all the jobs, but doesn't wait for anything
- * to finish.  See checkjobs().
- *
- * return code is normally -1, when the caller has to wait for children
- * to finish to determine the exit status of the pipe.  If the pipe
- * is a simple builtin command, however, the action is done by the
- * time run_pipe_real returns, and the exit code is provided as the
- * return value.
- *
- * The input of the pipe is always stdin, the output is always
- * stdout.  The outpipe[] mechanism in BusyBox-0.48 lash is bogus,
- * because it tries to avoid running the command substitution in
- * subshell, when that is in fact necessary.  The subshell process
- * now has its stdout directed to the input of the appropriate pipe,
- * so this routine is noticeably simpler.
- */
-static int run_pipe_real(struct pipe *pi)
-{
-	int i;
-	int nextin;
-	int flag = do_repeat ? CMD_FLAG_REPEAT : 0;
-	struct child_prog *child;
-	char *p;
-
-	nextin = 0;
-
-	/* Check if this is a simple builtin (not part of a pipe).
-	 * Builtins within pipes have to fork anyway, and are handled in
-	 * pseudo_exec.  "echo foo | read bar" doesn't work on bash, either.
-	 */
-	if (pi->num_progs == 1) child = & (pi->progs[0]);
-		if (pi->num_progs == 1 && child->group) {
-		int rcode;
-		debug_printf("non-subshell grouping\n");
-		rcode = run_list_real(child->group);
-		return rcode;
-	} else if (pi->num_progs == 1 && pi->progs[0].argv != NULL) {
-		for (i=0; is_assignment(child->argv[i]); i++) { /* nothing */ }
-		if (i!=0 && child->argv[i]==NULL) {
-			/* assignments, but no command: set the local environment */
-			for (i=0; child->argv[i]!=NULL; i++) {
-
-				/* Ok, this case is tricky.  We have to decide if this is a
-				 * local variable, or an already exported variable.  If it is
-				 * already exported, we have to export the new value.  If it is
-				 * not exported, we need only set this as a local variable.
-				 * This junk is all to decide whether or not to export this
-				 * variable. */
-				int export_me=0;
-				char *name, *value;
-				name = (char *)xstrdup(child->argv[i]);
-				debug_printf("Local environment set: %s\n", name);
-				value = (char *)strchr(name, '=');
-				if (value)
-					*value=0;
-				free(name);
-				p = insert_var_value(child->argv[i]);
-				if (p != child->argv[i]) 
-					free(p);
-			}
-			return EXIT_SUCCESS;   /* don't worry about errors in set_local_var() yet */
-		}
-		for (i = 0; is_assignment(child->argv[i]); i++) {
-			p = insert_var_value(child->argv[i]);
-			if (p != child->argv[i]) {
-				child->sp--;
-				free(p);
-			}
-		}
-		if (child->sp) {
-			char * str = NULL;
-
-			str = make_string(child->argv + i,
-					  child->argv_nonnull + i);
-			parse_string_outer(str, FLAG_EXIT_FROM_LOOP | FLAG_REPARSING);
-			free(str);
-			return last_return_code;
-		}
-		/* check ";", because ,example , argv consist from
-		 * "help;flinfo" must not execute
-		 */
-		if (strchr(child->argv[i], ';')) {
-			printf("Unknown command '%s' - try 'help' or use "
-					"'run' command\n", child->argv[i]);
-			return -1;
-		}
-		/* Process the command */
-		return cmd_process(flag, child->argc, child->argv,
-				   &flag_repeat, NULL);
-	}
-	return -1;
-}
+static int run_pipe_real(struct pipe *pi);
 
 static int run_list_real(struct pipe *pi)
 {
@@ -716,6 +625,100 @@ skip_more_in_this_rmode);
 	}
 	return rcode;
 }
+
+/* run_pipe_real() starts all the jobs, but doesn't wait for anything
+ * to finish.  See checkjobs().
+ *
+ * return code is normally -1, when the caller has to wait for children
+ * to finish to determine the exit status of the pipe.  If the pipe
+ * is a simple builtin command, however, the action is done by the
+ * time run_pipe_real returns, and the exit code is provided as the
+ * return value.
+ *
+ * The input of the pipe is always stdin, the output is always
+ * stdout.  The outpipe[] mechanism in BusyBox-0.48 lash is bogus,
+ * because it tries to avoid running the command substitution in
+ * subshell, when that is in fact necessary.  The subshell process
+ * now has its stdout directed to the input of the appropriate pipe,
+ * so this routine is noticeably simpler.
+ */
+static int run_pipe_real(struct pipe *pi)
+{
+	int i;
+	int nextin;
+	int flag = do_repeat ? CMD_FLAG_REPEAT : 0;
+	struct child_prog *child;
+	char *p;
+
+	nextin = 0;
+
+	/* Check if this is a simple builtin (not part of a pipe).
+	 * Builtins within pipes have to fork anyway, and are handled in
+	 * pseudo_exec.  "echo foo | read bar" doesn't work on bash, either.
+	 */
+	if (pi->num_progs == 1) child = & (pi->progs[0]);
+		if (pi->num_progs == 1 && child->group) {
+		int rcode;
+		debug_printf("non-subshell grouping\n");
+		rcode = run_list_real(child->group);
+		return rcode;
+	} else if (pi->num_progs == 1 && pi->progs[0].argv != NULL) {
+		for (i=0; is_assignment(child->argv[i]); i++) { /* nothing */ }
+		if (i!=0 && child->argv[i]==NULL) {
+			/* assignments, but no command: set the local environment */
+			for (i=0; child->argv[i]!=NULL; i++) {
+
+				/* Ok, this case is tricky.  We have to decide if this is a
+				 * local variable, or an already exported variable.  If it is
+				 * already exported, we have to export the new value.  If it is
+				 * not exported, we need only set this as a local variable.
+				 * This junk is all to decide whether or not to export this
+				 * variable. */
+				int export_me=0;
+				char *name, *value;
+				name = (char *)xstrdup(child->argv[i]);
+				debug_printf("Local environment set: %s\n", name);
+				value = (char *)strchr(name, '=');
+				if (value)
+					*value=0;
+				free(name);
+				p = insert_var_value(child->argv[i]);
+				if (p != child->argv[i]) 
+					free(p);
+			}
+			return EXIT_SUCCESS;   /* don't worry about errors in set_local_var() yet */
+		}
+		for (i = 0; is_assignment(child->argv[i]); i++) {
+			p = insert_var_value(child->argv[i]);
+			if (p != child->argv[i]) {
+				child->sp--;
+				free(p);
+			}
+		}
+		if (child->sp) {
+			char * str = NULL;
+
+			str = make_string(child->argv + i,
+					  child->argv_nonnull + i);
+			parse_string_outer(str, FLAG_EXIT_FROM_LOOP | FLAG_REPARSING);
+			free(str);
+			return last_return_code;
+		}
+		/* check ";", because ,example , argv consist from
+		 * "help;flinfo" must not execute
+		 */
+		if (strchr(child->argv[i], ';')) {
+			printf("Unknown command '%s' - try 'help' or use "
+					"'run' command\n", child->argv[i]);
+			return -1;
+		}
+		/* Process the command */
+		return cmd_process(flag, child->argc, child->argv,
+				   &flag_repeat, NULL);
+	}
+	return -1;
+}
+
 
 /* broken, of course, but OK for testing */
 static char *indenter(int i)

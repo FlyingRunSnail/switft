@@ -1,6 +1,6 @@
 # Sources
 
-SRCS = main.c system_stm32f2xx.c
+SRCS = 
 S_SRCS =  
 
 # USB
@@ -70,7 +70,8 @@ LIBPATHS = -L$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver
 LIBPATHS += -L$(BASEDIR)/Lib/STM32F2x7_ETH_Driver
 
 # Libraries to link
-LIBS = -lstdperiph -lc -lgcc -lnosys
+LIBS = -lc -lgcc -lnosys
+LD_SYS_LIBS = -lstdperiph -leth -lbsp -lhw -lucosiii -llwip -lapp -L$(BASEDIR)/build/
 
 # Extra includes
 INCLUDE_PATHS += -I$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver/inc
@@ -85,11 +86,14 @@ OBJS += $(S_SRCS:.s=.o)
 
 .PHONY: lib bsp hw app proj 
 
-all: lib bsp hw lwip app proj
+all: lib ucos bsp hw lwip app proj
 	$(SIZE) $(OUTPATH)/$(PROJ_NAME).elf
 
 lib:
 	$(MAKE) -C Lib FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+
+ucos:
+	$(MAKE) -C uCOS FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 
 bsp:
 	$(MAKE) -C BSP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
@@ -126,6 +130,7 @@ clean:
 	rm -f $(OUTPATH)/$(PROJ_NAME).map
 	# Remove this line if you don't want to clean the libs as well
 	$(MAKE) clean -C Lib FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+	$(MAKE) clean -C uCOS FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 	$(MAKE) clean -C BSP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 	$(MAKE) clean -C HW FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 	$(MAKE) clean -C lwip-1.4.1 FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)

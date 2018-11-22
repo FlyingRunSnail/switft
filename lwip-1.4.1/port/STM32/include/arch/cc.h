@@ -117,4 +117,8 @@ typedef u32_t mem_ptr_t;            /* Unsigned 32 bit quantity        */
 #define LWIP_PLATFORM_DIAG(x) do {printf x;} while(0)
 #endif
 
+#ifndef LWIP_TIMEVAL_PRIVATE
+#define LWIP_TIMEVAL_PRIVATE (0)
+#endif
+
 #endif /* __CC_H__ */

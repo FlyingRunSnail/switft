@@ -1,14 +1,14 @@
 # Sources
 
-SRCS = main.c stm32f4xx_it.c system_stm32f4xx.c startup_stm32f4xx.c
-S_SRCS = 
+SRCS = main.c system_stm32f2xx.c
+S_SRCS =  
 
 # USB
 # SRCS += usbd_usr.c usbd_cdc_vcp.c usbd_desc.c usb_bsp.c
 
 # Project name
 
-PROJ_NAME = stm32f4xx-gcc-barebones
+PROJ_NAME = swift
 OUTPATH = build
 
 OUTPATH := $(abspath $(OUTPATH))
@@ -39,7 +39,7 @@ SIZE=$(BINPATH)arm-none-eabi-size
 
 LINKER_SCRIPT = stm32_flash.ld
 
-CPU = -mcpu=cortex-m4 -mthumb
+CPU = -mcpu=cortex-m3 -mthumb
 
 CFLAGS  = $(CPU) -c -std=gnu99 -g -O2 -Wall
 LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -nostartfiles -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map,--cref --specs=nano.specs
@@ -53,7 +53,7 @@ endif
 
 # Default to STM32F40_41xxx if no device is passed
 ifeq ($(DEVICE_DEF), )
-DEVICE_DEF = STM32F40_41xxx
+DEVICE_DEF = STM32F2xx
 endif
 
 CFLAGS += -D$(DEVICE_DEF)
@@ -63,17 +63,18 @@ vpath %.a lib
 
 
 # Includes
-INCLUDE_PATHS = -I$(BASEDIR)/inc -I$(BASEDIR)/lib/cmsis/stm32f4xx -I$(BASEDIR)/lib/cmsis/include
-INCLUDE_PATHS += -I$(BASEDIR)/lib/Conf
+INCLUDE_PATHS = -I$(BASEDIR)/Lib/CMSIS -I$(BASEDIR)/Lib/CMSIS/DeviceSupport
 
 # Library paths
-LIBPATHS = -L$(BASEDIR)/lib/STM32F4xx_StdPeriph_Driver
+LIBPATHS = -L$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver
+LIBPATHS += -L$(BASEDIR)/Lib/STM32F2x7_ETH_Driver
 
 # Libraries to link
 LIBS = -lstdperiph -lc -lgcc -lnosys
 
 # Extra includes
-INCLUDE_PATHS += -I$(BASEDIR)/lib/STM32F4xx_StdPeriph_Driver/inc
+INCLUDE_PATHS += -I$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver/inc
+INCLUDE_PATHS += -I$(BASEDIR)/Lib/STM32F2x7_ETH_Driver/inc
 
 #CFLAGS += -Map $(OUTPATH)/$(PROJ_NAME).map
 
@@ -82,13 +83,25 @@ OBJS += $(S_SRCS:.s=.o)
 
 ###################################################
 
-.PHONY: lib proj
+.PHONY: lib bsp hw app proj 
 
-all: lib proj
+all: lib bsp hw lwip app proj
 	$(SIZE) $(OUTPATH)/$(PROJ_NAME).elf
 
 lib:
-	$(MAKE) -C lib FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR)
+	$(MAKE) -C Lib FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+
+bsp:
+	$(MAKE) -C BSP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+
+hw:
+	$(MAKE) -C HW FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+
+lwip:
+	$(MAKE) -C lwip-1.4.1 FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+
+app:
+	$(MAKE) -C APP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 
 proj: $(OUTPATH)/$(PROJ_NAME).elf
 
@@ -112,5 +125,9 @@ clean:
 	rm -f $(OUTPATH)/$(PROJ_NAME).dis
 	rm -f $(OUTPATH)/$(PROJ_NAME).map
 	# Remove this line if you don't want to clean the libs as well
-	$(MAKE) clean -C lib
+	$(MAKE) clean -C Lib FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+	$(MAKE) clean -C BSP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+	$(MAKE) clean -C HW FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+	$(MAKE) clean -C lwip-1.4.1 FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
+	$(MAKE) clean -C APP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 	

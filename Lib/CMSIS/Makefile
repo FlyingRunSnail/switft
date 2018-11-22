@@ -24,6 +24,10 @@ else
 CFLAGS += -msoft-float
 endif
 
+CFLAGS += -DUSE_STDPERIPH_DRIVER
+CFLAGS += -I$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver/inc/
+CFLAGS += -I$(BASEDIR)/Lib/CMSIS/DeviceSupport/
+
 # Default to STM32F40_41xxx if no device is passed
 ifeq ($(DEVICE_DEF), )
 DEVICE_DEF = STM32F2xx

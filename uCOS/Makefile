@@ -27,6 +27,7 @@ else
 CFLAGS += -msoft-float
 endif
 
+CFLAGS += -DUSE_STDPERIPH_DRIVER
 CFLAGS += -ffreestanding -nostdlib
 
 # Includes

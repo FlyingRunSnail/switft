@@ -37,7 +37,8 @@ OBJCOPY=$(BINPATH)arm-none-eabi-objcopy
 OBJDUMP=$(BINPATH)arm-none-eabi-objdump
 SIZE=$(BINPATH)arm-none-eabi-size
 
-LINKER_SCRIPT = stm32_flash.ld
+#LINKER_SCRIPT = stm32_flash.ld
+LINKER_SCRIPT = stm32f207flash.ld
 
 CPU = -mcpu=cortex-m3 -mthumb
 
@@ -50,6 +51,8 @@ CFLAGS += -mfpu=fpv4-sp-d16 -mfloat-abi=hard
 else
 CFLAGS += -msoft-float
 endif
+
+CFLAGS += -DUSE_STDPERIPH_DRIVER
 
 # Default to STM32F40_41xxx if no device is passed
 ifeq ($(DEVICE_DEF), )

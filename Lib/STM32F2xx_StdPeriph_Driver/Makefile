@@ -27,7 +27,9 @@ endif
 CFLAGS += -ffreestanding -nostdlib
 
 # Includes
-CFLAGS += -Iinc -I$(BASEDIR)/Lib/CMSIS/ -I$(BASEDIR)/Lib/CMSIS/DeviceSupport/
+CFLAGS += -I$(BASEDIR)/Lib/CMSIS/ 
+CFLAGS += -I$(BASEDIR)/Lib/CMSIS/DeviceSupport/
+CFLAGS += -Iinc
 
 # Default to STM32F40_41xxx if no device is passed
 ifeq ($(DEVICE_DEF), )
@@ -35,6 +37,7 @@ DEVICE_DEF = STM32F2xx
 endif
 
 CFLAGS += -D$(DEVICE_DEF)
+CFLAGS += -DUSE_STDPERIPH_DRIVER
 
 # Sources
 SRCS = misc.c stm32f2xx_dma.c stm32f2xx_rcc.c stm32f2xx_adc.c \

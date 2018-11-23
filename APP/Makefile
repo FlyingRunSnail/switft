@@ -89,6 +89,7 @@ SRCS = app_beacon.c \
 	cmd_reset.c \
 	cmd_ver.c \
 	lwip.c \
+	main.c \
 	os_app_hooks.c
 
 OBJS = $(SRCS:.c=.o)

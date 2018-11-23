@@ -1,6 +1,6 @@
 # Sources
 
-SRCS = APP/src/main.c
+SRCS = 
 S_SRCS =  
 
 # Project name
@@ -44,7 +44,7 @@ CPU = -mcpu=cortex-m3 -mthumb
 CFLAGS  = $(CPU) -c -std=gnu99 -g -O2 -Wall
 #LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -nostartfiles -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map,--cref --specs=nano.specs
 #LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map,--cref --specs=nano.specs
-LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map
+LDFLAGS  = -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map -specs=nano.specs -specs=nosys.specs $(CPU) -g3 -gdwarf-2
 
 ifeq ($(FLOAT_TYPE), hard)
 CFLAGS += -fsingle-precision-constant -Wdouble-promotion
@@ -86,8 +86,7 @@ CFLAGS += -I$(BASEDIR)/lwip-1.4.1/src/include/ipv4/lwip/
 CFLAGS += -I$(BASEDIR)/lwip-1.4.1/src/include/netif/
 
 # Libraries to link
-#LIBS = -lc -lgcc -lnosys
-LD_SYS_LIBS = -lstdperiph -leth -lbsp -lhw -lucosiii -llwip -lshell -lapp -L$(BASEDIR)/build/
+LD_SYS_LIBS = -lxxyyzz -L$(BASEDIR)/build/
 
 # Extra includes
 INCLUDE_PATHS += -I$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver/inc
@@ -98,11 +97,15 @@ INCLUDE_PATHS += -I$(BASEDIR)/Lib/STM32F2x7_ETH_Driver/inc
 OBJS = $(SRCS:.c=.o)
 OBJS += $(S_SRCS:.s=.o)
 
+LDOBJS = startup_stm32f2xx.o
+LDOBJS += system_stm32f2xx.o
+LDOBJS += main.o
+
 ###################################################
 
 .PHONY: lib bsp hw app proj demo
 
-all: lib ucos bsp hw lwip app proj
+all: lib ucos bsp hw lwip app demo proj
 	$(SIZE) $(OUTPATH)/$(PROJ_NAME).elf
 
 lib:
@@ -124,13 +127,12 @@ app:
 	$(MAKE) -C APP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 
 demo:
-	rm -rf build-test/
 	cp -rp build/ build-test/
 	rm -f build-test/main.o
-	rm -f ./libxxyyzz.a
+	rm -f $(OUTPATH)/libxxyyzz.a
 	rm -f build-test/startup_stm32f2xx.o
 	rm -f build-test/system_stm32f2xx.o
-	$(AR) rc libxxyyzz.a build-test/*.o
+	$(AR) rc $(OUTPATH)/libxxyyzz.a build-test/*.o
 
 proj: $(OUTPATH)/$(PROJ_NAME).elf
 
@@ -141,13 +143,15 @@ proj: $(OUTPATH)/$(PROJ_NAME).elf
 	$(CC) $(CFLAGS) -std=gnu99 $(INCLUDE_PATHS) -o $(addprefix  $(OUTPATH)/, $(notdir $@)) $<
 
 $(OUTPATH)/$(PROJ_NAME).elf: $(OBJS)
-	$(LD) $(LDFLAGS) -T$(LINKER_SCRIPT) -o $@ $(addprefix $(OUTPATH)/, $(notdir $<)) $(LIBS) $(LD_SYS_LIBS)
+	$(LD) -T$(LINKER_SCRIPT) $(LDFLAGS) -o $@ $(addprefix $(OUTPATH)/, $(LDOBJS)) $(LD_SYS_LIBS)
 	$(OBJCOPY) -O ihex $(OUTPATH)/$(PROJ_NAME).elf $(OUTPATH)/$(PROJ_NAME).hex
 	$(OBJCOPY) -O binary $(OUTPATH)/$(PROJ_NAME).elf $(OUTPATH)/$(PROJ_NAME).bin
 	$(OBJDUMP) -S --disassemble $(OUTPATH)/$(PROJ_NAME).elf > $(OUTPATH)/$(PROJ_NAME).dis
+	rm -rf build-test/	
 
 clean:
 	rm -f $(OUTPATH)/*.o
+	rm -f $(OUTPATH)/*.a
 	rm -f $(OUTPATH)/$(PROJ_NAME).elf
 	rm -f $(OUTPATH)/$(PROJ_NAME).hex
 	rm -f $(OUTPATH)/$(PROJ_NAME).bin

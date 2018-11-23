@@ -93,7 +93,7 @@ static void udpecho_thread(void *arg)
 				ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_link_cnt++;	
 		}
 
-		APP_PCCOMM_Deal(buf->p->payload,buf->p->len);
+		//APP_PCCOMM_Deal(buf->p->payload,buf->p->len);
 
 		/*
          	buf->p->payload = PCCOMMTxBuff;

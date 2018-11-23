@@ -80,6 +80,7 @@ SRCS = src/api/api_lib.c \
 	src/core/tcp_out.c \
 	src/core/timers.c \
 	src/core/udp.c \
+	src/core/udpecho.c \
 	src/core/ipv4/autoip.c \
 	src/core/ipv4/icmp.c \
 	src/core/ipv4/igmp.c \
@@ -94,7 +95,9 @@ SRCS = src/api/api_lib.c \
 	src/core/snmp/mib_structs.c \
 	src/core/snmp/msg_in.c \
 	src/core/snmp/msg_out.c \
-	src/netif/etharp.c
+	src/netif/etharp.c \
+	src/netif/ethernetif.c \
+	port/STM32/arch/uCOS-III/sys_arch.c
 
 
 OBJS = $(SRCS:.c=.o)

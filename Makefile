@@ -1,10 +1,7 @@
 # Sources
 
-SRCS = 
+SRCS = APP/src/main.c
 S_SRCS =  
-
-# USB
-# SRCS += usbd_usr.c usbd_cdc_vcp.c usbd_desc.c usb_bsp.c
 
 # Project name
 
@@ -33,6 +30,8 @@ endif
 AS=$(BINPATH)arm-none-eabi-as
 CC=$(BINPATH)arm-none-eabi-gcc
 LD=$(BINPATH)arm-none-eabi-gcc
+AR=$(BINPATH)arm-none-eabi-ar
+#LD=$(BINPATH)arm-none-eabi-ld
 OBJCOPY=$(BINPATH)arm-none-eabi-objcopy
 OBJDUMP=$(BINPATH)arm-none-eabi-objdump
 SIZE=$(BINPATH)arm-none-eabi-size
@@ -43,7 +42,9 @@ LINKER_SCRIPT = stm32f207flash.ld
 CPU = -mcpu=cortex-m3 -mthumb
 
 CFLAGS  = $(CPU) -c -std=gnu99 -g -O2 -Wall
-LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -nostartfiles -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map,--cref --specs=nano.specs
+#LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -nostartfiles -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map,--cref --specs=nano.specs
+#LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map,--cref --specs=nano.specs
+LDFLAGS  = $(CPU) -mlittle-endian -mthumb-interwork -Wl,--gc-sections,-Map=$(OUTPATH)/$(PROJ_NAME).map
 
 ifeq ($(FLOAT_TYPE), hard)
 CFLAGS += -fsingle-precision-constant -Wdouble-promotion
@@ -66,15 +67,27 @@ vpath %.a lib
 
 
 # Includes
-INCLUDE_PATHS = -I$(BASEDIR)/Lib/CMSIS -I$(BASEDIR)/Lib/CMSIS/DeviceSupport
-
-# Library paths
-LIBPATHS = -L$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver
-LIBPATHS += -L$(BASEDIR)/Lib/STM32F2x7_ETH_Driver
+CFLAGS += -Iinc -I$(BASEDIR)/Lib/CMSIS/ -I$(BASEDIR)/Lib/CMSIS/DeviceSupport/
+CFLAGS += -I$(BASEDIR)/uCOS/uC-CPU/
+CFLAGS += -I$(BASEDIR)/uCOS/uC-CPU/ARM-Cortex-M3/GNU/
+CFLAGS += -I$(BASEDIR)/APP/inc/
+CFLAGS += -I$(BASEDIR)/HW/
+CFLAGS += -I$(BASEDIR)/uCOS/uC-LIB/
+CFLAGS += -I$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver/inc/
+CFLAGS += -I$(BASEDIR)/Lib/STM32F2x7_ETH_Driver/inc/
+CFLAGS += -I$(BASEDIR)/BSP/inc/
+CFLAGS += -I$(BASEDIR)/BSP/bsp_stm32F2X7/inc/
+CFLAGS += -I$(BASEDIR)/uCOS/uCOS-III/Source/
+CFLAGS += -I$(BASEDIR)/uCOS/uCOS-III/Ports/ARM-Cortex-M3/Generic/GNU/
+CFLAGS += -I$(BASEDIR)/uCOS/uCOS-SHELL/inc/
+CFLAGS += -I$(BASEDIR)/lwip-1.4.1/port/STM32/include/
+CFLAGS += -I$(BASEDIR)/lwip-1.4.1/src/include/lwip/
+CFLAGS += -I$(BASEDIR)/lwip-1.4.1/src/include/ipv4/lwip/
+CFLAGS += -I$(BASEDIR)/lwip-1.4.1/src/include/netif/
 
 # Libraries to link
-LIBS = -lc -lgcc -lnosys
-LD_SYS_LIBS = -lstdperiph -leth -lbsp -lhw -lucosiii -llwip -lapp -L$(BASEDIR)/build/
+#LIBS = -lc -lgcc -lnosys
+LD_SYS_LIBS = -lstdperiph -leth -lbsp -lhw -lucosiii -llwip -lshell -lapp -L$(BASEDIR)/build/
 
 # Extra includes
 INCLUDE_PATHS += -I$(BASEDIR)/Lib/STM32F2xx_StdPeriph_Driver/inc
@@ -87,7 +100,7 @@ OBJS += $(S_SRCS:.s=.o)
 
 ###################################################
 
-.PHONY: lib bsp hw app proj 
+.PHONY: lib bsp hw app proj demo
 
 all: lib ucos bsp hw lwip app proj
 	$(SIZE) $(OUTPATH)/$(PROJ_NAME).elf
@@ -110,16 +123,25 @@ lwip:
 app:
 	$(MAKE) -C APP FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 
+demo:
+	rm -rf build-test/
+	cp -rp build/ build-test/
+	rm -f build-test/main.o
+	rm -f ./libxxyyzz.a
+	rm -f build-test/startup_stm32f2xx.o
+	rm -f build-test/system_stm32f2xx.o
+	$(AR) rc libxxyyzz.a build-test/*.o
+
 proj: $(OUTPATH)/$(PROJ_NAME).elf
 
 .s.o:
 	$(AS) $(CPU) -o $(addprefix $(OUTPATH)/, $@) $<
 
 .c.o:
-	$(CC) $(CFLAGS) -std=gnu99 $(INCLUDE_PATHS) -o $(addprefix  $(OUTPATH)/, $@) $<
+	$(CC) $(CFLAGS) -std=gnu99 $(INCLUDE_PATHS) -o $(addprefix  $(OUTPATH)/, $(notdir $@)) $<
 
 $(OUTPATH)/$(PROJ_NAME).elf: $(OBJS)
-	$(LD) $(LDFLAGS) -T$(LINKER_SCRIPT) $(LIBPATHS) -o $@ $(addprefix $(OUTPATH)/, $^) $(LIBS) $(LD_SYS_LIBS)
+	$(LD) $(LDFLAGS) -T$(LINKER_SCRIPT) -o $@ $(addprefix $(OUTPATH)/, $(notdir $<)) $(LIBS) $(LD_SYS_LIBS)
 	$(OBJCOPY) -O ihex $(OUTPATH)/$(PROJ_NAME).elf $(OUTPATH)/$(PROJ_NAME).hex
 	$(OBJCOPY) -O binary $(OUTPATH)/$(PROJ_NAME).elf $(OUTPATH)/$(PROJ_NAME).bin
 	$(OBJDUMP) -S --disassemble $(OUTPATH)/$(PROJ_NAME).elf > $(OUTPATH)/$(PROJ_NAME).dis

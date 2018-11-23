@@ -571,21 +571,21 @@ static  void  TaskMonitor(void *p_arg)
                 if( Task_Run_Flag[0] >0 )
                 {
                     TaskSatelliteTrackDel();
-                    if( Antenna_AllDriveEnd() == FAIL)
-                        Antenna_AllDriveEnd();
+                    //if( Antenna_AllDriveEnd() == FAIL)
+                        //Antenna_AllDriveEnd();
                 }
                 if( Task_Run_Flag[1] >0 )
                 {
                     TaskSatGradientTrackDel();
-                    if( Antenna_AllDriveEnd() == FAIL)
-                        Antenna_AllDriveEnd();
+                    //if( Antenna_AllDriveEnd() == FAIL)
+                        //Antenna_AllDriveEnd();
                     
                 }
                 if( Task_Run_Flag[2] >0 )
                 {
                     TaskAntennaRecordGotoDel();
-                    if( Antenna_AllDriveEnd() == FAIL)
-                        Antenna_AllDriveEnd();
+                    //if( Antenna_AllDriveEnd() == FAIL)
+                        //Antenna_AllDriveEnd();
                     
                 }
             }
@@ -694,23 +694,23 @@ static  void  TaskSatelliteTrack(void *p_arg)
     {         
         if( ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode == 0x02)
         {
-            if( APP_Satellite_Track_Start() == FAIL)
+            //if( APP_Satellite_Track_Start() == FAIL)
             {
                 ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode = 0x00;
                 ACUDevInfo.ACUCurrSta.dev_work_sta = 0x00;
 
-                APP_OptLOG_SaveCode(LOG_OPT_AUTO_AIM_STAR_END_BY_ACU_UNLOCK);
+                //APP_OptLOG_SaveCode(LOG_OPT_AUTO_AIM_STAR_END_BY_ACU_UNLOCK);
                 
             }
-            else
+            //else
             {
-                APP_OptLOG_SaveCode(LOG_OPT_AUTO_AIM_STAR_END_BY_ACU_LOCK);
+                //APP_OptLOG_SaveCode(LOG_OPT_AUTO_AIM_STAR_END_BY_ACU_LOCK);
             }
         }
         Task_Run_Flag[0] = 0;
 
-        if(Antenna_AllDriveEnd() == FAIL)
-            Antenna_AllDriveEnd();
+        //if(Antenna_AllDriveEnd() == FAIL)
+        //    Antenna_AllDriveEnd();
         OSTaskDel ((OS_TCB  *)0,&err);
         BSP_Delay_ms(50);
     }
@@ -1082,12 +1082,12 @@ static  void  TaskAntennaRecordGoto(void *p_arg)
             
             if( Task_Run_Flag[2] == 0 )         //  外部设置终止本程序
             {
-                if(Antenna_AllDriveEnd() == FAIL)           //  停止站东
-                {
-                    BSP_Delay_ms(50);
-                    if(Antenna_AllDriveEnd() == FAIL)
-                        goto TaskAntennaRecordGoto_END;
-                }
+                //if(Antenna_AllDriveEnd() == FAIL)           //  停止站东
+               // {
+                    //BSP_Delay_ms(50);
+                    //if(Antenna_AllDriveEnd() == FAIL)
+                    //    goto TaskAntennaRecordGoto_END;
+                //}
 
                 goto TaskAntennaRecordGoto_END;
                 
@@ -1108,8 +1108,8 @@ static  void  TaskAntennaRecordGoto(void *p_arg)
 
     Task_Run_Flag[2] = 0;
 
-    if( Antenna_AllDriveEnd() == FAIL)
-        Antenna_AllDriveEnd();
+    //if( Antenna_AllDriveEnd() == FAIL)
+       // Antenna_AllDriveEnd();
 
     if( ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode == 0x00)
     {
@@ -1117,7 +1117,7 @@ static  void  TaskAntennaRecordGoto(void *p_arg)
     }
     else if( ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode == 0x04)
     {
-        APP_OptLOG_SaveCode(LOG_OPT_ANTENNA_POSE_FINISH);
+        //APP_OptLOG_SaveCode(LOG_OPT_ANTENNA_POSE_FINISH);
 
         ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode  = 0x00;
         ACUDevInfo.ACUCurrSta.dev_work_sta = 0x00;
@@ -1220,12 +1220,12 @@ static  void  TaskSatGradientTrack(void *p_arg)
     {         
         if( ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode == 0x03)
         {
-            if(APP_Sat_GradientTrack() == FAIL)
+            //if(APP_Sat_GradientTrack() == FAIL)
             {
                 ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode = 0x00;
                 ACUDevInfo.ACUCurrSta.dev_work_sta = 0x00;
 
-                APP_OptLOG_SaveCode(LOG_OPT_FOLLOW_STAR_END_BY_ACU);
+                //APP_OptLOG_SaveCode(LOG_OPT_FOLLOW_STAR_END_BY_ACU);
             }
         }
         BSP_Delay_ms(50);

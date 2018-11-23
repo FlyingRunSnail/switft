@@ -53,14 +53,18 @@ endif
 
 CFLAGS += -D$(DEVICE_DEF)
 
-# Sources
-SRCS = app_beacon.c \
+#SRCS = app_beacon.c \
 	app_buzzer.c \
 	app_datetime.c \
 	app_eleccoder.c \
 	app_gps.c \
 	app_log.c \
 	app_monitor.c \
+	app_motor.c \
+	app_oledcomm.c \
+	app_pccomm.c \
+	app_pducomm.c \
+	app_satellite_track.c \
 	app_shell.c \
 	app_tool.c \
 	cmd_d.c \
@@ -69,7 +73,22 @@ SRCS = app_beacon.c \
 	cmd_reset.c \
 	cmd_ver.c \
 	lwip.c \
-	main.c \
+	os_app_hooks.c
+
+# Sources
+SRCS = app_beacon.c \
+	app_buzzer.c \
+	app_datetime.c \
+	app_eleccoder.c \
+	app_gps.c \
+	app_shell.c \
+	app_tool.c \
+	cmd_d.c \
+	cmd_help.c \
+	cmd_m.c \
+	cmd_reset.c \
+	cmd_ver.c \
+	lwip.c \
 	os_app_hooks.c
 
 OBJS = $(SRCS:.c=.o)

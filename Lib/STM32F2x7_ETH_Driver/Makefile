@@ -47,11 +47,11 @@ LIBNAME = $(OUTPATH)/libeth.a
 all: $(LIBNAME)
 
 %.o : %.c
-	$(CC) $(CFLAGS) -c -o $(addprefix $(OUTPATH),$@) $^
+	$(CC) $(CFLAGS) -c -o $(addprefix $(OUTPATH)/,$@) $^
 
 $(LIBNAME): $(OBJS)
-	$(AR) -r $@ $(addprefix $(OUTPATH),$(OBJS))
+	$(AR) -r $@ $(addprefix $(OUTPATH)/,$(OBJS))
 
 clean:
-	rm -f $(addprefix $(OUTPATH),$(OBJS)) $(LIBNAME)
+	rm -f $(addprefix $(OUTPATH)/,$(OBJS)) $(LIBNAME)
 	

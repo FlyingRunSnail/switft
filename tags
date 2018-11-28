@@ -8085,16 +8085,20 @@ HSI_INTERNAL_RC_OSC_16MHZ	BSP/src/bsp.c	52;"	d	file:
 HSI_VALUE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	100;"	d
 HTR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t HTR;    \/*!< ADC watchdog higher threshold register,      Address offset: 0x24 *\/$/;"	m	struct:__anon58
 HWTYPE_ETHERNET	lwip-1.4.1/src/netif/etharp.c	93;"	d	file:
-HW_BEACON_DEF	HW/hw_beacon.c	2;"	d	file:
-HW_BEACON_GLOBE	HW/hw_beacon.h	6;"	d
-HW_BEACON_GLOBE	HW/hw_beacon.h	8;"	d
-HW_BEACON_GLOBE	HW/hw_eleccoder.h	4;"	d
-HW_BEACON_GLOBE	HW/hw_eleccoder.h	6;"	d
-HW_BEACON_UARTX	HW/hw_beacon.h	22;"	d
-HW_BEACON_UART_RX_PIN	HW/hw_beacon.h	20;"	d
-HW_BEACON_UART_RX_PIN_PORT	HW/hw_beacon.h	19;"	d
-HW_BEACON_UART_TX_PIN	HW/hw_beacon.h	17;"	d
-HW_BEACON_UART_TX_PIN_PORT	HW/hw_beacon.h	16;"	d
+HW_BEACON_DEF	HW/hw_uart6.c	2;"	d	file:
+HW_BEACON_GLOBE	HW/hw_uart1.h	4;"	d
+HW_BEACON_GLOBE	HW/hw_uart1.h	6;"	d
+HW_BEACON_GLOBE	HW/hw_uart2.h	4;"	d
+HW_BEACON_GLOBE	HW/hw_uart2.h	6;"	d
+HW_BEACON_GLOBE	HW/hw_uart5.h	3;"	d
+HW_BEACON_GLOBE	HW/hw_uart5.h	5;"	d
+HW_BEACON_GLOBE	HW/hw_uart6.h	6;"	d
+HW_BEACON_GLOBE	HW/hw_uart6.h	8;"	d
+HW_BEACON_UARTX	HW/hw_uart6.h	20;"	d
+HW_BEACON_UART_RX_PIN	HW/hw_uart6.h	18;"	d
+HW_BEACON_UART_RX_PIN_PORT	HW/hw_uart6.h	17;"	d
+HW_BEACON_UART_TX_PIN	HW/hw_uart6.h	15;"	d
+HW_BEACON_UART_TX_PIN_PORT	HW/hw_uart6.h	14;"	d
 HW_BUZZER_DEF	HW/hw_buzzer.c	4;"	d	file:
 HW_BUZZER_Flick	HW/hw_buzzer.c	/^void HW_BUZZER_Flick(void)$/;"	f
 HW_BUZZER_GLOBE	HW/hw_buzzer.h	4;"	d
@@ -8104,19 +8108,6 @@ HW_BUZZER_Off	HW/hw_buzzer.c	/^void HW_BUZZER_Off(void)$/;"	f
 HW_BUZZER_On	HW/hw_buzzer.c	/^void HW_BUZZER_On(void)$/;"	f
 HW_BUZZER_PIN	HW/hw_buzzer.h	13;"	d
 HW_BUZZER_PIN_PORT	HW/hw_buzzer.h	12;"	d
-HW_CabrageElecCoder_UART_INT_ID	HW/hw_eleccoder.h	47;"	d
-HW_Cabrage_RS422_DUPLEX_SWITCH_PIN	HW/hw_eleccoder.h	51;"	d
-HW_Cabrage_RS422_DUPLEX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	50;"	d
-HW_Cabrage_RS422_DUPLEX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	49;"	d
-HW_Cabrage_RS422_RATE_PIN	HW/hw_eleccoder.h	63;"	d
-HW_Cabrage_RS422_RATE_PIN_PORT	HW/hw_eleccoder.h	62;"	d
-HW_Cabrage_RS422_RATE_PIN_PORT_CLK	HW/hw_eleccoder.h	61;"	d
-HW_Cabrage_RS422_RX_SWITCH_PIN	HW/hw_eleccoder.h	55;"	d
-HW_Cabrage_RS422_RX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	54;"	d
-HW_Cabrage_RS422_RX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	53;"	d
-HW_Cabrage_RS422_TX_SWITCH_PIN	HW/hw_eleccoder.h	59;"	d
-HW_Cabrage_RS422_TX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	58;"	d
-HW_Cabrage_RS422_TX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	57;"	d
 HW_EEPROM_DATA_PIN	HW/hw_eeprom.h	36;"	d
 HW_EEPROM_DATA_PIN_PORT	HW/hw_eeprom.h	35;"	d
 HW_EEPROM_DEF	HW/hw_eeprom.c	3;"	d	file:
@@ -8137,7 +8128,8 @@ HW_EEPROM_Test	HW/hw_eeprom.c	/^int HW_EEPROM_Test(void)$/;"	f
 HW_EEPROM_WaitEepromStandbyState	HW/hw_eeprom.c	/^int HW_EEPROM_WaitEepromStandbyState(void)      $/;"	f
 HW_EEPROM_WriteBuffer	HW/hw_eeprom.c	/^int HW_EEPROM_WriteBuffer(INT32U WriteAddr, INT8U* pBuffer, INT32U NumByteToWrite)$/;"	f
 HW_EEPROM_WritePage	HW/hw_eeprom.c	/^int HW_EEPROM_WritePage(INT32U WriteAddr, INT8U* pBuffer, INT8U* NumByteToWrite)$/;"	f
-HW_ELECCODER_DEF	HW/hw_eleccoder.c	4;"	d	file:
+HW_ELECCODER_DEF	HW/hw_uart2.c	2;"	d	file:
+HW_ELECCODER_DEF	HW/hw_uart5.c	1;"	d	file:
 HW_LED1_Flick	HW/hw_led.c	/^void HW_LED1_Flick(void)$/;"	f
 HW_LED1_OFF	HW/hw_led.c	/^void HW_LED1_OFF(void)$/;"	f
 HW_LED1_ON	HW/hw_led.c	/^void HW_LED1_ON(void)$/;"	f
@@ -8152,51 +8144,12 @@ HW_LED_DEF	HW/hw_led.c	1;"	d	file:
 HW_LED_GLOBE	HW/hw_led.h	4;"	d
 HW_LED_GLOBE	HW/hw_led.h	6;"	d
 HW_LED_Init	HW/hw_led.c	/^void HW_LED_Init(void)$/;"	f
-HW_OLED_DEF	HW/hw_oledcomm.c	9;"	d	file:
-HW_OLED_GLOBE	HW/hw_oledcomm.h	5;"	d
-HW_OLED_GLOBE	HW/hw_oledcomm.h	7;"	d
-HW_PDU_DEF	HW/hw_pducomm.c	7;"	d	file:
-HW_PDU_GLOBE	HW/hw_pducomm.h	5;"	d
-HW_PDU_GLOBE	HW/hw_pducomm.h	7;"	d
-HW_PDU_RS422_DUPLEX_SWITCH_PIN	HW/hw_pducomm.h	21;"	d
-HW_PDU_RS422_DUPLEX_SWITCH_PIN_PORT	HW/hw_pducomm.h	20;"	d
-HW_PDU_RS422_DUPLEX_SWITCH_PIN_PORT_CLK	HW/hw_pducomm.h	19;"	d
-HW_PDU_RS422_RATE_PIN	HW/hw_pducomm.h	33;"	d
-HW_PDU_RS422_RATE_PIN_PORT	HW/hw_pducomm.h	32;"	d
-HW_PDU_RS422_RATE_PIN_PORT_CLK	HW/hw_pducomm.h	31;"	d
-HW_PDU_RS422_RX_SWITCH_PIN	HW/hw_pducomm.h	25;"	d
-HW_PDU_RS422_RX_SWITCH_PIN_PORT	HW/hw_pducomm.h	24;"	d
-HW_PDU_RS422_RX_SWITCH_PIN_PORT_CLK	HW/hw_pducomm.h	23;"	d
-HW_PDU_RS422_TX_SWITCH_PIN	HW/hw_pducomm.h	29;"	d
-HW_PDU_RS422_TX_SWITCH_PIN_PORT	HW/hw_pducomm.h	28;"	d
-HW_PDU_RS422_TX_SWITCH_PIN_PORT_CLK	HW/hw_pducomm.h	27;"	d
-HW_PolarElecCoder_UARTX	HW/hw_eleccoder.h	72;"	d
-HW_PolarElecCoder_UART_INT_ID	HW/hw_eleccoder.h	73;"	d
-HW_Polar_RS422_DUPLEX_SWITCH_PIN	HW/hw_eleccoder.h	77;"	d
-HW_Polar_RS422_DUPLEX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	76;"	d
-HW_Polar_RS422_DUPLEX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	75;"	d
-HW_Polar_RS422_RATE_PIN	HW/hw_eleccoder.h	89;"	d
-HW_Polar_RS422_RATE_PIN_PORT	HW/hw_eleccoder.h	88;"	d
-HW_Polar_RS422_RATE_PIN_PORT_CLK	HW/hw_eleccoder.h	87;"	d
-HW_Polar_RS422_RX_SWITCH_PIN	HW/hw_eleccoder.h	81;"	d
-HW_Polar_RS422_RX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	80;"	d
-HW_Polar_RS422_RX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	79;"	d
-HW_Polar_RS422_TX_SWITCH_PIN	HW/hw_eleccoder.h	85;"	d
-HW_Polar_RS422_TX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	84;"	d
-HW_Polar_RS422_TX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	83;"	d
-HW_PositionElecCoder_UART_INT_ID	HW/hw_eleccoder.h	21;"	d
-HW_Position_RS422_DUPLEX_SWITCH_PIN	HW/hw_eleccoder.h	25;"	d
-HW_Position_RS422_DUPLEX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	24;"	d
-HW_Position_RS422_DUPLEX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	23;"	d
-HW_Position_RS422_RATE_PIN	HW/hw_eleccoder.h	37;"	d
-HW_Position_RS422_RATE_PIN_PORT	HW/hw_eleccoder.h	36;"	d
-HW_Position_RS422_RATE_PIN_PORT_CLK	HW/hw_eleccoder.h	35;"	d
-HW_Position_RS422_RX_SWITCH_PIN	HW/hw_eleccoder.h	29;"	d
-HW_Position_RS422_RX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	28;"	d
-HW_Position_RS422_RX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	27;"	d
-HW_Position_RS422_TX_SWITCH_PIN	HW/hw_eleccoder.h	33;"	d
-HW_Position_RS422_TX_SWITCH_PIN_PORT	HW/hw_eleccoder.h	32;"	d
-HW_Position_RS422_TX_SWITCH_PIN_PORT_CLK	HW/hw_eleccoder.h	31;"	d
+HW_OLED_DEF	HW/hw_uart3.c	6;"	d	file:
+HW_OLED_GLOBE	HW/hw_uart3.h	5;"	d
+HW_OLED_GLOBE	HW/hw_uart3.h	7;"	d
+HW_PDU_DEF	HW/hw_uart4.c	4;"	d	file:
+HW_PDU_GLOBE	HW/hw_uart4.h	5;"	d
+HW_PDU_GLOBE	HW/hw_uart4.h	7;"	d
 HW_SPIFLASH_CS_PIN	HW/hw_spiflash.h	26;"	d
 HW_SPIFLASH_CS_PIN_PORT	HW/hw_spiflash.h	25;"	d
 HW_SPIFLASH_CsDisable	HW/hw_spiflash.c	/^void HW_SPIFLASH_CsDisable(void)$/;"	f
@@ -8214,6 +8167,10 @@ HW_SPIFLASH_SCK_PIN	HW/hw_spiflash.h	17;"	d
 HW_SPIFLASH_SCK_PIN_PORT	HW/hw_spiflash.h	16;"	d
 HW_SPIFLASH_SPI_PORT	HW/hw_spiflash.h	28;"	d
 HW_SPIFLASH_WriteByte	HW/hw_spiflash.c	/^INT8U HW_SPIFLASH_WriteByte(INT8U data)$/;"	f
+HW_UART1	HW/hw_uart1.h	19;"	d
+HW_UART1_INT_ID	HW/hw_uart1.h	20;"	d
+HW_UART2_INT_ID	HW/hw_uart2.h	19;"	d
+HW_UART5_INT_ID	HW/hw_uart5.h	18;"	d
 HW_WTD_DEF	HW/hw_watchdog.c	2;"	d	file:
 HW_WTD_Feed	HW/hw_watchdog.c	/^void HW_WTD_Feed(void)$/;"	f
 HW_WTD_GLOBE	HW/hw_watchdog.h	3;"	d
@@ -13858,7 +13815,7 @@ SRAM_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	997;"	d
 SRAM_BB_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1000;"	d
 SRCS	APP/Makefile	/^SRCS = shell.c \\$/;"	m
 SRCS	BSP/Makefile	/^SRCS = bsp.c bsp_delay.c bsp_int.c bsp_ioe.c \\$/;"	m
-SRCS	HW/Makefile	/^SRCS = hw_beacon.c \\$/;"	m
+SRCS	HW/Makefile	/^SRCS = hw_uart6.c \\$/;"	m
 SRCS	Lib/CMSIS/Makefile	/^SRCS = DeviceSupport\/system_stm32f2xx.c$/;"	m
 SRCS	Lib/STM32F2x7_ETH_Driver/Makefile	/^SRCS = stm32f2x7_eth.c$/;"	m
 SRCS	Lib/STM32F2xx_StdPeriph_Driver/Makefile	/^SRCS = misc.c stm32f2xx_dma.c stm32f2xx_rcc.c stm32f2xx_adc.c \\$/;"	m
@@ -13913,116 +13870,116 @@ SVCall_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  SVCall_IRQn                 
 SWAP_BYTES_IN_WORD	lwip-1.4.1/src/include/ipv4/lwip/inet_chksum.h	44;"	d
 SWAP_BYTES_IN_WORD	lwip-1.4.1/src/include/ipv4/lwip/inet_chksum.h	47;"	d
 SWIER	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t SWIER;  \/*!< EXTI Software interrupt event register,  Address offset: 0x10 *\/$/;"	m	struct:__anon71
-SWIFTUART1Buff	HW/hw_eleccoder.c	/^INT8U	SWIFTUART1Buff[SWIFTUART1BuffSize];$/;"	v
-SWIFTUART1BuffSize	HW/hw_eleccoder.c	31;"	d	file:
-SWIFTUART2Buff	HW/hw_eleccoder.c	/^INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];$/;"	v
-SWIFTUART2BuffSize	HW/hw_eleccoder.c	21;"	d	file:
-SWIFTUART3Buff	HW/hw_oledcomm.c	/^INT8U	SWIFTUART3Buff[SWIFTUART3BuffSize];$/;"	v
-SWIFTUART3BuffSize	HW/hw_oledcomm.c	14;"	d	file:
-SWIFTUART4Buff	HW/hw_pducomm.c	/^INT8U	SWIFTUART4Buff[SWIFTUART4BuffSize];$/;"	v
-SWIFTUART4BuffSize	HW/hw_pducomm.c	12;"	d	file:
-SWIFTUART5Buff	HW/hw_eleccoder.c	/^INT8U	SWIFTUART5Buff[SWIFTUART5BuffSize];$/;"	v
-SWIFTUART5BuffSize	HW/hw_eleccoder.c	11;"	d	file:
-SWIFTUART6Buff	HW/hw_beacon.c	/^INT8U	SWIFTUART6Buff[SWIFTUART6BuffSize];$/;"	v
-SWIFTUART6BuffSize	HW/hw_beacon.c	10;"	d	file:
-SWIFT_UART1_Buff	HW/hw_eleccoder.c	/^str_UART_Buff		SWIFT_UART1_Buff;$/;"	v
-SWIFT_UART1_GPIO	HW/hw_eleccoder.c	/^static str_UART_GPIO_HARD	SWIFT_UART1_GPIO;$/;"	v	file:
-SWIFT_UART1_INT_Switch	HW/hw_eleccoder.c	/^void SWIFT_UART1_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART1_Init	HW/hw_eleccoder.c	/^void SWIFT_UART1_Init(INT32U	BaudRate)$/;"	f
-SWIFT_UART1_IntHandler	HW/hw_eleccoder.c	/^void SWIFT_UART1_IntHandler(void)$/;"	f
-SWIFT_UART1_Predict_RevBytes	HW/hw_eleccoder.c	/^INT8U SWIFT_UART1_Predict_RevBytes=0;$/;"	v
-SWIFT_UART1_RX_PIN	HW/hw_eleccoder.h	70;"	d
-SWIFT_UART1_RX_PIN_PORT	HW/hw_eleccoder.h	69;"	d
-SWIFT_UART1_RecvBuff	HW/hw_eleccoder.c	/^void SWIFT_UART1_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
-SWIFT_UART1_RecvBuff_Clear	HW/hw_eleccoder.c	/^void SWIFT_UART1_RecvBuff_Clear(void)$/;"	f
-SWIFT_UART1_Rev_Sem	HW/hw_eleccoder.c	/^OS_SEM SWIFT_UART1_Rev_Sem;	$/;"	v
-SWIFT_UART1_Rev_Sem	HW/hw_eleccoder.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART1_Rev_Sem;$/;"	v
-SWIFT_UART1_SendBuff	HW/hw_eleccoder.c	/^void SWIFT_UART1_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
-SWIFT_UART1_Send_Sem	HW/hw_eleccoder.c	/^OS_SEM SWIFT_UART1_Send_Sem;	$/;"	v
-SWIFT_UART1_TX_PIN	HW/hw_eleccoder.h	67;"	d
-SWIFT_UART1_TX_PIN_PORT	HW/hw_eleccoder.h	66;"	d
-SWIFT_UART2	HW/hw_eleccoder.h	46;"	d
-SWIFT_UART2_Buff	HW/hw_eleccoder.c	/^str_UART_Buff		SWIFT_UART2_Buff;$/;"	v
-SWIFT_UART2_GPIO	HW/hw_eleccoder.c	/^static str_UART_GPIO_HARD	SWIFT_UART2_GPIO;$/;"	v	file:
-SWIFT_UART2_INT_Switch	HW/hw_eleccoder.c	/^void SWIFT_UART2_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART2_Init	HW/hw_eleccoder.c	/^void SWIFT_UART2_Init(INT32U	BaudRate)$/;"	f
-SWIFT_UART2_IntHandler	HW/hw_eleccoder.c	/^void SWIFT_UART2_IntHandler(void)$/;"	f
-SWIFT_UART2_Predict_RevBytes	HW/hw_eleccoder.c	/^INT8U SWIFT_UART2_Predict_RevBytes=0;$/;"	v
-SWIFT_UART2_RX_PIN	HW/hw_eleccoder.h	44;"	d
-SWIFT_UART2_RX_PIN_PORT	HW/hw_eleccoder.h	43;"	d
-SWIFT_UART2_RecvBuff	HW/hw_eleccoder.c	/^void SWIFT_UART2_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
-SWIFT_UART2_RecvBuff_Clear	HW/hw_eleccoder.c	/^void SWIFT_UART2_RecvBuff_Clear(void)$/;"	f
-SWIFT_UART2_Rev_Sem	HW/hw_eleccoder.c	/^OS_SEM SWIFT_UART2_Rev_Sem;	$/;"	v
-SWIFT_UART2_Rev_Sem	HW/hw_eleccoder.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;$/;"	v
-SWIFT_UART2_SendBuff	HW/hw_eleccoder.c	/^void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
-SWIFT_UART2_Send_Sem	HW/hw_eleccoder.c	/^OS_SEM SWIFT_UART2_Send_Sem;	$/;"	v
-SWIFT_UART2_TX_PIN	HW/hw_eleccoder.h	41;"	d
-SWIFT_UART2_TX_PIN_PORT	HW/hw_eleccoder.h	40;"	d
-SWIFT_UART3	HW/hw_oledcomm.h	16;"	d
-SWIFT_UART3_Buff	HW/hw_oledcomm.c	/^str_UART_Buff		SWIFT_UART3_Buff;$/;"	v
-SWIFT_UART3_GPIO	HW/hw_oledcomm.c	/^static str_UART_GPIO_HARD	SWIFT_UART3_GPIO;$/;"	v	file:
-SWIFT_UART3_INT_ID	HW/hw_oledcomm.h	17;"	d
-SWIFT_UART3_INT_Switch	HW/hw_oledcomm.c	/^void SWIFT_UART3_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART3_Init	HW/hw_oledcomm.c	/^void SWIFT_UART3_Init(INT32U BaudRate)$/;"	f
-SWIFT_UART3_IntHandler	HW/hw_oledcomm.c	/^void SWIFT_UART3_IntHandler(void)$/;"	f
-SWIFT_UART3_RX_PIN	HW/hw_oledcomm.h	14;"	d
-SWIFT_UART3_RX_PIN_PORT	HW/hw_oledcomm.h	13;"	d
-SWIFT_UART3_RecvBuff	HW/hw_oledcomm.c	/^void SWIFT_UART3_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
-SWIFT_UART3_RecvBuff_Clear	HW/hw_oledcomm.c	/^void SWIFT_UART3_RecvBuff_Clear(void)$/;"	f
-SWIFT_UART3_Rev_Sem	HW/hw_oledcomm.c	/^OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
-SWIFT_UART3_Rev_Sem	HW/hw_oledcomm.h	/^HW_OLED_GLOBE OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
-SWIFT_UART3_SendBuff	HW/hw_oledcomm.c	/^void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
-SWIFT_UART3_Send_Sem	HW/hw_oledcomm.c	/^OS_SEM SWIFT_UART3_Send_Sem;$/;"	v
-SWIFT_UART3_TX_PIN	HW/hw_oledcomm.h	11;"	d
-SWIFT_UART3_TX_PIN_PORT	HW/hw_oledcomm.h	10;"	d
-SWIFT_UART4	HW/hw_pducomm.h	16;"	d
-SWIFT_UART4_Buff	HW/hw_pducomm.c	/^str_UART_Buff		SWIFT_UART4_Buff;$/;"	v
-SWIFT_UART4_GPIO	HW/hw_pducomm.c	/^static str_UART_GPIO_HARD	SWIFT_UART4_GPIO;$/;"	v	file:
-SWIFT_UART4_INT_ID	HW/hw_pducomm.h	17;"	d
-SWIFT_UART4_INT_Switch	HW/hw_pducomm.c	/^void SWIFT_UART4_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART4_Init	HW/hw_pducomm.c	/^void SWIFT_UART4_Init(INT32U BaudRate)$/;"	f
-SWIFT_UART4_RX_PIN	HW/hw_pducomm.h	14;"	d
-SWIFT_UART4_RX_PIN_PORT	HW/hw_pducomm.h	13;"	d
-SWIFT_UART4_RecvBuff	HW/hw_pducomm.c	/^void SWIFT_UART4_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
-SWIFT_UART4_RecvBuff_Clear	HW/hw_pducomm.c	/^void SWIFT_UART4_RecvBuff_Clear(void)$/;"	f
-SWIFT_UART4_Rev_Sem	HW/hw_pducomm.c	/^OS_SEM SWIFT_UART4_Rev_Sem;$/;"	v
-SWIFT_UART4_Rev_Sem	HW/hw_pducomm.h	/^HW_PDU_GLOBE OS_SEM SWIFT_UART4_Rev_Sem;$/;"	v
-SWIFT_UART4_SendBuff	HW/hw_pducomm.c	/^void SWIFT_UART4_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
-SWIFT_UART4_Send_Sem	HW/hw_pducomm.c	/^OS_SEM SWIFT_UART4_Send_Sem;$/;"	v
-SWIFT_UART4_TX_PIN	HW/hw_pducomm.h	11;"	d
-SWIFT_UART4_TX_PIN_PORT	HW/hw_pducomm.h	10;"	d
-SWIFT_UART4_UrgentDeal	HW/hw_pducomm.c	/^void SWIFT_UART4_UrgentDeal(void)$/;"	f
-SWIFT_UART5	HW/hw_eleccoder.h	20;"	d
-SWIFT_UART5_Buff	HW/hw_eleccoder.c	/^str_UART_Buff		SWIFT_UART5_Buff;$/;"	v
-SWIFT_UART5_GPIO	HW/hw_eleccoder.c	/^static str_UART_GPIO_HARD	SWIFT_UART5_GPIO;$/;"	v	file:
-SWIFT_UART5_INT_Switch	HW/hw_eleccoder.c	/^void SWIFT_UART5_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART5_Init	HW/hw_eleccoder.c	/^void SWIFT_UART5_Init(INT32U	BaudRate)$/;"	f
-SWIFT_UART5_IntHandler	HW/hw_eleccoder.c	/^void SWIFT_UART5_IntHandler(void)$/;"	f
-SWIFT_UART5_Predict_RevBytes	HW/hw_eleccoder.c	/^INT8U SWIFT_UART5_Predict_RevBytes=0;$/;"	v
-SWIFT_UART5_RX_PIN	HW/hw_eleccoder.h	18;"	d
-SWIFT_UART5_RX_PIN_PORT	HW/hw_eleccoder.h	17;"	d
-SWIFT_UART5_RecvBuff	HW/hw_eleccoder.c	/^void SWIFT_UART5_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
-SWIFT_UART5_RecvBuff_Clear	HW/hw_eleccoder.c	/^void SWIFT_UART5_RecvBuff_Clear(void)$/;"	f
-SWIFT_UART5_Rev_Sem	HW/hw_eleccoder.c	/^OS_SEM SWIFT_UART5_Rev_Sem;	$/;"	v
-SWIFT_UART5_Rev_Sem	HW/hw_eleccoder.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART5_Rev_Sem;$/;"	v
-SWIFT_UART5_SendBuff	HW/hw_eleccoder.c	/^void SWIFT_UART5_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
-SWIFT_UART5_Send_Sem	HW/hw_eleccoder.c	/^OS_SEM SWIFT_UART5_Send_Sem;	$/;"	v
-SWIFT_UART5_TX_PIN	HW/hw_eleccoder.h	15;"	d
-SWIFT_UART5_TX_PIN_PORT	HW/hw_eleccoder.h	14;"	d
-SWIFT_UART6_Buff	HW/hw_beacon.c	/^str_UART_Buff		SWIFT_UART6_Buff;$/;"	v
-SWIFT_UART6_GPIO	HW/hw_beacon.c	/^static str_UART_GPIO_HARD	SWIFT_UART6_GPIO;$/;"	v	file:
-SWIFT_UART6_INT_ID	HW/hw_beacon.h	23;"	d
-SWIFT_UART6_INT_Switch	HW/hw_beacon.c	/^void SWIFT_UART6_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART6_Init	HW/hw_beacon.c	/^void SWIFT_UART6_Init(INT32U	BaudRate)$/;"	f
-SWIFT_UART6_IntHandler	HW/hw_beacon.c	/^void SWIFT_UART6_IntHandler(void)$/;"	f
-SWIFT_UART6_RecvBuff	HW/hw_beacon.c	/^void SWIFT_UART6_RecvBuff(INT8S *buff, INT32U *bufflen)$/;"	f
-SWIFT_UART6_Rev_Sem	HW/hw_beacon.c	/^OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
-SWIFT_UART6_Rev_Sem	HW/hw_beacon.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
-SWIFT_UART6_SendBuff	HW/hw_beacon.c	/^void SWIFT_UART6_SendBuff(INT8S *buff, INT32U bufflen)$/;"	f
-SWIFT_UART6_Send_Sem	HW/hw_beacon.c	/^OS_SEM SWIFT_UART6_Send_Sem;$/;"	v
-SWIFT_USART6_GETC	HW/hw_beacon.c	/^INT32S SWIFT_USART6_GETC(void)$/;"	f
-SWIFT_USART6_TSTC	HW/hw_beacon.c	/^INT32S SWIFT_USART6_TSTC(void)$/;"	f
-SWITFT_UART4_IntHandler	HW/hw_pducomm.c	/^void SWITFT_UART4_IntHandler(void)$/;"	f
+SWIFTUART1Buff	HW/hw_uart1.c	/^INT8U	SWIFTUART1Buff[SWIFTUART1BuffSize];$/;"	v
+SWIFTUART1BuffSize	HW/hw_uart1.c	5;"	d	file:
+SWIFTUART2Buff	HW/hw_uart2.c	/^INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];$/;"	v
+SWIFTUART2BuffSize	HW/hw_uart2.c	6;"	d	file:
+SWIFTUART3Buff	HW/hw_uart3.c	/^INT8U	SWIFTUART3Buff[SWIFTUART3BuffSize];$/;"	v
+SWIFTUART3BuffSize	HW/hw_uart3.c	11;"	d	file:
+SWIFTUART4Buff	HW/hw_uart4.c	/^INT8U	SWIFTUART4Buff[SWIFTUART4BuffSize];$/;"	v
+SWIFTUART4BuffSize	HW/hw_uart4.c	9;"	d	file:
+SWIFTUART5Buff	HW/hw_uart5.c	/^INT8U	SWIFTUART5Buff[SWIFTUART5BuffSize];$/;"	v
+SWIFTUART5BuffSize	HW/hw_uart5.c	5;"	d	file:
+SWIFTUART6Buff	HW/hw_uart6.c	/^INT8U	SWIFTUART6Buff[SWIFTUART6BuffSize];$/;"	v
+SWIFTUART6BuffSize	HW/hw_uart6.c	10;"	d	file:
+SWIFT_UART1_Buff	HW/hw_uart1.c	/^str_UART_Buff		SWIFT_UART1_Buff;$/;"	v
+SWIFT_UART1_GPIO	HW/hw_uart1.c	/^static str_UART_GPIO_HARD	SWIFT_UART1_GPIO;$/;"	v	file:
+SWIFT_UART1_INT_Switch	HW/hw_uart1.c	/^void SWIFT_UART1_INT_Switch(INT8U switch_set)$/;"	f
+SWIFT_UART1_Init	HW/hw_uart1.c	/^void SWIFT_UART1_Init(INT32U	BaudRate)$/;"	f
+SWIFT_UART1_IntHandler	HW/hw_uart1.c	/^void SWIFT_UART1_IntHandler(void)$/;"	f
+SWIFT_UART1_Predict_RevBytes	HW/hw_uart1.c	/^INT8U SWIFT_UART1_Predict_RevBytes=0;$/;"	v
+SWIFT_UART1_RX_PIN	HW/hw_uart1.h	17;"	d
+SWIFT_UART1_RX_PIN_PORT	HW/hw_uart1.h	16;"	d
+SWIFT_UART1_RecvBuff	HW/hw_uart1.c	/^void SWIFT_UART1_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
+SWIFT_UART1_RecvBuff_Clear	HW/hw_uart1.c	/^void SWIFT_UART1_RecvBuff_Clear(void)$/;"	f
+SWIFT_UART1_Rev_Sem	HW/hw_uart1.c	/^OS_SEM SWIFT_UART1_Rev_Sem;	$/;"	v
+SWIFT_UART1_Rev_Sem	HW/hw_uart1.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART1_Rev_Sem;$/;"	v
+SWIFT_UART1_SendBuff	HW/hw_uart1.c	/^void SWIFT_UART1_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
+SWIFT_UART1_Send_Sem	HW/hw_uart1.c	/^OS_SEM SWIFT_UART1_Send_Sem;	$/;"	v
+SWIFT_UART1_TX_PIN	HW/hw_uart1.h	14;"	d
+SWIFT_UART1_TX_PIN_PORT	HW/hw_uart1.h	13;"	d
+SWIFT_UART2	HW/hw_uart2.h	18;"	d
+SWIFT_UART2_Buff	HW/hw_uart2.c	/^str_UART_Buff		SWIFT_UART2_Buff;$/;"	v
+SWIFT_UART2_GPIO	HW/hw_uart2.c	/^static str_UART_GPIO_HARD	SWIFT_UART2_GPIO;$/;"	v	file:
+SWIFT_UART2_INT_Switch	HW/hw_uart2.c	/^void SWIFT_UART2_INT_Switch(INT8U switch_set)$/;"	f
+SWIFT_UART2_Init	HW/hw_uart2.c	/^void SWIFT_UART2_Init(INT32U	BaudRate)$/;"	f
+SWIFT_UART2_IntHandler	HW/hw_uart2.c	/^void SWIFT_UART2_IntHandler(void)$/;"	f
+SWIFT_UART2_Predict_RevBytes	HW/hw_uart2.c	/^INT8U SWIFT_UART2_Predict_RevBytes=0;$/;"	v
+SWIFT_UART2_RX_PIN	HW/hw_uart2.h	16;"	d
+SWIFT_UART2_RX_PIN_PORT	HW/hw_uart2.h	15;"	d
+SWIFT_UART2_RecvBuff	HW/hw_uart2.c	/^void SWIFT_UART2_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
+SWIFT_UART2_RecvBuff_Clear	HW/hw_uart2.c	/^void SWIFT_UART2_RecvBuff_Clear(void)$/;"	f
+SWIFT_UART2_Rev_Sem	HW/hw_uart2.c	/^OS_SEM SWIFT_UART2_Rev_Sem;	$/;"	v
+SWIFT_UART2_Rev_Sem	HW/hw_uart2.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;$/;"	v
+SWIFT_UART2_SendBuff	HW/hw_uart2.c	/^void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
+SWIFT_UART2_Send_Sem	HW/hw_uart2.c	/^OS_SEM SWIFT_UART2_Send_Sem;	$/;"	v
+SWIFT_UART2_TX_PIN	HW/hw_uart2.h	13;"	d
+SWIFT_UART2_TX_PIN_PORT	HW/hw_uart2.h	12;"	d
+SWIFT_UART3	HW/hw_uart3.h	16;"	d
+SWIFT_UART3_Buff	HW/hw_uart3.c	/^str_UART_Buff		SWIFT_UART3_Buff;$/;"	v
+SWIFT_UART3_GPIO	HW/hw_uart3.c	/^static str_UART_GPIO_HARD	SWIFT_UART3_GPIO;$/;"	v	file:
+SWIFT_UART3_INT_ID	HW/hw_uart3.h	17;"	d
+SWIFT_UART3_INT_Switch	HW/hw_uart3.c	/^void SWIFT_UART3_INT_Switch(INT8U switch_set)$/;"	f
+SWIFT_UART3_Init	HW/hw_uart3.c	/^void SWIFT_UART3_Init(INT32U BaudRate)$/;"	f
+SWIFT_UART3_IntHandler	HW/hw_uart3.c	/^void SWIFT_UART3_IntHandler(void)$/;"	f
+SWIFT_UART3_RX_PIN	HW/hw_uart3.h	14;"	d
+SWIFT_UART3_RX_PIN_PORT	HW/hw_uart3.h	13;"	d
+SWIFT_UART3_RecvBuff	HW/hw_uart3.c	/^void SWIFT_UART3_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
+SWIFT_UART3_RecvBuff_Clear	HW/hw_uart3.c	/^void SWIFT_UART3_RecvBuff_Clear(void)$/;"	f
+SWIFT_UART3_Rev_Sem	HW/hw_uart3.c	/^OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
+SWIFT_UART3_Rev_Sem	HW/hw_uart3.h	/^HW_OLED_GLOBE OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
+SWIFT_UART3_SendBuff	HW/hw_uart3.c	/^void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
+SWIFT_UART3_Send_Sem	HW/hw_uart3.c	/^OS_SEM SWIFT_UART3_Send_Sem;$/;"	v
+SWIFT_UART3_TX_PIN	HW/hw_uart3.h	11;"	d
+SWIFT_UART3_TX_PIN_PORT	HW/hw_uart3.h	10;"	d
+SWIFT_UART4	HW/hw_uart4.h	16;"	d
+SWIFT_UART4_Buff	HW/hw_uart4.c	/^str_UART_Buff		SWIFT_UART4_Buff;$/;"	v
+SWIFT_UART4_GPIO	HW/hw_uart4.c	/^static str_UART_GPIO_HARD	SWIFT_UART4_GPIO;$/;"	v	file:
+SWIFT_UART4_INT_ID	HW/hw_uart4.h	17;"	d
+SWIFT_UART4_INT_Switch	HW/hw_uart4.c	/^void SWIFT_UART4_INT_Switch(INT8U switch_set)$/;"	f
+SWIFT_UART4_Init	HW/hw_uart4.c	/^void SWIFT_UART4_Init(INT32U BaudRate)$/;"	f
+SWIFT_UART4_RX_PIN	HW/hw_uart4.h	14;"	d
+SWIFT_UART4_RX_PIN_PORT	HW/hw_uart4.h	13;"	d
+SWIFT_UART4_RecvBuff	HW/hw_uart4.c	/^void SWIFT_UART4_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
+SWIFT_UART4_RecvBuff_Clear	HW/hw_uart4.c	/^void SWIFT_UART4_RecvBuff_Clear(void)$/;"	f
+SWIFT_UART4_Rev_Sem	HW/hw_uart4.c	/^OS_SEM SWIFT_UART4_Rev_Sem;$/;"	v
+SWIFT_UART4_Rev_Sem	HW/hw_uart4.h	/^HW_PDU_GLOBE OS_SEM SWIFT_UART4_Rev_Sem;$/;"	v
+SWIFT_UART4_SendBuff	HW/hw_uart4.c	/^void SWIFT_UART4_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
+SWIFT_UART4_Send_Sem	HW/hw_uart4.c	/^OS_SEM SWIFT_UART4_Send_Sem;$/;"	v
+SWIFT_UART4_TX_PIN	HW/hw_uart4.h	11;"	d
+SWIFT_UART4_TX_PIN_PORT	HW/hw_uart4.h	10;"	d
+SWIFT_UART4_UrgentDeal	HW/hw_uart4.c	/^void SWIFT_UART4_UrgentDeal(void)$/;"	f
+SWIFT_UART5	HW/hw_uart5.h	17;"	d
+SWIFT_UART5_Buff	HW/hw_uart5.c	/^str_UART_Buff		SWIFT_UART5_Buff;$/;"	v
+SWIFT_UART5_GPIO	HW/hw_uart5.c	/^static str_UART_GPIO_HARD	SWIFT_UART5_GPIO;$/;"	v	file:
+SWIFT_UART5_INT_Switch	HW/hw_uart5.c	/^void SWIFT_UART5_INT_Switch(INT8U switch_set)$/;"	f
+SWIFT_UART5_Init	HW/hw_uart5.c	/^void SWIFT_UART5_Init(INT32U	BaudRate)$/;"	f
+SWIFT_UART5_IntHandler	HW/hw_uart5.c	/^void SWIFT_UART5_IntHandler(void)$/;"	f
+SWIFT_UART5_Predict_RevBytes	HW/hw_uart5.c	/^INT8U SWIFT_UART5_Predict_RevBytes=0;$/;"	v
+SWIFT_UART5_RX_PIN	HW/hw_uart5.h	15;"	d
+SWIFT_UART5_RX_PIN_PORT	HW/hw_uart5.h	14;"	d
+SWIFT_UART5_RecvBuff	HW/hw_uart5.c	/^void SWIFT_UART5_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
+SWIFT_UART5_RecvBuff_Clear	HW/hw_uart5.c	/^void SWIFT_UART5_RecvBuff_Clear(void)$/;"	f
+SWIFT_UART5_Rev_Sem	HW/hw_uart5.c	/^OS_SEM SWIFT_UART5_Rev_Sem;	$/;"	v
+SWIFT_UART5_Rev_Sem	HW/hw_uart5.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART5_Rev_Sem;$/;"	v
+SWIFT_UART5_SendBuff	HW/hw_uart5.c	/^void SWIFT_UART5_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
+SWIFT_UART5_Send_Sem	HW/hw_uart5.c	/^OS_SEM SWIFT_UART5_Send_Sem;	$/;"	v
+SWIFT_UART5_TX_PIN	HW/hw_uart5.h	12;"	d
+SWIFT_UART5_TX_PIN_PORT	HW/hw_uart5.h	11;"	d
+SWIFT_UART6_Buff	HW/hw_uart6.c	/^str_UART_Buff		SWIFT_UART6_Buff;$/;"	v
+SWIFT_UART6_GPIO	HW/hw_uart6.c	/^static str_UART_GPIO_HARD	SWIFT_UART6_GPIO;$/;"	v	file:
+SWIFT_UART6_INT_ID	HW/hw_uart6.h	21;"	d
+SWIFT_UART6_INT_Switch	HW/hw_uart6.c	/^void SWIFT_UART6_INT_Switch(INT8U switch_set)$/;"	f
+SWIFT_UART6_Init	HW/hw_uart6.c	/^void SWIFT_UART6_Init(INT32U	BaudRate)$/;"	f
+SWIFT_UART6_IntHandler	HW/hw_uart6.c	/^void SWIFT_UART6_IntHandler(void)$/;"	f
+SWIFT_UART6_RecvBuff	HW/hw_uart6.c	/^void SWIFT_UART6_RecvBuff(INT8S *buff, INT32U *bufflen)$/;"	f
+SWIFT_UART6_Rev_Sem	HW/hw_uart6.c	/^OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
+SWIFT_UART6_Rev_Sem	HW/hw_uart6.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
+SWIFT_UART6_SendBuff	HW/hw_uart6.c	/^void SWIFT_UART6_SendBuff(INT8S *buff, INT32U bufflen)$/;"	f
+SWIFT_UART6_Send_Sem	HW/hw_uart6.c	/^OS_SEM SWIFT_UART6_Send_Sem;$/;"	v
+SWIFT_USART6_GETC	HW/hw_uart6.c	/^INT32S SWIFT_USART6_GETC(void)$/;"	f
+SWIFT_USART6_TSTC	HW/hw_uart6.c	/^INT32S SWIFT_USART6_TSTC(void)$/;"	f
+SWITFT_UART4_IntHandler	HW/hw_uart4.c	/^void SWITFT_UART4_IntHandler(void)$/;"	f
 SWTRIGR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t SWTRIGR;  \/*!< DAC software trigger register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon65
 SYNCHRO_TIMEOUT	Lib/STM32F2xx_StdPeriph_Driver/src/stm32f2xx_rtc.c	284;"	d	file:
 SYN_RCVD	lwip-1.4.1/src/include/lwip/tcp.h	/^  SYN_RCVD    = 3,$/;"	e	enum:tcp_state
@@ -15450,7 +15407,7 @@ USART_Parity	Lib/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_usart.h	/^  uint16_t U
 USART_Parity_Even	Lib/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_usart.h	150;"	d
 USART_Parity_No	Lib/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_usart.h	149;"	d
 USART_Parity_Odd	Lib/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_usart.h	151;"	d
-USART_RX_BUF	HW/hw_beacon.c	/^u8 USART_RX_BUF[SWIFTUART6BuffSize];$/;"	v
+USART_RX_BUF	HW/hw_uart6.c	/^u8 USART_RX_BUF[SWIFTUART6BuffSize];$/;"	v
 USART_ReceiveData	Lib/STM32F2xx_StdPeriph_Driver/src/stm32f2xx_usart.c	/^uint16_t USART_ReceiveData(USART_TypeDef* USARTx)$/;"	f
 USART_ReceiverWakeUpCmd	Lib/STM32F2xx_StdPeriph_Driver/src/stm32f2xx_usart.c	/^void USART_ReceiverWakeUpCmd(USART_TypeDef* USARTx, FunctionalState NewState)$/;"	f
 USART_SR_CTS	Lib/CMSIS/DeviceSupport/stm32f2xx.h	6244;"	d
@@ -15632,8 +15589,8 @@ __DMB	Lib/CMSIS/core_cmInstr.h	89;"	d
 __DSB	Lib/CMSIS/core_cmInstr.h	/^__attribute__( ( always_inline ) ) static __INLINE void __DSB(void)$/;"	f
 __DSB	Lib/CMSIS/core_cmInstr.h	81;"	d
 __EXPORTS_H__	uCOS/uCOS-SHELL/inc/exports.h	2;"	d
-__FILE	HW/hw_beacon.c	/^struct __FILE $/;"	s	file:
-__HW_BEACON__	HW/hw_beacon.h	3;"	d
+__FILE	HW/hw_uart6.c	/^struct __FILE $/;"	s	file:
+__HW_BEACON__	HW/hw_uart6.h	3;"	d
 __I	Lib/CMSIS/core_cm3.h	108;"	d
 __I	Lib/CMSIS/core_cm3.h	110;"	d
 __INLINE	Lib/CMSIS/core_cm3.h	78;"	d
@@ -15819,7 +15776,7 @@ __set_PRIMASK	Lib/CMSIS/core_cmFunc.h	/^__attribute__( ( always_inline ) ) stati
 __set_PRIMASK	Lib/CMSIS/core_cmFunc.h	/^static __INLINE void __set_PRIMASK(uint32_t priMask)$/;"	f
 __set_PSP	Lib/CMSIS/core_cmFunc.h	/^__attribute__( ( always_inline ) ) static __INLINE void __set_PSP(uint32_t topOfProcStack)$/;"	f
 __set_PSP	Lib/CMSIS/core_cmFunc.h	/^static __INLINE void __set_PSP(uint32_t topOfProcStack)$/;"	f
-__stdout	HW/hw_beacon.c	/^FILE __stdout;$/;"	v
+__stdout	HW/hw_uart6.c	/^FILE __stdout;$/;"	v
 __user_initial_stackheap	Lib/CMSIS/startup/cstartup.s	/^__user_initial_stackheap$/;"	l
 _do_help	uCOS/uCOS-SHELL/src/command.c	/^int _do_help(cmd_tbl_t *cmd_start, int cmd_items, cmd_tbl_t *cmdtp, int flag,$/;"	f
 _enumCOMMCmdID_	APP/inc/devdef.h	/^typedef enum _enumCOMMCmdID_$/;"	g
@@ -15880,7 +15837,7 @@ _str_I2C_GPIO_SOFT_	BSP/bsp_stm32F2X7/inc/bsp_i2c_soft.h	/^typedef struct _str_I
 _str_SPI_GPIO_HARD_	BSP/bsp_stm32F2X7/inc/bsp_spi_hard.h	/^typedef struct _str_SPI_GPIO_HARD_$/;"	s
 _str_UART_Buff_	BSP/bsp_stm32F2X7/inc/bsp_uart.h	/^typedef struct _str_UART_Buff_$/;"	s
 _str_UART_GPIO_HARD_	BSP/bsp_stm32F2X7/inc/bsp_uart.h	/^typedef struct _str_UART_GPIO_HARD_$/;"	s
-_sys_exit	HW/hw_beacon.c	/^_sys_exit(int x) $/;"	f
+_sys_exit	HW/hw_uart6.c	/^_sys_exit(int x) $/;"	f
 aaddrlen	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u16_t aaddrlen;$/;"	m	struct:snmp_trap_header_lengths
 aaddrlenlen	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u8_t aaddrlenlen;$/;"	m	struct:snmp_trap_header_lengths
 accept	lwip-1.4.1/src/include/lwip/sockets.h	346;"	d
@@ -16444,7 +16401,7 @@ fd	lwip-1.4.1/src/netif/ppp/ppp.c	/^  sio_fd_t fd;$/;"	m	struct:PPPControlRx_s	f
 fd_bits	lwip-1.4.1/src/include/lwip/sockets.h	/^          unsigned char fd_bits [(FD_SETSIZE+7)\/8];$/;"	m	struct:fd_set
 fd_set	lwip-1.4.1/src/include/lwip/sockets.h	/^        } fd_set;$/;"	t	typeref:struct:fd_set
 fd_set	lwip-1.4.1/src/include/lwip/sockets.h	/^  typedef struct fd_set {$/;"	s
-fgetc	HW/hw_beacon.c	/^int fgetc(FILE *f)$/;"	f
+fgetc	HW/hw_uart6.c	/^int fgetc(FILE *f)$/;"	f
 file	lwip-1.4.1/src/core/memp.c	/^  const char *file;$/;"	m	struct:memp	file:
 final_printf	uCOS/uCOS-SHELL/src/cli_hush.c	237;"	d	file:
 find_cmd	uCOS/uCOS-SHELL/src/command.c	/^cmd_tbl_t *find_cmd(const char *cmd)$/;"	f
@@ -16471,7 +16428,7 @@ flow1	lwip-1.4.1/src/include/ipv6/lwip/ip.h	/^  u8_t flow1:4, tclass2:4;  $/;"	m
 flow2	lwip-1.4.1/src/include/ipv6/lwip/ip.h	/^  u16_t flow2;$/;"	m	struct:ip_hdr
 followup	uCOS/uCOS-SHELL/src/cli_hush.c	/^	pipe_style followup;		\/* PIPE_BG, PIPE_SEQ, PIPE_OR, PIPE_AND *\/$/;"	m	struct:pipe	file:
 found	lwip-1.4.1/src/core/dns.c	/^  dns_found_callback found;$/;"	m	struct:dns_table_entry	file:
-fputc	HW/hw_beacon.c	/^int fputc(int ch, FILE *f)$/;"	f
+fputc	HW/hw_uart6.c	/^int fputc(int ch, FILE *f)$/;"	f
 free_etharp_q	lwip-1.4.1/src/netif/etharp.c	/^free_etharp_q(struct etharp_q_entry *q)$/;"	f	file:
 free_etharp_q	lwip-1.4.1/src/netif/etharp.c	171;"	d	file:
 free_socket	lwip-1.4.1/src/api/sockets.c	/^free_socket(struct lwip_sock *sock, int is_tcp)$/;"	f	file:
@@ -16559,7 +16516,7 @@ h_errno	lwip-1.4.1/src/api/netdb.c	/^int h_errno;$/;"	v
 h_length	lwip-1.4.1/src/include/lwip/netdb.h	/^    int    h_length;    \/* The length, in bytes, of the address. *\/$/;"	m	struct:hostent
 h_name	lwip-1.4.1/src/include/lwip/netdb.h	/^    char  *h_name;      \/* Official name of the host. *\/$/;"	m	struct:hostent
 had_ctrlc	uCOS/uCOS-SHELL/src/console.c	/^int had_ctrlc (void)$/;"	f
-handle	HW/hw_beacon.c	/^	int handle; $/;"	m	struct:__FILE	file:
+handle	HW/hw_uart6.c	/^	int handle; $/;"	m	struct:__FILE	file:
 handle_dollar	uCOS/uCOS-SHELL/src/cli_hush.c	/^static int handle_dollar(o_string *dest, struct p_context *ctx, struct in_str *input)$/;"	f	file:
 handler_name	lwip-1.4.1/src/include/lwip/timers.h	/^  const char* handler_name;$/;"	m	struct:sys_timeo
 hardver	APP/inc/devdef.h	/^	INT8U 			hardver[16];$/;"	m	struct:_strVersion_

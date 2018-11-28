@@ -8,27 +8,27 @@
 #include <stdio.h>
 #include "console.h"
 #include "command.h"
-#include "hw_uart6.h"
+#include "hw_uart1.h"
 
 int cgetc(void)
 {
-	return SWIFT_USART6_GETC();
+	return SWIFT_USART1_GETC();
 }
 
 int ctstc(void)
 {
-	return SWIFT_USART6_TSTC();
+	return SWIFT_USART1_TSTC();
 }
 
 void cputc(char c)
 {
-	SWIFT_UART6_SendBuff(&c, 1);
+	SWIFT_UART1_SendBuff(&c, 1);
 }
 
 void cputs(char *s)
 {
 	/* Send directly to the handler */
-	SWIFT_UART6_SendBuff(s, strlen(s));
+	SWIFT_UART1_SendBuff(s, strlen(s));
 }
 
 #ifdef __GNUC__

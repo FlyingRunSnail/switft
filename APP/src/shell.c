@@ -10,7 +10,7 @@
 
 /***********************************************************
 **name:	APP_Shell_Init
-**describe: 对shell的初始化
+**describe: shell init functions
 **input:	
 **output:	none
 **return:  FAIL:   SUCC
@@ -19,8 +19,8 @@
 ************************************************************/
 int APP_Shell_Init(void)
 {
-	// 对应的串口驱动初始化
-	SWIFT_UART6_Init(115200);
+	// init uart1 as debug com
+	SWIFT_UART1_Init(115200);
 
 	cmd_help_init();
 	cmd_ver_init();

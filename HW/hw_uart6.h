@@ -1,8 +1,8 @@
 
-#ifndef __HW_BEACON__
-#define __HW_BEACON__
+#ifndef __HW_UART6__
+#define __HW_UART6__
 
-#ifdef HW_BEACON_DEF
+#ifdef HW_UART6_DEF
 	#define HW_BEACON_GLOBE
 #else
 	#define HW_BEACON_GLOBE		extern

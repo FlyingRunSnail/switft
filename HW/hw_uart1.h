@@ -1,6 +1,6 @@
 
 
-#ifdef HW_BEACON_DEF
+#ifdef HW_UART1_DEF
 	#define HW_BEACON_GLOBE
 #else
 	#define HW_BEACON_GLOBE		extern
@@ -35,4 +35,6 @@ HW_BEACON_GLOBE void SWIFT_UART1_RecvBuff(INT8U *buff, INT32U *bufflen);
 
 HW_BEACON_GLOBE void SWIFT_UART1_RecvBuff_Clear(void);
 
+HW_BEACON_GLOBE INT32S SWIFT_USART1_GETC(void);
 
+HW_BEACON_GLOBE INT32S SWIFT_USART1_TSTC(void);

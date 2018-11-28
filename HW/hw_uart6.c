@@ -1,5 +1,5 @@
 
-#define HW_BEACON_DEF
+#define HW_UART6_DEF
 
 #include "hw_uart6.h"
 
@@ -75,8 +75,6 @@ int fgetc(FILE *f)
 ************************************************************/
 void SWIFT_UART6_Init(INT32U	BaudRate)
 {
-	INT8U test_buff[10]={0};
-
 	SWIFT_UART6_GPIO.GPIOx[UART_GPIO_TX_INDEX] = HW_BEACON_UART_TX_PIN_PORT;
 	SWIFT_UART6_GPIO.GPIO_InitStruct[UART_GPIO_TX_INDEX].GPIO_OType = GPIO_OType_PP;
 	SWIFT_UART6_GPIO.GPIO_InitStruct[UART_GPIO_TX_INDEX].GPIO_PuPd = GPIO_PuPd_UP;

@@ -1,3 +1,4 @@
+#define HW_UART1_DEF
 
 #include "hw_uart1.h"
 
@@ -9,31 +10,6 @@ INT8U	SWIFTUART1Buff[SWIFTUART1BuffSize];
 str_UART_Buff		SWIFT_UART1_Buff;
 OS_SEM SWIFT_UART1_Send_Sem;	
 OS_SEM SWIFT_UART1_Rev_Sem;	
-
-INT8U SWIFT_UART1_Predict_RevBytes=0;
-
-#if 1
-/***********************************************************
-**name:	SWIFT_UART1_IntHandler
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void SWIFT_UART1_IntHandler(void)
-{
-	if (USART_GetITStatus(SWIFT_UART1_GPIO.USARTx, USART_IT_RXNE) != RESET)
-	{
-		SWIFT_UART1_Buff.pbuff[SWIFT_UART1_Buff.write_p++] = USART_ReceiveData(SWIFT_UART1_GPIO.USARTx);
-		if( SWIFT_UART1_Buff.write_p >= SWIFTUART1BuffSize )
-			SWIFT_UART1_Buff.write_p = 0;
-		if( (SWIFT_UART1_Buff.write_p >= SWIFT_UART1_Predict_RevBytes ) &&(SWIFT_UART1_Predict_RevBytes>0))
-			BSP_OS_Sem_Post(&SWIFT_UART1_Rev_Sem);
-	}
-}
-#else
 
 /***********************************************************
 **name:	SWIFT_UART1_IntHandler
@@ -50,51 +26,10 @@ void SWIFT_UART1_IntHandler(void)
 
 	if (USART_GetITStatus(SWIFT_UART1_GPIO.USARTx, USART_IT_RXNE) != RESET)
 	{
-		//读取接收到的数据
-		Res = USART_ReceiveData(SWIFT_UART1_GPIO.USARTx);
-
-		//退格键
-		if (Res == 0x8)
-		{
-			if ((USART_RX_STA & 0x3FFF) > 0)
-			{
-				//先发退格键，再发空格，最后再发退格
-				fputc(Res, NULL);
-				fputc(0x20, NULL);
-				fputc(Res, NULL);
-				USART_RX_STA--;
-			}
-		}
-		else
-		{
-			fputc(Res, NULL);
-			USART_RX_BUF[USART_RX_STA & 0x3FFF] = Res ;
-
-			//回车键
-			if (Res == '\r')
-			{
-				if ((USART_RX_STA & 0x3FFF) > 1)
-				{
-					USART_RX_BUF[USART_RX_STA & 0x3FFF] = '\0' ;
-				}
-
-				USART_RX_STA |= 0x8000;
-
-				//唤醒shell任务
-				BSP_OS_Sem_Post(&SWIFT_UART1_Rev_Sem);
-			}
-
-			USART_RX_STA++;
-
-			//接收数据错误,重新开始接收
-			if ((USART_RX_STA & 0x3FFF) > (SWIFTUART1BuffSize - 1))
-			{
-				USART_RX_STA = 0;
-			}
-		}
+		USART_ClearITPendingBit(SWIFT_UART1_GPIO.USARTx, USART_IT_RXNE);
+		BSP_OS_Sem_Post(&SWIFT_UART1_Rev_Sem);
 	}
 }
-#endif
 
 /***********************************************************
 **name:	SWIFT_UART1_INT_Switch
@@ -128,7 +63,7 @@ void SWIFT_UART1_INT_Switch(INT8U switch_set)
 **autor:  andiman
 **date:
 ************************************************************/
-void SWIFT_UART1_Init(INT32U	BaudRate)
+void SWIFT_UART1_Init(INT32U BaudRate)
 {
 	GPIO_InitTypeDef GPIO_InitStructure;
 
@@ -218,3 +153,13 @@ void SWIFT_UART1_RecvBuff_Clear(void)
 	SWIFT_UART1_Buff.read_p = 0;
 }
 
+INT32S SWIFT_USART1_GETC(void)
+{
+	BSP_OS_Sem_Pend(&SWIFT_UART1_Rev_Sem, 0);
+	return BSP_UART_RCV(SWIFT_UART1_GPIO.USARTx);
+}
+
+INT32S SWIFT_USART1_TSTC(void)
+{
+	return BSP_UART_TST(SWIFT_UART1_GPIO.USARTx);
+}

@@ -4,7 +4,10 @@
  * Paolo Scaffardi, AIRVENT SAM s.p.a - RIMINI(ITALY), arsenio@tin.it
  */
 
-#include <console.h>
+#include <stdarg.h>
+#include <stdio.h>
+#include "console.h"
+#include "command.h"
 #include "hw_beacon.h"
 
 int cgetc(void)
@@ -27,6 +30,27 @@ void cputs(char *s)
 	/* Send directly to the handler */
 	SWIFT_UART6_SendBuff(s, strlen(s));
 }
+
+#ifdef __GNUC__
+int printf(const char *fmt, ...)
+{
+    va_list args;
+    uint i;
+    char printbuffer[SHELL_SYS_PBSIZE];
+
+    va_start(args, fmt);
+
+    /* For this to work, printbuffer must be larger than
+     * anything we ever want to print.
+     */
+    i = vsnprintf(printbuffer, sizeof(printbuffer), fmt, args);
+    va_end(args);
+
+    /* Print the string */
+    cputs(printbuffer);
+    return i;
+}
+#endif
 
 /* test if ctrl-c was pressed */
 static int ctrlc_disabled = 0;	/* see disable_ctrl() */

@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "command.h"
 #include "cmd_m.h"
+#include "exports.h"
 
 
 static int modify_memory(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])

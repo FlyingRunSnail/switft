@@ -13,7 +13,7 @@
 
 #define MAX_CMD_LINE (32)
 
-static unsigned short cmd_index = 0;
+static volatile unsigned short cmd_index = 0;
 cmd_tbl_t cmd_tbl[MAX_CMD_LINE] = {0};
 
 cmd_tbl_t *cmd_entry_start(void)

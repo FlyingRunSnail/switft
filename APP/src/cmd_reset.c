@@ -2,6 +2,7 @@
 #include "bsp.h"
 #include "command.h"
 #include "cmd_reset.h"
+#include "exports.h"
 
 
 int do_reset(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])

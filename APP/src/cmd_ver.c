@@ -1,5 +1,6 @@
 #include "command.h"
 #include "cmd_ver.h"
+#include "exports.h"
 
 
 static int show_version(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])

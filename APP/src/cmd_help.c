@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "command.h"
 #include "cmd_help.h"
+#include "exports.h"
 
 
 static int do_help(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])

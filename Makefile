@@ -157,6 +157,7 @@ clean:
 	rm -f $(OUTPATH)/$(PROJ_NAME).bin
 	rm -f $(OUTPATH)/$(PROJ_NAME).dis
 	rm -f $(OUTPATH)/$(PROJ_NAME).map
+	rm -rf build-test/	
 	# Remove this line if you don't want to clean the libs as well
 	$(MAKE) clean -C Lib FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)
 	$(MAKE) clean -C uCOS FLOAT_TYPE=$(FLOAT_TYPE) BINPATH=$(BINPATH) DEVICE_DEF=$(DEVICE_DEF) BASEDIR=$(BASEDIR) OUTPATH=$(OUTPATH)

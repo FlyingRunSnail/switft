@@ -75,11 +75,10 @@ static INT16U Period_Ms_Cnt = 0;
 *                                            LOCAL DEFINES
 *********************************************************************************************************
 */
- static  void  TaskStart (void *p_arg);
-//  static  void  TaskBuzzer(void *p_arg);
- static  void  TaskCreate (void);
+static  void  TaskStart (void *p_arg);
+static  void  TaskCreate (void);
 
- void   AppObjCreate(void);
+void   AppObjCreate(void);
 
 
 /*
@@ -159,12 +158,6 @@ static  void  TaskStart (void *p_arg)
 	
 
 	APP_Shell_Init(); 
-	//APP_LOG_Init();
- 	
-	//APP_ElecEncoder_Init();	
-	//APP_PARAM_Init();
-	
-	//APP_PCCOMM_Init();
 	
 	BSP_Delay_ms(500);
 
@@ -174,34 +167,10 @@ static  void  TaskStart (void *p_arg)
     		OSStatInit();                                               /* Determine CPU capacity                                   */
 	#endif
 
-    //APP_TRACE_INFO(("Creating Application Objects... \n\r"));
-	AppObjCreate();                                             /* Create Application Kernel Objects                        */
-	
-    //APP_TRACE_INFO(("Creating Application Tasks... \n\r"));
-	
-	
-	
 	udpecho_init();
 
- 	//APP_PDUCOMM_Init();
- 	//APP_PDUCOMM_VersionQue();
  	BSP_Delay_ms(100);
 
-
-	// 安全考虑，上电之后停止所有电机的动作
-	//Antenna_AllDriveEnd();
-
-#if 0
-	// 长鸣叫1秒钟，表示初始化完毕,同时记录开机操作日志
-	if( APP_PARAM_EthRelinkResetMCUFlag_Read()==0)
-	{
-		APP_BUZZER_On();
-		BSP_Delay_s(1);
-		APP_BUZZER_Off();
-		APP_BUZZER_Switch(DISABLE);
-		APP_OptLOG_Save_PowerOn();
-	}
-#endif
 	// 创建其他任务
 	TaskCreate();                                            /* Create Application Tasks                                 */
 
@@ -209,7 +178,6 @@ static  void  TaskStart (void *p_arg)
 	//HW_WTD_Init();
 
   	//从时钟芯片 获取时间，随后在本任务中自动计时
-	//DATETIME_ReadFromRtcIC(&ACUDevInfo.SysDateTime);
 	while (DEF_TRUE) 
 	{     
 		//HW_WTD_Feed();
@@ -220,12 +188,6 @@ static  void  TaskStart (void *p_arg)
 		HW_LED2_OFF();
 		BSP_Delay_ms(250);
 	}
-}
-
-static void prompt(void)
-{
-	SWIFT_UART6_SendBuff(SHELL_SYS_PROMPT, sizeof(SHELL_SYS_PROMPT));
-	SWIFT_UART6_SendBuff(STR_LF_CR, sizeof(STR_LF_CR));
 }
 
 /***********************************************************
@@ -239,370 +201,11 @@ static void prompt(void)
 ************************************************************/
 static  void  TaskShell(void *p_arg)
 {
-	//prompt();
-
     while (DEF_TRUE) 
     {         
-        //if(BSP_OS_Sem_Pend(&SWIFT_UART6_Rev_Sem, 0) == SUCC)
-        {
-            //shell_proc();
-			cli_loop();
-			//prompt();
-        }
-        //BSP_Delay_ms(1);
+        cli_loop();
     }
 }
-
-
-/***********************************************************
-**name: TaskPositionElecCoderRevData
-**describe:   方位电子码盘轮询数据任务
-**input:            
-**output:   none
-**return: none
-**autor:  andiman
-**date:
-************************************************************/
-static  void  TaskPositionElecCoderRevData(void *p_arg)
-{
-    OS_ERR err;
-
-    INT32U data[2];
-
-    INT8U addr = 0 ;
-    INT8U work_alarm_cnt = 0;
-    INT8U dir=0;
-    INT8U count_mode;
-
-    // 先查询电子码盘地址
-    APP_ElecEncoder_Position_Addr_Que(&addr);
-
-    // 若不符合相应的地址，则重设地址,若连续15次均不能设置成功，则表示电子码盘故障，删除本任务
-    while( addr != APP_ELEC_ENCODER_POSITION )
-    {
-        APP_ElecEncoder_Position_Addr_Set(APP_ELEC_ENCODER_POSITION);
-        BSP_Delay_ms(500);
-        APP_ElecEncoder_Position_Addr_Que(&addr);
-        BSP_Delay_ms(50);
-        work_alarm_cnt++;
-        if( work_alarm_cnt > ELEC_ENCODER_UNLINK_NUM)
-        {
-            ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_POSITION-1].EleccoderStat.link_stat = COMM_UNLINK;
-            work_alarm_cnt = 0;
-            BSP_Delay_s(10);
-        }
-    }
-
-    APP_ElecEncoder_Position_DataAddDir_Que(&dir);
-    BSP_Delay_ms(100);
-    APP_PARAM_ElecCode_count_mode_Read(APP_ELEC_ENCODER_POSITION,&count_mode);
-
-    if( (dir != count_mode) && (( count_mode == 0xE1) ||( count_mode == 0xE2) ))
-        APP_ElecEncoder_Position_DataAddDir_Set(count_mode);
-
-    ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_POSITION-1].EleccoderConf.count_mode = count_mode;
-
-    ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_POSITION-1].EleccoderStat.link_stat = COMM_LINK;
-
-    BSP_Delay_ms(100);
-    while (DEF_TRUE) 
-    {         
-        APP_ElecEncoder_Position_CurrData_Get(&data[0]);
-        BSP_Delay_ms(25);
-    }
-}
-
-/***********************************************************
-**name: TaskCabrageElecCoderRevData
-**describe:   俯仰电子码盘轮询数据任务
-**input:            
-**output:   none
-**return: none
-**autor:  andiman
-**date:
-************************************************************/
-static  void  TaskCabrageElecCoderRevData(void *p_arg)
-{
-    OS_ERR err;
-
-    INT32U data;
-    
-    INT8U addr = 0 ;
-    INT8U work_alarm_cnt = 0;
-    INT8U dir=0;
-    INT8U count_mode;
-
-    // 先查询电子码盘地址
-    APP_ElecEncoder_Cabrage_Addr_Que(&addr);
-
-    // 若不符合相应的地址，则重设地址,若连续15次均不能设置成功，则表示电子码盘故障，删除本任务
-    while( addr != APP_ELEC_ENCODER_CABRAGE)
-    {
-        APP_ElecEncoder_Cabrage_Addr_Set(APP_ELEC_ENCODER_CABRAGE);
-        BSP_Delay_ms(500);
-        APP_ElecEncoder_Cabrage_Addr_Que(&addr);
-        BSP_Delay_ms(50);
-        work_alarm_cnt++;
-        if( work_alarm_cnt > ELEC_ENCODER_UNLINK_NUM )
-        {
-            ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_CABRAGE-1].EleccoderStat.link_stat = COMM_UNLINK;
-            work_alarm_cnt = 0;
-            BSP_Delay_s(10);
-        }
-    }
-
-    APP_ElecEncoder_Cabrage_DataAddDir_Que(&dir);
-    APP_PARAM_ElecCode_count_mode_Read(APP_ELEC_ENCODER_CABRAGE,&count_mode);
-
-    if( (dir != count_mode) && (( count_mode == 0xE1) ||( count_mode == 0xE2) ))
-        APP_ElecEncoder_Cabrage_DataAddDir_Set(count_mode);
-
-    ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_CABRAGE-1].EleccoderConf.count_mode = count_mode;
-
-    ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_CABRAGE-1].EleccoderStat.link_stat = COMM_LINK;
-
-    BSP_Delay_ms(100);
-    while (DEF_TRUE) 
-    {         
-
-        APP_ElecEncoder_Cabrage_CurrData_Get(&data);
-        
-        BSP_Delay_ms(25);
-    }
-}
-
-/***********************************************************
-**name: TaskPolarElecCoderRevData
-**describe:   极化电子码盘轮询数据任务
-**input:            
-**output:   none
-**return: none
-**autor:  andiman
-**date:
-************************************************************/
-static  void  TaskPolarElecCoderRevData(void *p_arg)
-{
-    OS_ERR err;
-    INT32U data;
-    INT8U addr = 0;
-
-    INT8U work_alarm_cnt = 0;
-    INT8U dir=0;
-    INT8U count_mode;
-
-    PolarElecCoderRevData_Begin:
-    while( ACUDevInfo.ACUParam.AntennaParam.elec_coder_num != 3 )
-        BSP_Delay_s(5);
-
-    APP_ElecEncoder_Polarization_Addr_Que(&addr);
-
-    while( addr != APP_ELEC_ENCODER_POLARIZATION)
-    {
-        APP_ElecEncoder_Polarization_Addr_Set(APP_ELEC_ENCODER_POLARIZATION);
-        BSP_Delay_ms(500);
-        APP_ElecEncoder_Polarization_Addr_Que(&addr);
-        BSP_Delay_ms(50);
-
-        work_alarm_cnt++;
-        if( work_alarm_cnt > ELEC_ENCODER_UNLINK_NUM )
-        {
-            ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_POLARIZATION-1].EleccoderStat.link_stat = COMM_UNLINK;
-            work_alarm_cnt = 0;
-            BSP_Delay_s(10);
-        }
-    }
-
-    APP_ElecEncoder_Polarization_DataAddDir_Que(&dir);
-    APP_PARAM_ElecCode_count_mode_Read(APP_ELEC_ENCODER_POLARIZATION,&count_mode);
-
-    if( (dir != count_mode) && (( count_mode == 0xE1) ||( count_mode == 0xE2) ))
-        APP_ElecEncoder_Polarization_Addr_Set(count_mode);
-
-    ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_POLARIZATION-1].EleccoderConf.count_mode = count_mode;
-
-    ACUDevInfo.DeviceInfo.EleccoderInfo[APP_ELEC_ENCODER_POLARIZATION-1].EleccoderStat.link_stat = COMM_LINK;
-
-    BSP_Delay_ms(100);
-
-    while (DEF_TRUE) 
-    {         
-        if( ACUDevInfo.ACUParam.AntennaParam.elec_coder_num == 3)
-        {
-            APP_ElecEncoder_Polarization_CurrData_Get(&data);
-            BSP_Delay_ms(25);
-        }
-        else
-            goto PolarElecCoderRevData_Begin;
-    }
-}
-
-
-/***********************************************************
-**name: TaskBeaconRevData
-**describe:  信标机轮询数据任务
-**input:            
-**output:   none
-**return: none
-**autor:  andiman
-**date:
-************************************************************/
-static  void  TaskBeaconRevData(void *p_arg)
-{
-    OS_ERR err;
-
-    INT32U data;
-
-    
-    
-    while (DEF_TRUE) 
-    {         
-        APP_BEACON_QueAGC();
-        BSP_Delay_ms(25);
-    }
-}
-
-
-
-/***********************************************************
-**name: TaskMonitor
-**describe:  ACU监控任务
-**input:            
-**output:   none
-**return: none
-**autor:  andiman
-**date:
-************************************************************/
-static  void  TaskMonitor(void *p_arg)
-{
-    OS_ERR err;
-    INT32U cnt2=0,cnt1=0,GPS_scan_cnt=0,PDU_sta_cnt=0;
-    INT8U curr_eth_link;
-    INT32U period_ms = 25;      // 25 毫秒
-    strSysDateTime SysDateTime;
-
-    //BSP_Delay_s(2);
-    
-    while (DEF_TRUE) 
-    {         
-        // 实时天线角度数据获取
-        APP_MONITOR_LocallAntennaRealDegreeDataGet();
-
-        APP_MONITOR_DevMotorMonitor(period_ms);
-
-        // 设备硬件状态处理
-        //APP_MONITOR_DevHWSta(period_ms);
-
-        // GPS数据是否有效，无效则5秒轮询一次
-        if( ACUDevInfo.DeviceInfo.GPSInfo.GPSData.valid != 'A')
-        {
-            //GPS_scan_cnt = 0;
-            GPS_scan_cnt++;
-            if( GPS_scan_cnt  *  period_ms  >= 5000 )       // 每间隔5秒钟查询一次GPS数据
-            {
-                APP_GPS_DataGet();
-                GPS_scan_cnt = 0;
-            }
-
-            // 若检测到数据有效后，则同步系统时间
-            if( ACUDevInfo.DeviceInfo.GPSInfo.GPSData.valid == 'A')
-            {
-                
-                APP_GPS_UTC2BeijingTime(&ACUDevInfo.DeviceInfo.GPSInfo.GPSData, &SysDateTime);
-                if( SysDateTime.year  > 2000 )
-                    DATETIME_SavetoRtcIC(&SysDateTime);
-                else
-                    ACUDevInfo.DeviceInfo.GPSInfo.GPSData.valid = 0x00;
-
-                if((ACUDevInfo.DeviceInfo.HandLocalPositionParam.lon_flag != ACUDevInfo.ACUParam.LocalPositionParam.lon_flag)||
-                    (ACUDevInfo.DeviceInfo.HandLocalPositionParam.lon != ACUDevInfo.ACUParam.LocalPositionParam.lon)||
-                    (ACUDevInfo.DeviceInfo.HandLocalPositionParam.lat_flag != ACUDevInfo.ACUParam.LocalPositionParam.lat_flag)||
-                    (ACUDevInfo.DeviceInfo.HandLocalPositionParam.lat != ACUDevInfo.ACUParam.LocalPositionParam.lat))
-                {
-
-                    ACUDevInfo.DeviceInfo.HandLocalPositionParam.lon_flag = ACUDevInfo.ACUParam.LocalPositionParam.lon_flag;
-                    ACUDevInfo.DeviceInfo.HandLocalPositionParam.lon = ACUDevInfo.ACUParam.LocalPositionParam.lon;
-                    ACUDevInfo.DeviceInfo.HandLocalPositionParam.lat_flag = ACUDevInfo.ACUParam.LocalPositionParam.lat_flag;
-                    ACUDevInfo.DeviceInfo.HandLocalPositionParam.lat = ACUDevInfo.ACUParam.LocalPositionParam.lat;
-                    ACUDevInfo.DeviceInfo.HandLocalPositionParam.height= ACUDevInfo.ACUParam.LocalPositionParam.height;
-                    ACUDevInfo.DeviceInfo.HandLocalPositionParam.valid_flag = 0x01;
-
-                    APP_PARAM_LocallHandParam_Save(&ACUDevInfo.DeviceInfo.HandLocalPositionParam);
-                }
-
-                memcpy(&ACUDevInfo.SysDateTime,&SysDateTime,sizeof(SysDateTime));
-            }
-        }
-        else
-        {
-            // 在上次获取有效GPS数据之后，再间隔5分钟同步一次数据
-            GPS_scan_cnt++;
-            if( GPS_scan_cnt * period_ms  >= 3600000 )
-            {
-                if( APP_GPS_DataGet() ==SUCC)
-                {
-                    if( ACUDevInfo.DeviceInfo.GPSInfo.GPSData.valid == 'A')
-                    {
-                        APP_GPS_UTC2BeijingTime(&ACUDevInfo.DeviceInfo.GPSInfo.GPSData, &SysDateTime);
-                        if( SysDateTime.year  > 2000 )
-                            DATETIME_SavetoRtcIC(&SysDateTime);
-                        else
-                            ACUDevInfo.DeviceInfo.GPSInfo.GPSData.valid = 0x00;
-
-                        memcpy(&ACUDevInfo.SysDateTime,&SysDateTime,sizeof(SysDateTime));
-                    }
-                }
-                GPS_scan_cnt = 0;
-            }
-            
-        }
-
-        // 每间隔1秒钟，查询一次PDU的状态
-        PDU_sta_cnt++;
-        if( PDU_sta_cnt * period_ms >= 1000)
-        {
-            APP_PDUCOMM_PDUDevStaQue();
-            PDU_sta_cnt = 0;
-
-            // 检测到处于PDU主控模式，则退出系列任务的操作
-            if( ACUDevInfo.ACUCurrSta.dev_admin_sta == 0x02)
-            {
-                ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode = 0x00;
-                ACUDevInfo.ACUCurrSta.dev_work_sta = 0x00;
-                if( Task_Run_Flag[0] >0 )
-                {
-                    TaskSatelliteTrackDel();
-                    //if( Antenna_AllDriveEnd() == FAIL)
-                        //Antenna_AllDriveEnd();
-                }
-                if( Task_Run_Flag[1] >0 )
-                {
-                    TaskSatGradientTrackDel();
-                    //if( Antenna_AllDriveEnd() == FAIL)
-                        //Antenna_AllDriveEnd();
-                    
-                }
-                if( Task_Run_Flag[2] >0 )
-                {
-                    TaskAntennaRecordGotoDel();
-                    //if( Antenna_AllDriveEnd() == FAIL)
-                        //Antenna_AllDriveEnd();
-                    
-                }
-            }
-        }
-
-        ///////////////////////////////////////////////////////////////////////////////////////
-        #ifdef  TEST_CODE_USE_FLAG
-        APP_LOG_RecordSatDrift(period_ms);      //  漂移检测处理，正式版本需要删除或注释掉
-        #endif
-        //////////////////////////////////////////////////////////////////////////////////////
-
-        BSP_Delay_ms(period_ms);
-    }
-}
-
-
-
 
 /***********************************************************
 **name: TaskEthRelink
@@ -1430,31 +1033,5 @@ static  void  TaskCreate (void)
                  (OS_ERR     *)&err);
 
 #endif
-#if 0
-    OSTaskCreate((OS_TCB     *)&TaskAntennaRecordGotoTCB,                /* Create the start task    */
-                 (CPU_CHAR   *)"Task AntennaRecordGoto",
-                 (OS_TASK_PTR ) TaskAntennaRecordGoto,
-                 (void       *) 0,
-                 (OS_PRIO     ) TASK_AntennaRecordGoto_PRIO,
-                 (CPU_STK    *)&TaskAntennaRecordGotoStk[0],
-                 (CPU_STK     )(TASK_AntennaRecordGoto_STK_SIZE / 10u),
-                 (CPU_STK_SIZE) TASK_AntennaRecordGoto_STK_SIZE,
-                 (OS_MSG_QTY  ) 0,
-                 (OS_TICK     ) 0,
-                 (void       *) 0,
-                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
-                 (OS_ERR     *)&err);   
-
-            
-#endif
 }
 
-
-
-void    AppObjCreate(void)
-{
-//  BSP_OS_Sem_Creat(&PC2MCU_Sem,"PC2MCU Sem",0);               // PC到MCU的通信信号量
-//  BSP_OS_Q_Creat(&PC2MCU_CFG_CMD_Q,"PC 2 MCU Q",10);              // PC到MCU的指令消息，任务TaskPcComm 到任务TaskDevCfg
-//  BSP_OS_Q_Creat(&Display_Q,"Dispaly Q",10);              // 显示的指令消息，任务TaskMonitor 到任务TaskDisplay
-//  BSP_OS_Q_Creat(&Buzzer_Q,"Buzzer Q",10);                // Buzzer的指令消息，任务TaskMonitor 到任务TaskBuzzer
-}

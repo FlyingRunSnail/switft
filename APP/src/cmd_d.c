@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include "command.h"
 #include "cmd_d.h"
+#include "exports.h"
 
 
 static int show_memory(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])

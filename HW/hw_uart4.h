@@ -1,7 +1,7 @@
 
 #include <bsp_uart.h>
 
-#ifdef 	HW_PDU_DEF
+#ifdef 	HW_UART4_DEF
 	#define	HW_PDU_GLOBE
 #else
 	#define	HW_PDU_GLOBE	extern

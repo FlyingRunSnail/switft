@@ -1,7 +1,7 @@
 
 #include <bsp.h>
 
-#ifdef 	HW_OLED_DEF
+#ifdef 	HW_UART3_DEF
 	#define	HW_OLED_GLOBE
 #else
 	#define	HW_OLED_GLOBE	extern

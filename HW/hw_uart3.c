@@ -1,9 +1,10 @@
+
 #include <devdef.h>
 #include <bsp_uart.h>
+
+#define	HW_UART3_DEF
+
 #include "hw_uart3.h"
-
-
-#define	HW_OLED_DEF
 
 
 static str_UART_GPIO_HARD	SWIFT_UART3_GPIO;

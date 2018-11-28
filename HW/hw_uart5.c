@@ -1,4 +1,4 @@
-#define HW_ELECCODER_DEF
+#define HW_UART5_DEF
 
 #include <hw_uart5.h>
 

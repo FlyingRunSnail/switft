@@ -1,7 +1,7 @@
 #include "hw_uart4.h"
 #include <devdef.h>
 
-#define	HW_PDU_DEF
+#define	HW_UART4_DEF
 
 
 static str_UART_GPIO_HARD	SWIFT_UART4_GPIO;

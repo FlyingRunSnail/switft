@@ -1,5 +1,5 @@
 
-#define HW_ELECCODER_DEF
+#define HW_UART2_DEF
 
 #include <hw_uart2.h>
 

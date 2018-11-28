@@ -9,12 +9,12 @@
 #include <bsp_gpio.h>
 
 // LED1
-#define		HW_LED1_PIN_PORT			GPIOF
-#define		HW_LED1_PIN					GPIO_Pin_4
+#define		HW_LED1_PIN_PORT			GPIOB
+#define		HW_LED1_PIN					GPIO_Pin_8
 
 //LED2
-#define		HW_LED2_PIN_PORT			GPIOF
-#define		HW_LED2_PIN					GPIO_Pin_5
+#define		HW_LED2_PIN_PORT			GPIOB
+#define		HW_LED2_PIN					GPIO_Pin_9
 
 
 HW_LED_GLOBE void HW_LED_Init(void);

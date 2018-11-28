@@ -2,7 +2,6 @@
 
 
 #include <hw_pducomm.h>
-#include <app_log.h>
 #include <devdef.h>
 
 #define	HW_PDU_DEF

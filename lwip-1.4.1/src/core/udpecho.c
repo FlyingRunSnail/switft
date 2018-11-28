@@ -32,7 +32,6 @@
 
 
 #include "opt.h"
-#include "app_pccomm.h"
 #if LWIP_NETCONN
 
 #include "api.h"
@@ -52,8 +51,6 @@ extern INT8U PCCOMMTxBuff[1500];
 extern INT16U PCCOMMTxBuffLen;
 
 
-//extern	INT8U UDP_TxBuff[1500];
-//extern	INT16U UDP_TxBuff_len;
 /*-----------------------------------------------------------------------------------*/
 static void udpecho_thread(void *arg)
 {
@@ -77,34 +74,7 @@ static void udpecho_thread(void *arg)
         {
           addr = netbuf_fromaddr(buf);
           port = netbuf_fromport(buf);
-
-         // netconn_connect(conn, addr, port);
-         // buf->addr.addr = NULL;
-        //  netconn_send(conn,buf);
-         // netbuf_delete(buf);
-         	//PROTOCOL_PCcomm_Deal(buf->p->payload,buf->p->len);
-		ACUDevInfo.DeviceInfo.PCCommStat.dst_IP_addr = addr->addr;
-		ACUDevInfo.DeviceInfo.PCCommStat.dst_IP_port = port;
-
-		if( ACUDevInfo.ACUCurrSta.DevAdmin.admin_sta == 0x01)		// PC控制
-		{
-			//  当前通信PC机是否就是具有主控权限的PC机
-			if( ACUDevInfo.DeviceInfo.PCCommStat.dst_IP_addr == ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ip_addr)
-				ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_link_cnt++;	
-		}
-
-		//APP_PCCOMM_Deal(buf->p->payload,buf->p->len);
-
-		/*
-         	buf->p->payload = PCCOMMTxBuff;
-         	buf->p->len = PCCOMMTxBuffLen;
-         	buf->p->tot_len= buf->p->len;
-         	buf->ptr->payload = PCCOMMTxBuff;
-         	buf->ptr->len = PCCOMMTxBuffLen;
-         	buf->ptr->tot_len= buf->ptr->len;
-	     	netconn_sendto(conn,buf,addr,port);
-	     	*/
-         	 netbuf_delete(buf);
+          netbuf_delete(buf);
        
         }
       }

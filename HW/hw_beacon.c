@@ -1,6 +1,4 @@
 
-
-
 #define HW_BEACON_DEF
 
 #include <hw_beacon.h>
@@ -18,12 +16,6 @@ OS_SEM SWIFT_UART6_Rev_Sem;
 
 //接收缓冲,最大USART_REC_LEN个字节
 u8 USART_RX_BUF[SWIFTUART6BuffSize];
-
-// 接收状态标记
-//bit15，	接收完成标志
-//bit14，	接收到0x0d
-//bit13~0，	接收到的有效字节数目
-u16 USART_RX_STA = 0;
 
 #if 0
 static char *pUSARTBufStart = SWIFTUART6Buff;
@@ -116,8 +108,6 @@ void SWIFT_UART6_Init(INT32U	BaudRate)
 	SWIFT_UART6_Buff.write_p = 0;
 	SWIFT_UART6_Buff.read_p  = 0;
 
-	BSP_OS_Sem_Creat(&Beacon2MCU_Sem,"Beacon2MCU Sem",0);
-
 	BSP_OS_Sem_Creat(&SWIFT_UART6_Send_Sem,"SWIFT_UART6_Send_Sem",1);
 
     BSP_OS_Sem_Creat(&SWIFT_UART6_Rev_Sem, "SWIFT_SHELL_SEM", 0);
@@ -147,7 +137,7 @@ void SWIFT_UART6_IntHandler(void)
 			{
 				if( SWIFT_UART6_Buff.pbuff[SWIFT_UART6_Buff.write_p-2] == 0x0D)
 						
-				BSP_OS_Sem_Post(&Beacon2MCU_Sem);
+				//BSP_OS_Sem_Post(&Beacon2MCU_Sem);
 			}
 		}
 		else
@@ -172,56 +162,7 @@ void SWIFT_UART6_IntHandler(void)
 	if (USART_GetITStatus(SWIFT_UART6_GPIO.USARTx, USART_IT_RXNE) != RESET)
 	{
 		USART_ClearITPendingBit(SWIFT_UART6_GPIO.USARTx, USART_IT_RXNE);
-		//Res = USART_ReceiveData(SWIFT_UART6_GPIO.USARTx);
 		BSP_OS_Sem_Post(&SWIFT_UART6_Rev_Sem);
-
-#if 0
-		//读取接收到的数据
-		Res = USART_ReceiveData(SWIFT_UART6_GPIO.USARTx);
-#endif
-
-#if 0
-		//退格键
-		if (Res == 0x8)
-		{
-			if ((USART_RX_STA & 0x3FFF) > 0)
-			{
-				//先发退格键，再发空格，最后再发退格
-				fputc(Res, NULL);
-				fputc(0x20, NULL);
-				fputc(Res, NULL);
-				USART_RX_STA--;
-			}
-		}
-		else
-		{
-			fputc(Res, NULL);
-			USART_RX_BUF[USART_RX_STA & 0x3FFF] = Res ;
-
-			//回车键
-			if (Res == '\r')
-			{
-				if ((USART_RX_STA & 0x3FFF) > 1)
-				{
-					USART_RX_BUF[USART_RX_STA & 0x3FFF] = '\0' ;
-				}
-
-				USART_RX_STA |= 0x8000;
-				memcpy(console_buffer, USART_RX_BUF, SWIFTUART6BuffSize);
-
-				//唤醒shell任务
-				BSP_OS_Sem_Post(&SWIFT_UART6_Rev_Sem);
-			}
-
-			USART_RX_STA++;
-
-			//接收数据错误,重新开始接收
-			if ((USART_RX_STA & 0x3FFF) > (SWIFTUART6BuffSize - 1))
-			{
-				USART_RX_STA = 0;
-			}
-		}
-#endif
 	}
 }
 

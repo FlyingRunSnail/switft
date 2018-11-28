@@ -52,10 +52,12 @@ CFLAGS += -D$(DEVICE_DEF)
 SRCS = hw_uart6.c \
 	hw_buzzer.c \
 	hw_eeprom.c \
-	hw_eleccoder.c \
+	hw_uart1.c \
+	hw_uart2.c \
+	hw_uart5.c \
 	hw_led.c \
-	hw_oledcomm.c \
-	hw_pducomm.c \
+	hw_uart3.c \
+	hw_uart4.c \
 	hw_spiflash.c \
 	hw_watchdog.c \
 	ic_ad7814.c \

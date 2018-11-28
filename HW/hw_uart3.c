@@ -1,6 +1,6 @@
-#include <hw_oledcomm.h>
 #include <devdef.h>
 #include <bsp_uart.h>
+#include "hw_uart3.h"
 
 
 #define	HW_OLED_DEF

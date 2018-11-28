@@ -1,7 +1,4 @@
-
-
-
-#include <hw_pducomm.h>
+#include "hw_uart4.h"
 #include <devdef.h>
 
 #define	HW_PDU_DEF

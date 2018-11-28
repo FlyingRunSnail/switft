@@ -170,6 +170,8 @@ void  BSP_Init (void)
 
 	HW_LED_Init();
 
+    HW_BUZZER_Init();
+
 	//DS1302_Init();
 	
 	//HW_SPIFLASH_Init();

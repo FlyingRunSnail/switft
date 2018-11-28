@@ -1,7 +1,7 @@
 #ifndef __APP_SHELL__
 #define __APP_SHELL__
 
-#include "hw_beacon.h"
+#include "hw_uart6.h"
 #include "command.h"
 
 

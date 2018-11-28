@@ -35,95 +35,10 @@ void SWIFT_UART4_UrgentDeal(void)
 
 	SWIFT_UART4_RecvBuff(rxbuff,&len);
 
-//	if( rxbuff[1] + 4 != len )
-//	{
-//		return;
-//	}
-
 	cmd = (rxbuff[2] << 8) + rxbuff[3];
 
 	switch( cmd )
 	{
-		/*
-		case 0x0D01:
-			if( ACUDevInfo.ACUCurrSta.antenna_position_sta != rxbuff[5])
-				ACUDevInfo.ACUCurrSta.antenna_position_sta =  rxbuff[5];
-			if( ACUDevInfo.ACUCurrSta.antenna_cabrage_sta != rxbuff[6])
-				ACUDevInfo.ACUCurrSta.antenna_cabrage_sta =  rxbuff[6];
-			if( ACUDevInfo.ACUCurrSta.antenna_polar_sta != rxbuff[7])
-				ACUDevInfo.ACUCurrSta.antenna_polar_sta =  rxbuff[7];
-			break;
-		
-		case 0x0D06:
-			
-			if(  rxbuff[5] > 0x00 )
-			{
-				if( ACUDevInfo.ACUCurrSta.dev_admin_sta != 0x02)
-				{
-					ACUDevInfo.ACUCurrSta.dev_admin_sta = 0x02;
-					ACUDevInfo.ACUCurrSta.DevAdmin.admin_sta = 0x02;
-					ACUDevInfo.ACUCurrSta.DevAdmin.mode_sta = 0x02;
-					ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode = 0x01;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ip_addr = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_link_cnt = 0;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ask_ip_addr = 0;
-					APP_OptLOG_SaveCode(LOG_OPT_PDU_ADMIN_ENABLE);
-				}
-			}
-			else
-			{
-				if( ACUDevInfo.ACUCurrSta.dev_admin_sta == 0x02)
-				{
-					ACUDevInfo.ACUCurrSta.dev_admin_sta = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.admin_sta = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.mode_sta = 0x00;
-					ACUDevInfo.ACUParam.SeekSatParam.SeekSat_Mode = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ip_addr = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_link_cnt = 0;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ask_ip_addr = 0;
-					APP_OptLOG_SaveCode(LOG_OPT_PDU_ADMIN_DISABLE);
-				}
-			}
-			
-			break;
-			
-		case 0x0D08:
-			if(  rxbuff[5] > 0x00 )
-			{
-				if( ACUDevInfo.ACUCurrSta.DevAdmin.stop_flag != 0x01)
-				{
-					
-					if( ACUDevInfo.ACUCurrSta.dev_admin_sta != 0x02 )
-					{
-						ACUDevInfo.ACUCurrSta.dev_admin_sta = 0x02;
-						ACUDevInfo.ACUCurrSta.DevAdmin.admin_sta = 0x02;
-						ACUDevInfo.ACUCurrSta.DevAdmin.mode_sta = 0x01;
-						ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ip_addr = 0x00;
-						ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_link_cnt = 0;
-						ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ask_ip_addr = 0;
-						APP_OptLOG_SaveCode(LOG_OPT_PDU_ADMIN_ENABLE);
-					}
-					
-					ACUDevInfo.ACUCurrSta.DevAdmin.stop_flag = 0x01;
-					APP_OptLOG_SaveCode(LOG_OPT_PDU_STOP_ENABLE);
-				}
-			}
-			else
-			{
-				if( ACUDevInfo.ACUCurrSta.DevAdmin.stop_flag > 0x00)
-				{
-					ACUDevInfo.ACUCurrSta.dev_admin_sta = 0x02;
-					ACUDevInfo.ACUCurrSta.DevAdmin.admin_sta = 0x02;
-					ACUDevInfo.ACUCurrSta.DevAdmin.mode_sta = 0x02;
-					ACUDevInfo.ACUCurrSta.DevAdmin.stop_flag = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ip_addr = 0x00;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_link_cnt = 0;
-					ACUDevInfo.ACUCurrSta.DevAdmin.pc_admin_ask_ip_addr = 0;
-					APP_OptLOG_SaveCode(LOG_OPT_PDU_STOP_DISABLE);
-				}
-			}
-			break;
-		*/
 		default:
 			break;
 	}

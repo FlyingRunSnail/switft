@@ -1,6 +1,3 @@
-
-
-
 #include <hw_oledcomm.h>
 #include <devdef.h>
 #include <bsp_uart.h>
@@ -56,8 +53,6 @@ void SWIFT_UART3_IntHandler(void)
 	}
 }
 
-
-
 /***********************************************************
 **name:	SWIFT_UART3_INT_Switch
 **describe:
@@ -80,8 +75,6 @@ void SWIFT_UART3_INT_Switch(INT8U switch_set)
 		BSP_IntDis(SWIFT_UART3_INT_ID);
 	}
 }
-
-
 
 /***********************************************************
 **name:	Motor_Init
@@ -134,7 +127,6 @@ void SWIFT_UART3_Init(INT32U BaudRate)
 
 	
 }
-
 
 /***********************************************************
 **name:	SWIFT_UART3_RecvBuff_Clear

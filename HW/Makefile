@@ -49,7 +49,7 @@ endif
 CFLAGS += -D$(DEVICE_DEF)
 
 # Sources
-SRCS = hw_beacon.c \
+SRCS = hw_uart6.c \
 	hw_buzzer.c \
 	hw_eeprom.c \
 	hw_eleccoder.c \

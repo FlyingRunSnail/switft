@@ -1,7 +1,7 @@
 
 #define HW_BEACON_DEF
 
-#include <hw_beacon.h>
+#include "hw_uart6.h"
 
 
 

@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include "console.h"
 #include "command.h"
-#include "hw_beacon.h"
+#include "hw_uart6.h"
 
 int cgetc(void)
 {

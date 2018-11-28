@@ -11,15 +11,13 @@
 #include <bsp_uart.h>
 
 
-
-
 #define		HW_BEACON_UART_TX_PIN_PORT		GPIOC
 #define		HW_BEACON_UART_TX_PIN			GPIO_Pin_6
 
 #define		HW_BEACON_UART_RX_PIN_PORT		GPIOC
 #define		HW_BEACON_UART_RX_PIN			GPIO_Pin_7
 
-#define 		HW_BEACON_UARTX			USART6								// 信标机串口号
+#define 	HW_BEACON_UARTX			USART6								// 信标机串口号
 #define		SWIFT_UART6_INT_ID	BSP_INT_ID_USART6					// 信标机串口中断ID
 
 

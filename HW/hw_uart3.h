@@ -13,7 +13,7 @@
 #define		SWIFT_UART3_RX_PIN_PORT		GPIOD
 #define		SWIFT_UART3_RX_PIN			GPIO_Pin_9
 
-#define 		SWIFT_UART3					USART3								
+#define 	SWIFT_UART3					USART3								
 #define		SWIFT_UART3_INT_ID			BSP_INT_ID_USART3					
 
 

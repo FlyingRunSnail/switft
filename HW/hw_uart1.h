@@ -11,10 +11,10 @@
 
 // UART1
 #define		SWIFT_UART1_TX_PIN_PORT		GPIOA
-#define		SWIFT_UART1_TX_PIN				GPIO_Pin_9
+#define		SWIFT_UART1_TX_PIN			GPIO_Pin_9
 
 #define		SWIFT_UART1_RX_PIN_PORT		GPIOA
-#define		SWIFT_UART1_RX_PIN				GPIO_Pin_10
+#define		SWIFT_UART1_RX_PIN			GPIO_Pin_10
 
 #define 	HW_UART1					USART1								
 #define		HW_UART1_INT_ID				BSP_INT_ID_USART1	

@@ -9,10 +9,10 @@
 
 // UART5
 #define		SWIFT_UART5_TX_PIN_PORT		GPIOC
-#define		SWIFT_UART5_TX_PIN				GPIO_Pin_12
+#define		SWIFT_UART5_TX_PIN			GPIO_Pin_12
 
 #define		SWIFT_UART5_RX_PIN_PORT		GPIOD
-#define		SWIFT_UART5_RX_PIN				GPIO_Pin_2
+#define		SWIFT_UART5_RX_PIN			GPIO_Pin_2
 
 #define 	SWIFT_UART5					UART5								
 #define		HW_UART5_INT_ID				BSP_INT_ID_USART5			

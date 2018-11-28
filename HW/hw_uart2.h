@@ -10,10 +10,10 @@
 
 // UART2
 #define		SWIFT_UART2_TX_PIN_PORT		GPIOD
-#define		SWIFT_UART2_TX_PIN				GPIO_Pin_5
+#define		SWIFT_UART2_TX_PIN			GPIO_Pin_5
 
 #define		SWIFT_UART2_RX_PIN_PORT		GPIOD
-#define		SWIFT_UART2_RX_PIN				GPIO_Pin_6
+#define		SWIFT_UART2_RX_PIN			GPIO_Pin_6
 
 #define 	SWIFT_UART2					USART2								
 #define		HW_UART2_INT_ID				BSP_INT_ID_USART2	

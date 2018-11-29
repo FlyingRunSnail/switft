@@ -5,6 +5,7 @@
 #include "cmd_d.h"
 #include "cmd_m.h"
 #include "cmd_reset.h"
+#include "cmd_buzzer.h"
 
 
 
@@ -27,6 +28,7 @@ int APP_Shell_Init(void)
 	cmd_d_init();
 	cmd_m_init();
 	cmd_reset_init();
+	cmd_buzzer_init();
 
 	cli_init();
 	

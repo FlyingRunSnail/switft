@@ -17,8 +17,6 @@
 ************************************************************/
 void HW_BUZZER_Init(void)
 {
-	INT8U i;
-	
 	GPIO_InitTypeDef  GPIO_InitStructure;
   
 	BSP_GPIO_PortClkSwitch(HW_BUZZER_PIN_PORT,ENABLE);

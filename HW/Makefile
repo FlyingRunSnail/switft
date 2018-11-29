@@ -51,6 +51,8 @@ CFLAGS += -D$(DEVICE_DEF)
 # Sources
 SRCS = hw_uart6.c \
 	hw_buzzer.c \
+	hw_power.c \
+	hw_gps.c \
 	hw_eeprom.c \
 	hw_uart1.c \
 	hw_uart2.c \

@@ -29,7 +29,7 @@ int cmd_buzzer_init(void)
 	int ret;
 	
 	ret = cmd_register(
-		"buzzer", SHELL_SYS_MAXARGS, 0,	show_memory,
+		"buzzer", SHELL_SYS_MAXARGS, 0,	do_buzzer,
 		"start or stop buzzer",
 		"buzzer on\r\n	 - start buzzer work\r\n"
 		"buzzer off\r\n  - stop buzzer work\r\n"

@@ -6,6 +6,7 @@
 #include "cmd_m.h"
 #include "cmd_reset.h"
 #include "cmd_buzzer.h"
+#include "cmd_phy.h"
 
 
 
@@ -29,6 +30,7 @@ int APP_Shell_Init(void)
 	cmd_m_init();
 	cmd_reset_init();
 	cmd_buzzer_init();
+	cmd_phy_init();
 
 	cli_init();
 	

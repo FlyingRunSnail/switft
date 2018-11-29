@@ -61,6 +61,8 @@ SRCS = shell.c \
 	cmd_m.c \
 	cmd_reset.c \
 	cmd_ver.c \
+	cmd_buzzer.c \
+	cmd_phy.c \
 	lwip.c \
 	main.c \
 	os_app_hooks.c

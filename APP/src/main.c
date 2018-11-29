@@ -44,7 +44,7 @@
 #include <main.h>
 #include <devdef.h>
 #include <math.h>
-
+#include "cli.h"
 #include <app_shell.h>
 
 
@@ -133,9 +133,6 @@ int main(void)
 
 static  void  TaskStart (void *p_arg)
 {
-	OS_ERR      os_err;
-	INT16U delay_ms;
-
 	(void)p_arg;
 
 	CPU_Init();                                                 /* Init CPU name & int. dis. time measuring fncts.          */	

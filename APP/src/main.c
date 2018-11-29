@@ -134,8 +134,6 @@ int main(void)
 static  void  TaskStart (void *p_arg)
 {
 	OS_ERR      os_err;
-	INT32U		IDbuff[3];
-	INT32U period_ms1 = 100,period_ms2,period_cnt1=0,period_cnt2=0;
 	INT16U delay_ms;
 
 	(void)p_arg;
@@ -144,11 +142,8 @@ static  void  TaskStart (void *p_arg)
 	Mem_Init();                                                 /* Initialize Memory managment                              */
 	BSP_CPU_TickInit();                                         /* Start Tick Initialization                                */
 	                                                /* Init BSP fncts.                                          */
-	
-	 ACUDevInfo.ACUCurrSta.dev_work_sta = 0xFF;                                               
 	BSP_Init(); 
 	
-
 	APP_Shell_Init(); 
 	
 	BSP_Delay_ms(500);

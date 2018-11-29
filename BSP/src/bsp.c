@@ -177,10 +177,6 @@ void  BSP_Init (void)
 	//HW_SPIFLASH_Init();
 
 	//HW_EEPROM_Init();
-
-	//APP_BUZZER_Init();
-
-	//APP_BEACON_Init();
 }
 
 

@@ -4,7 +4,7 @@
 #define BSP_ETH_DEF
 
 #include <bsp_eth.h>
-
+#include "bsp_delay.h"
 
 
 volatile	static	INT8U 	EthLinkStatus = 0;
@@ -21,8 +21,12 @@ extern ETH_DMA_Rx_Frame_infos *DMA_RX_FRAME_infos;
 void  (*BSP_ETH_IRQHandler)(void) = NULL;
 
 
-INT8U ETH_MAC_ADDR[6] = {DEFAULT_MAC_ADDR0,	DEFAULT_MAC_ADDR1,		DEFAULT_MAC_ADDR2,
-							DEFAULT_MAC_ADDR3	,	DEFAULT_MAC_ADDR4	,	DEFAULT_MAC_ADDR5};
+INT8U ETH_MAC_ADDR[6] = {DEFAULT_MAC_ADDR0,	
+                         DEFAULT_MAC_ADDR1,	
+                         DEFAULT_MAC_ADDR2,
+                         DEFAULT_MAC_ADDR3,	
+                         DEFAULT_MAC_ADDR4,	
+                         DEFAULT_MAC_ADDR5};
 
 /*******************************************************************************
 * Function Name  : BSP_ETH_GetCurrentTxBuffer
@@ -247,6 +251,16 @@ void ETH_GPIO_Config(void)
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
+
+  // PHY Reset Pin init as output (PF9)
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  GPIO_Init(GPIOF, &GPIO_InitStructure);
+  // asserting this pin low for at least 1 us
+  GPIO_ResetBits(GPIOF, GPIO_Pin_9);
   
   /* MII/RMII Media interface selection --------------------------------------*/
 #ifdef MII_MODE /* Mode MII with STM322xG-EVAL  */
@@ -372,7 +386,10 @@ void ETH_GPIO_Config(void)
   GPIO_PinAFConfig(GPIOG, GPIO_PinSource14, GPIO_AF_ETH);
 #endif
 
-	
+  // delay 2 us keep sure reset is ok
+  BSP_Delay_us(2);
+  // asserting this pin high to end PHY Reset
+  GPIO_SetBits(GPIOF, GPIO_Pin_9);
 }
 
 

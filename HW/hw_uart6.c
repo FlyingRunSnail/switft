@@ -84,8 +84,8 @@ void SWIFT_UART6_IntHandler(void)
 			if( SWIFT_UART6_Buff.pbuff[SWIFT_UART6_Buff.write_p-1] == 0x0A)
 			{
 				if( SWIFT_UART6_Buff.pbuff[SWIFT_UART6_Buff.write_p-2] == 0x0D)
-						
-				//BSP_OS_Sem_Post(&Beacon2MCU_Sem);
+			    {
+                }			
 			}
 		}
 		else

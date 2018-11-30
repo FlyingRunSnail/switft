@@ -17,7 +17,7 @@ void HW_GPS_Init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
   
-	BSP_GPIO_PortClkSwitch(HW_AP_PIN_PORT,ENABLE);
+	BSP_GPIO_PortClkSwitch(HW_GPS_CTRL_PIN_PORT,ENABLE);
   
     //Configure AP (PA11 PA12)
     GPIO_InitStructure.GPIO_Pin = HW_GPS_CTRL_PIN | HW_GPS_RST_PIN;

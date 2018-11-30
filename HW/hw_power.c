@@ -92,7 +92,7 @@ static void HW_4G_Init(void)
 **autor:  andiman
 **date:
 ************************************************************/
-static void HW_mesh_Init(void)
+static void HW_MESH_Init(void)
 {
 	GPIO_InitTypeDef  GPIO_InitStructure;
   

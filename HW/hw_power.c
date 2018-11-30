@@ -84,6 +84,33 @@ static void HW_4G_Init(void)
 }
 
 /***********************************************************
+**name:	HW_MESH_Init
+**describe: init mesh io control as output
+**input:			
+**output:	none
+**return:
+**autor:  andiman
+**date:
+************************************************************/
+static void HW_mesh_Init(void)
+{
+	GPIO_InitTypeDef  GPIO_InitStructure;
+  
+	BSP_GPIO_PortClkSwitch(HW_MESH_PIN_PORT,ENABLE);
+
+	GPIO_InitStructure.GPIO_Pin = HW_MESH_PIN;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+
+	GPIO_Init(HW_MESH_PIN_PORT, &GPIO_InitStructure);
+
+    // output low default
+	BSP_GPIO_PinWriteLow(HW_MESH_PIN_PORT, HW_MESH_PIN);
+}
+
+/***********************************************************
 **name:	HW_POWER_Init
 **describe:
 **input:			
@@ -98,6 +125,7 @@ void HW_POWER_Init(void)
     HW_BAT_Init();
     HW_AP_Init();
     HW_4G_Init();
+    HW_MESH_Init();
 }
 
 /***********************************************************
@@ -210,5 +238,33 @@ void HW_4G_On(void)
 void HW_4G_Off(void)
 {
 	BSP_GPIO_PinWriteHigh(HW_4G_PIN_PORT,HW_4G_PIN);
+}
+
+/***********************************************************
+**name:	HW_MESH_On
+**describe:
+**input:			
+**output:	none
+**return:
+**autor:  andiman
+**date:
+************************************************************/
+void HW_MESH_On(void)
+{
+	BSP_GPIO_PinWriteHigh(HW_MESH_PIN_PORT, HW_MESH_PIN);
+}
+
+/***********************************************************
+**name:	HW_MESH_Off
+**describe:
+**input:			
+**output:	none
+**return:
+**autor:  andiman
+**date:
+************************************************************/
+void HW_MESH_Off(void)
+{
+	BSP_GPIO_PinWriteLow(HW_MESH_PIN_PORT, HW_MESH_PIN);
 }
 

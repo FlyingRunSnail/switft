@@ -21,7 +21,8 @@
 #define		HW_4G_PIN_PORT         GPIOB
 #define		HW_4G_PIN              GPIO_Pin_14
 
-
+#define		HW_MESH_PIN_PORT       GPIOD
+#define		HW_MESH_PIN            GPIO_Pin_7
 
 HW_POWER_GLOBE void HW_POWER_Init(void);
 
@@ -40,4 +41,8 @@ HW_POWER_GLOBE void HW_AP_Off(void);
 HW_POWER_GLOBE void HW_4G_On(void);
 
 HW_POWER_GLOBE void HW_4G_Off(void);
+
+HW_POWER_GLOBE void HW_MESH_On(void);
+
+HW_POWER_GLOBE void HW_MESH_Off(void);
 

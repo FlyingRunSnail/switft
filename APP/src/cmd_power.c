@@ -72,11 +72,26 @@ static int do_power(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
             return -1;
         }
     }
+    else if (!strcmp(argv[1], "mesh"))
+    {
+        if (!strcmp(argv[2], "on"))
+        {
+            HW_MESH_On();
+        }
+        else if (!strcmp(argv[2], "off"))
+        {
+            HW_MESH_Off();
+        }
+        else
+        {
+            return -1;
+        }
+    }
     else
     {
         return -1;
     }
-	
+
 	return 0;
 }
 
@@ -86,8 +101,8 @@ int cmd_power_init(void)
 	
 	ret = cmd_register(
 		"power", SHELL_SYS_MAXARGS, 0, do_power,
-		"power 12v/bat/ap/4g on/off",
-		"power 12v/bat/ap/4g on/off\r\n	 - control the power on or off\r\n"
+		"power 12v/bat/ap/4g/mesh on/off",
+		"power 12v/bat/ap/4g/mesh on/off\r\n	 - control the power on or off\r\n"
 	);
 
 	return ret;

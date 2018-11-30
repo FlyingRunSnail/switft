@@ -14,56 +14,6 @@ str_UART_Buff		SWIFT_UART6_Buff;
 OS_SEM SWIFT_UART6_Send_Sem;
 OS_SEM SWIFT_UART6_Rev_Sem;
 
-//接收缓冲,最大USART_REC_LEN个字节
-u8 USART_RX_BUF[SWIFTUART6BuffSize];
-
-#if 0
-static char *pUSARTBufStart = SWIFTUART6Buff;
-static char *pUSARTBufIdx = SWIFTUART6Buff;
-#endif
-
-#pragma import(__use_no_semihosting)
-
-//标准库需要的支持函数                 
-struct __FILE 
-{ 
-	int handle; 
-}; 
-
-FILE __stdout;
-//定义_sys_exit()以避免使用半主机模式    
-_sys_exit(int x) 
-{ 
-	x = x; 
-}
-
-//重定义fputc函数 
-int fputc(int ch, FILE *f)
-{
-	//循环发送,直到发送完毕   
-	while((USART6->SR & 0X40) == 0)
-	{
-		;
-	}
-
-	USART6->DR = (u8) ch;
-
-	return ch;
-}
-
-int fgetc(FILE *f)
-{
-	int ch;
-	while (USART_GetFlagStatus(USART6, USART_FLAG_RXNE) == RESET) 
-	{
-		;
-	}
-
-	ch = USART_ReceiveData(USART6);
-
-	return ch;
-}
-
 /***********************************************************
 **name:	SWIFT_UART6_Init
 **describe:
@@ -112,7 +62,7 @@ void SWIFT_UART6_Init(INT32U	BaudRate)
 	
 }
 
-#if 0
+#if 1
 /***********************************************************
 **name:	SWIFT_UART6_IntHandler
 **describe:
@@ -142,7 +92,7 @@ void SWIFT_UART6_IntHandler(void)
 			SWIFT_UART6_Buff.write_p = 0;
 	}
 }
-#endif
+#else
 
 /***********************************************************
 **name:	SWIFT_UART6_IntHandler
@@ -163,7 +113,7 @@ void SWIFT_UART6_IntHandler(void)
 		BSP_OS_Sem_Post(&SWIFT_UART6_Rev_Sem);
 	}
 }
-
+#endif
 
 /***********************************************************
 **name:	SWIFT_UART6_INT_Switch
@@ -220,16 +170,5 @@ void SWIFT_UART6_RecvBuff(INT8S *buff, INT32U *bufflen)
 	*bufflen = SWIFT_UART6_Buff.write_p;
 	memcpy(buff,SWIFT_UART6_Buff.pbuff,*bufflen);
 	SWIFT_UART6_Buff.write_p = 0;
-}
-
-INT32S SWIFT_USART6_GETC(void)
-{
-	BSP_OS_Sem_Pend(&SWIFT_UART6_Rev_Sem, 0);
-	return BSP_UART_RCV(SWIFT_UART6_GPIO.USARTx);
-}
-
-INT32S SWIFT_USART6_TSTC(void)
-{
-	return BSP_UART_TST(SWIFT_UART6_GPIO.USARTx);
 }
 

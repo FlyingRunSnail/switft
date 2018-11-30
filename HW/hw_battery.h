@@ -1,43 +1,49 @@
 
 
-#ifdef HW_POWER_DEF
-	#define HW_POWER_GLOBE
+#ifdef HW_BATTERY_DEF
+	#define HW_BATTERY_GLOBE
 #else
-	#define HW_POWER_GLOBE		extern
+	#define HW_BATTERY_GLOBE		extern
 #endif
 
 #include <bsp_gpio.h>
 
 
-#define     HW_12V_PIN_PORT        GPIOF
-#define     HW_12V_PIN             GPIO_Pin_6
+#define		HW_BATTERY_READ_PIN_PORT         GPIOB
+#define		HW_BATTERY_READ_PIN              GPIO_Pin_12
 
-#define     HW_BAT_PIN_PORT        GPIOF
-#define     HW_BAT_PIN             GPIO_Pin_7
 
-#define     HW_AP_PIN_PORT         GPIOA
-#define     HW_AP_PIN              GPIO_Pin_3
+typedef enum
+{
+    eBattery_in = 0,
+    eBattery_ext,
 
-#define		HW_4G_PIN_PORT         GPIOB
-#define		HW_4G_PIN              GPIO_Pin_14
+    eBattery_cnt
+}battery_id_t;
+
+
+typedef struct st_battery_base_info
+{
+    INT16U total_voltage;
+    INT16S current;
+    INT16U remainder_capcity;
+    INT16U std_capcity;
+    INT16U recycle_times;
+    INT16U manufacture_date;
+    INT16U proportionate_status;
+    INT16U proportionate_status_h;
+    INT16U protect_status;
+    INT8U  software_ver;
+    INT8U  rsoc;
+    INT8U  fet_ctrl_status;
+    INT8U  bat_cnt;
+    INT8U  ntc_cnt; 
+
+}battery_base_info_t;
 
 
 
 HW_POWER_GLOBE void HW_POWER_Init(void);
 
-HW_POWER_GLOBE void HW_12V_On(void);
-
-HW_POWER_GLOBE void HW_12V_Off(void);
-
-HW_POWER_GLOBE void HW_BAT_On(void);
-
-HW_POWER_GLOBE void HW_BAT_Off(void);
-
-HW_POWER_GLOBE void HW_AP_On(void);
-
-HW_POWER_GLOBE void HW_AP_Off(void);
-
-HW_POWER_GLOBE void HW_4G_On(void);
-
-HW_POWER_GLOBE void HW_4G_Off(void);
+HW_POWER_GLOBE void HW_Battery_Read(battery_id_t id, battery_base_info_t *bbi);
 

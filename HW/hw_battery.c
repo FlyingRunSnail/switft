@@ -1,90 +1,11 @@
 
-#define HW_POWER_DEF
+#define HW_BATTERY_DEF
 
-#include <hw_power.h>
+#include <hw_battery.h>
 
-
-static void HW_12V_Init(void)
-{
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_12V_PIN_PORT,ENABLE);
-
-    GPIO_InitStructure.GPIO_Pin = HW_12V_PIN;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(HW_12V_PIN_PORT, &GPIO_InitStructure);
-
-    // output high default
-    BSP_GPIO_PinWriteHigh(HW_12V_PIN_PORT, HW_12V_PIN);
-}
-
-static void HW_BAT_Init(void)
-{
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_BAT_PIN_PORT,ENABLE);
-
-    GPIO_InitStructure.GPIO_Pin = HW_BAT_PIN;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(HW_BAT_PIN_PORT, &GPIO_InitStructure);
-
-    // output low default
-    BSP_GPIO_PinWriteLow(HW_BAT_PIN_PORT, HW_BAT_PIN);
-}
-
-static void HW_AP_Init(void)
-{
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_AP_PIN_PORT,ENABLE);
-  
-    //Configure AP (PA3)
-    GPIO_InitStructure.GPIO_Pin = HW_AP_PIN;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-    GPIO_Init(HW_AP_PIN_PORT, &GPIO_InitStructure);
-
-    // output high default
-    BSP_GPIO_PinWriteLow(HW_AP_PIN_PORT, HW_AP_PIN);
-}
 
 /***********************************************************
-**name:	HW_4G_Init
-**describe: init 4g io control as output
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-static void HW_4G_Init(void)
-{
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_4G_PIN_PORT,ENABLE);
-
-	GPIO_InitStructure.GPIO_Pin = HW_4G_PIN;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-
-	GPIO_Init(HW_4G_PIN_PORT, &GPIO_InitStructure);
-
-    // output high default
-	BSP_GPIO_PinWriteHigh(HW_4G_PIN_PORT,HW_4G_PIN);
-}
-
-/***********************************************************
-**name:	HW_POWER_Init
+**name:	HW_BATTERY_Init
 **describe:
 **input:			
 **output:	none
@@ -92,16 +13,69 @@ static void HW_4G_Init(void)
 **autor:  andiman
 **date:
 ************************************************************/
-void HW_POWER_Init(void)
+void HW_BATTERY_Init(void)
 {
-    HW_12V_Init();
-    HW_BAT_Init();
-    HW_AP_Init();
-    HW_4G_Init();
+    BSP_GPIO_Init(HW_BATTERY_READ_PIN_PORT, HW_BATTERY_READ_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
 }
 
 /***********************************************************
-**name:	HW_12V_On
+**name:	HW_Battery_Read_Enable
+**describe: get battery internal enable
+**input:			
+**output:	none
+**return:
+**autor:  andiman
+**date:
+************************************************************/
+static void HW_Battery_Read_Enable(void)
+{
+	BSP_GPIO_PinWriteHigh(HW_BATTERY_READ_PIN_PORT, HW_BATTERY_READ_PIN);
+}
+
+static INT16U battery_check_sum(INT8U *data, INT32U len)
+{
+    INT16U checksum = 0;
+    INT32U i;
+
+    for (i = 0; i < len; i++)
+    {
+        checksum += data[i];
+    }
+
+    checksum = ~checksum;
+    checksum += 1;
+
+    return checksum;
+}
+
+static void HW_Battery_Send_Read_Req(void)
+{
+#define BATTERY_REQ_BUF_LEN (7)
+#define BATTERY_REQ_HEAD    (0)
+#define BATTERY_REQ_START   (1)
+#define BATTERY_REQ_FUNC    (2)
+#define BATTERY_REQ_LEN     (3)
+#define BATTERY_REQ_CSUM_H  (4)
+#define BATTERY_REQ_CSUM_L  (5)
+#define BATTERY_REQ_TAIL    (6)
+
+    INT8U brq[BATTERY_REQ_BUF_LEN] = {0xdd, 0xa5, 0x03, 0x0, 0x0, 0x0, 0x77};
+    INT32U len = 2;
+    INT16U checksum = battery_check_sum(&brq[BATTERY_REQ_START], len);
+
+    brq[BATTERY_REQ_CSUM_H] = checksum >> 8;
+    brq[BATTERY_REQ_CSUM_L] = checksum & 0xff;
+    
+    SWIFT_UART3_SendBuff(&brq[BATTERY_REQ_HEAD], BATTERY_REQ_BUF_LEN);
+}
+
+static void HW_Battery_Rcv_Data(INT8U *buf, INT32U len)
+{
+    
+}
+
+/***********************************************************
+**name:	HW_Battery_Read
 **describe:
 **input:			
 **output:	none
@@ -109,106 +83,9 @@ void HW_POWER_Init(void)
 **autor:  andiman
 **date:
 ************************************************************/
-void HW_12V_On(void)
+void HW_Battery_Read(battery_id_t id, battery_base_info_t *bbi)
 {
-	BSP_GPIO_PinWriteHigh(HW_12V_PIN_PORT,HW_12V_PIN);
-}
-
-/***********************************************************
-**name:	HW_12V_Off
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_12V_Off(void)
-{
-	BSP_GPIO_PinWriteLow(HW_12V_PIN_PORT,HW_12V_PIN);
-}
-
-/***********************************************************
-**name:	HW_BAT_On
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_BAT_On(void)
-{
-	BSP_GPIO_PinWriteHigh(HW_BAT_PIN_PORT,HW_BAT_PIN);
-}
-
-/***********************************************************
-**name:	HW_BAT_Off
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_BAT_Off(void)
-{
-	BSP_GPIO_PinWriteLow(HW_BAT_PIN_PORT,HW_BAT_PIN);
-}
-
-/***********************************************************
-**name:	HW_AP_On
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_AP_On(void)
-{
-	BSP_GPIO_PinWriteLow(HW_AP_PIN_PORT,HW_AP_PIN);
-}
-
-/***********************************************************
-**name:	HW_AP_Off
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_AP_Off(void)
-{
-	BSP_GPIO_PinWriteHigh(HW_AP_PIN_PORT,HW_AP_PIN);
-}
-
-/***********************************************************
-**name:	HW_4G_On
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_4G_On(void)
-{
-	BSP_GPIO_PinWriteLow(HW_4G_PIN_PORT,HW_4G_PIN);
-}
-
-/***********************************************************
-**name:	HW_4G_Off
-**describe:
-**input:			
-**output:	none
-**return:
-**autor:  andiman
-**date:
-************************************************************/
-void HW_4G_Off(void)
-{
+    HW_Battery_Read_Enable();
 	BSP_GPIO_PinWriteHigh(HW_4G_PIN_PORT,HW_4G_PIN);
 }
 

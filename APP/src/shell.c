@@ -8,6 +8,7 @@
 #include "cmd_buzzer.h"
 #include "cmd_phy.h"
 #include "cmd_power.h"
+#include "cmd_gps.h"
 
 
 
@@ -33,6 +34,7 @@ int APP_Shell_Init(void)
 	cmd_buzzer_init();
 	cmd_phy_init();
 	cmd_power_init();
+	cmd_gps_init();
 
 	cli_init();
 	

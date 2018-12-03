@@ -2,8 +2,7 @@
 #include "command.h"
 #include "cmd_phy.h"
 #include "exports.h"
-#include "hw_buzzer.h"
-
+#include "hw_phy.h"
 
 static int do_phy(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
@@ -14,9 +13,10 @@ static int do_phy(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 
     if (!strcmp(argv[1], "reset"))
     {
-	    BSP_GPIO_PinWriteLow(GPIOF, GPIO_Pin_9);
-        BSP_Delay_us(2);
-	    BSP_GPIO_PinWriteHigh(GPIOF, GPIO_Pin_9);
+	    //BSP_GPIO_PinWriteLow(GPIOF, GPIO_Pin_9);
+        //BSP_Delay_ms(100);
+	    //BSP_GPIO_PinWriteHigh(GPIOF, GPIO_Pin_9);
+        HW_PHY_Rst();
     }
     else
     {

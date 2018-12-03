@@ -6,33 +6,16 @@
 
 static void HW_12V_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_12V_PIN_PORT,ENABLE);
-
-    GPIO_InitStructure.GPIO_Pin = HW_12V_PIN;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(HW_12V_PIN_PORT, &GPIO_InitStructure);
+    BSP_GPIO_Init(HW_12V_PIN_PORT, HW_12V_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
 
     // output high default
-    BSP_GPIO_PinWriteHigh(HW_12V_PIN_PORT, HW_12V_PIN);
+    //BSP_GPIO_PinWriteHigh(HW_12V_PIN_PORT, HW_12V_PIN);
+    BSP_GPIO_PinWriteLow(HW_12V_PIN_PORT, HW_12V_PIN);
 }
 
 static void HW_BAT_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_BAT_PIN_PORT,ENABLE);
-
-    GPIO_InitStructure.GPIO_Pin = HW_BAT_PIN;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-    GPIO_Init(HW_BAT_PIN_PORT, &GPIO_InitStructure);
+    BSP_GPIO_Init(HW_BAT_PIN_PORT, HW_BAT_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
 
     // output low default
     BSP_GPIO_PinWriteLow(HW_BAT_PIN_PORT, HW_BAT_PIN);
@@ -40,17 +23,7 @@ static void HW_BAT_Init(void)
 
 static void HW_AP_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_AP_PIN_PORT,ENABLE);
-  
-    //Configure AP (PA3)
-    GPIO_InitStructure.GPIO_Pin = HW_AP_PIN;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-    GPIO_Init(HW_AP_PIN_PORT, &GPIO_InitStructure);
+    BSP_GPIO_Init(HW_AP_PIN_PORT, HW_AP_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
 
     // output high default
     BSP_GPIO_PinWriteLow(HW_AP_PIN_PORT, HW_AP_PIN);
@@ -67,17 +40,7 @@ static void HW_AP_Init(void)
 ************************************************************/
 static void HW_4G_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_4G_PIN_PORT,ENABLE);
-
-	GPIO_InitStructure.GPIO_Pin = HW_4G_PIN;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-
-	GPIO_Init(HW_4G_PIN_PORT, &GPIO_InitStructure);
+    BSP_GPIO_Init(HW_4G_PIN_PORT, HW_4G_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
 
     // output high default
 	BSP_GPIO_PinWriteHigh(HW_4G_PIN_PORT,HW_4G_PIN);
@@ -94,17 +57,7 @@ static void HW_4G_Init(void)
 ************************************************************/
 static void HW_MESH_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_MESH_PIN_PORT,ENABLE);
-
-	GPIO_InitStructure.GPIO_Pin = HW_MESH_PIN;
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-
-	GPIO_Init(HW_MESH_PIN_PORT, &GPIO_InitStructure);
+    BSP_GPIO_Init(HW_MESH_PIN_PORT, HW_MESH_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
 
     // output low default
 	BSP_GPIO_PinWriteLow(HW_MESH_PIN_PORT, HW_MESH_PIN);

@@ -15,17 +15,9 @@
 ************************************************************/
 void HW_GPS_Init(void)
 {
-	GPIO_InitTypeDef  GPIO_InitStructure;
-  
-	BSP_GPIO_PortClkSwitch(HW_GPS_CTRL_PIN_PORT,ENABLE);
-  
     //Configure AP (PA11 PA12)
-    GPIO_InitStructure.GPIO_Pin = HW_GPS_CTRL_PIN | HW_GPS_RST_PIN;
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-    GPIO_Init(HW_GPS_CTRL_PIN_PORT, &GPIO_InitStructure);
+    BSP_GPIO_Init(HW_GPS_CTRL_PIN_PORT, HW_GPS_CTRL_PIN | HW_GPS_RST_PIN, GPIO_Mode_OUT, GPIO_OType_PP,GPIO_PuPd_NOPULL);
+
 
     // output high default
     BSP_GPIO_PinWriteHigh(HW_GPS_CTRL_PIN_PORT, HW_GPS_CTRL_PIN);
@@ -73,5 +65,6 @@ void HW_GPS_Rst(void)
 {
 	BSP_GPIO_PinWriteLow(HW_GPS_CTRL_PIN_PORT, HW_GPS_RST_PIN);
     BSP_Delay_ms(100);
+	BSP_GPIO_PinWriteHigh(HW_GPS_CTRL_PIN_PORT, HW_GPS_RST_PIN);
 }
 

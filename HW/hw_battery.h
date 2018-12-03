@@ -42,8 +42,7 @@ typedef struct st_battery_base_info
 }battery_base_info_t;
 
 
+HW_BATTERY_GLOBE void HW_BATTERY_Init(void);
 
-HW_POWER_GLOBE void HW_POWER_Init(void);
-
-HW_POWER_GLOBE void HW_Battery_Read(battery_id_t id, battery_base_info_t *bbi);
+HW_BATTERY_GLOBE void HW_BATTERY_Read(INT8U *buf, INT32U len);
 

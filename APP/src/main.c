@@ -143,6 +143,8 @@ static  void  TaskStart (void *p_arg)
 	
 	APP_Shell_Init(); 
 	
+    HW_PHY_Rst();
+
 	BSP_Delay_ms(500);
 
  	LWIP_Init();

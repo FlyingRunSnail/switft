@@ -253,14 +253,14 @@ void ETH_GPIO_Config(void)
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   // PHY Reset Pin init as output (PF9)
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
-  GPIO_Init(GPIOF, &GPIO_InitStructure);
+  //GPIO_InitStructure.GPIO_Pin = GPIO_Pin_9;
+  //GPIO_InitStructure.GPIO_Mode = GPIO_Mode_OUT;
+  //GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+  //GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
+  //GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+  //GPIO_Init(GPIOF, &GPIO_InitStructure);
   // asserting this pin low for at least 1 us
-  GPIO_ResetBits(GPIOF, GPIO_Pin_9);
+  //GPIO_ResetBits(GPIOF, GPIO_Pin_9);
   
   /* MII/RMII Media interface selection --------------------------------------*/
 #ifdef MII_MODE /* Mode MII with STM322xG-EVAL  */
@@ -387,9 +387,9 @@ void ETH_GPIO_Config(void)
 #endif
 
   // delay 2 us keep sure reset is ok
-  BSP_Delay_us(2);
+  //BSP_Delay_ms(10);
   // asserting this pin high to end PHY Reset
-  GPIO_SetBits(GPIOF, GPIO_Pin_9);
+  //GPIO_SetBits(GPIOF, GPIO_Pin_9);
 }
 
 

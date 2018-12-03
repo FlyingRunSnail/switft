@@ -7,7 +7,7 @@
 
 static int do_gps(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
-	if (argc !=2) 
+	if (argc != 2) 
 	{
 		return -1;
 	}
@@ -16,7 +16,7 @@ static int do_gps(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
     {
         HW_GPS_On();
     }
-    else if (!strcmp(argv[1], "Off"))
+    else if (!strcmp(argv[1], "off"))
     {
         HW_GPS_Off();
     }

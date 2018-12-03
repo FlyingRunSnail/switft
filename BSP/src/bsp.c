@@ -164,13 +164,21 @@ const CPU_INT32U  GPIO_CLK[LEDn]  = {RCC_AHB1Periph_GPIOG,
 
 void  BSP_Init (void)
 {
-	INT8U readbuff[10]={0};
-	
 	BSP_IntInit();
 
 	HW_LED_Init();
 
     HW_BUZZER_Init();
+
+    HW_POWER_Init();
+
+    HW_GPS_Init();
+
+    HW_PHY_Rst_Init();
+
+    HW_BATTERY_Init();
+
+    SWIFT_UART3_Init(9600);
 
 	//DS1302_Init();
 	

@@ -19,7 +19,7 @@
 #define     HW_AP_PIN              GPIO_Pin_3
 
 #define		HW_4G_PIN_PORT         GPIOB
-#define		HW_4G_PIN              GPIO_Pin_14
+#define		HW_4G_PIN              GPIO_Pin_13
 
 #define		HW_MESH_PIN_PORT       GPIOD
 #define		HW_MESH_PIN            GPIO_Pin_7

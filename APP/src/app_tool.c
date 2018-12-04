@@ -7,6 +7,86 @@
 
 
 
+/***********************************************************
+**name:	TOOL_CheckSum16BitGet
+**describe:
+**input:			
+**output:	none
+**return:
+**autor:  andiman
+**date:
+************************************************************/
+static INT16U TOOL_CheckSum16BitGet(INT8U *buf, INT32U len)
+{
+    INT16U chksum = 0;
+    INT16U i;
+
+    for (i = 0; i < len; i++)
+    {
+        chksum += (INT16U)buf[i];
+    }
+
+    chksum = (INT16U)chksum;
+    chksum = ~chksum;
+    chksum += 1;
+
+    return chksum;
+}
+
+
+/***********************************************************
+**name:	TOOL_BatteryFrameCheck
+**describe:
+**input:			
+**output:	none
+**return:
+**autor:  andiman
+**date:
+************************************************************/
+INT8S TOOL_BatteryFrameCheck(INT8U *buf, INT32U len)
+{
+    INT16U tmp;
+    INT16U chksum;
+    INT8U len_field;
+
+    if (!buf)
+    {
+        return -1;
+    }
+
+    if (buf[0] != 0xDD)
+    {
+        return -1;
+    }
+
+    if (buf[1] != 0x03)
+    {
+        return -1;
+    }
+
+    if (buf[2] != 0x00)
+    {
+        return -1;
+    }
+    
+    if (buf[len -1] != 0x77)
+    {
+        return -1;
+    }
+
+    len_field = buf[3];
+    chksum = TOOL_CheckSum16BitGet(&buf[2], (INT32U)(len_field + 2));
+
+    tmp = buf[4 + len_field + 0] << 8; 
+    tmp |= buf[4 + len_field +1];
+
+    if (tmp != chksum)
+    {
+        return -1;
+    }
+
+    return 0;
+}
 
 /***********************************************************
 **name:	TOOL_CheckSum8BitGet

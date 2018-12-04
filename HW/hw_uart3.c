@@ -5,6 +5,7 @@
 #define	HW_UART3_DEF
 
 #include "hw_uart3.h"
+#include "exports.h"
 
 
 static str_UART_GPIO_HARD	SWIFT_UART3_GPIO;
@@ -29,28 +30,21 @@ OS_SEM SWIFT_UART3_Rev_Sem;
 ************************************************************/
 void SWIFT_UART3_IntHandler(void)
 {
+    INT8U tmp;
+
  	if (USART_GetITStatus(SWIFT_UART3_GPIO.USARTx, USART_IT_RXNE) != RESET)
 	{
-		SWIFT_UART3_Buff.pbuff[SWIFT_UART3_Buff.write_p++] = USART_ReceiveData(SWIFT_UART3_GPIO.USARTx);
+        USART_ClearITPendingBit(SWIFT_UART3_GPIO.USARTx, USART_IT_RXNE);
+        BSP_OS_Sem_Post(&SWIFT_UART3_Rev_Sem);
+#if 0
+        tmp = USART_ReceiveData(SWIFT_UART3_GPIO.USARTx);
+		SWIFT_UART3_Buff.pbuff[SWIFT_UART3_Buff.write_p] = tmp;
+        SWIFT_UART3_Buff.write_p += 1;
 		if( SWIFT_UART3_Buff.write_p >= SWIFTUART3BuffSize )
 			SWIFT_UART3_Buff.write_p = 0;
-		if( SWIFT_UART3_Buff.pbuff[0] == 0xDD ) 
-		{
-			if( SWIFT_UART3_Buff.write_p >= 0x03 )
-			{
-				if( SWIFT_UART3_Buff.write_p >= SWIFT_UART3_Buff.pbuff[3] + 0x06 )
-				{
-					if( SWIFT_UART3_Buff.pbuff[SWIFT_UART3_Buff.pbuff[3] + 0x06] == 0x77 )
-					{
-						BSP_OS_Sem_Post(&SWIFT_UART3_Rev_Sem);
-					}
-					else
-						SWIFT_UART3_Buff.write_p = 0;
-				}
-			}
-		}
-		else
-			SWIFT_UART3_Buff.write_p = 0;
+
+        printf("index 0x%02x\r\n", tmp);
+#endif
 	}
 }
 
@@ -88,7 +82,6 @@ void SWIFT_UART3_INT_Switch(INT8U switch_set)
 ************************************************************/
 void SWIFT_UART3_Init(INT32U BaudRate)
 {
-	
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	SWIFT_UART3_GPIO.GPIOx[UART_GPIO_TX_INDEX] = SWIFT_UART3_TX_PIN_PORT;
@@ -115,18 +108,17 @@ void SWIFT_UART3_Init(INT32U BaudRate)
 
 	
 	BSP_UART_Init(SWIFT_UART3_GPIO);
-	SWIFT_UART3_INT_Switch(ENABLE);
 
 	SWIFT_UART3_Buff.pbuff = SWIFTUART3Buff;
-	memset(SWIFT_UART3_Buff.pbuff,0,32);
+	memset(SWIFT_UART3_Buff.pbuff,0,SWIFTUART3BuffSize);
 	SWIFT_UART3_Buff.write_p = 0;
 	SWIFT_UART3_Buff.read_p  = 0;
+
+	SWIFT_UART3_INT_Switch(ENABLE);
 
 	BSP_OS_Sem_Creat(&SWIFT_UART3_Rev_Sem,"SWIFT_UART3_Rev_Sem",0);
 
 	BSP_OS_Sem_Creat(&SWIFT_UART3_Send_Sem,"SWIFT_UART3_Send_Sem",1);
-
-	
 }
 
 /***********************************************************
@@ -160,7 +152,6 @@ void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen)
 	SWIFT_UART3_RecvBuff_Clear();
 	BSP_UART_Send(SWIFT_UART3_GPIO.USARTx, buff,bufflen);
 	BSP_OS_Sem_Post(&SWIFT_UART3_Send_Sem);
-	
 }
 
 /***********************************************************
@@ -174,11 +165,23 @@ void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen)
 ************************************************************/
 void SWIFT_UART3_RecvBuff(INT8U *buff, INT32U *bufflen)
 {
-    BSP_OS_Sem_Pend(&SWIFT_UART3_Rev_Sem, 0);
+    //BSP_OS_Sem_Pend(&SWIFT_UART3_Rev_Sem, 0);
 	*bufflen = SWIFT_UART3_Buff.write_p;
 	memcpy(buff,SWIFT_UART3_Buff.pbuff,*bufflen);
-	SWIFT_UART3_Buff.write_p = 0;
-	BSP_OS_Sem_Post(&SWIFT_UART3_Rev_Sem);
+
+	//SWIFT_UART3_Buff.write_p = 0;
+	//BSP_OS_Sem_Post(&SWIFT_UART3_Rev_Sem);
 }
 
+
+INT32S SWIFT_USART3_GETC(void)
+{
+    BSP_OS_Sem_Pend(&SWIFT_UART3_Rev_Sem, 0);
+    return BSP_UART_RCV(SWIFT_UART3_GPIO.USARTx);
+}
+ 
+INT32S SWIFT_USART3_TSTC(void)
+{
+    return BSP_UART_TST(SWIFT_UART3_GPIO.USARTx);
+}
 

@@ -2,9 +2,9 @@
 #include <bsp.h>
 
 #ifdef 	HW_UART3_DEF
-	#define	HW_OLED_GLOBE
+	#define	HW_UART3_GLOBE
 #else
-	#define	HW_OLED_GLOBE	extern
+	#define	HW_UART3_GLOBE	extern
 #endif
 
 #define		SWIFT_UART3_TX_PIN_PORT		GPIOD
@@ -19,15 +19,19 @@
 
 
 
-HW_OLED_GLOBE OS_SEM SWIFT_UART3_Rev_Sem;
+HW_UART3_GLOBE OS_SEM SWIFT_UART3_Rev_Sem;
 
-HW_OLED_GLOBE void SWIFT_UART3_IntHandler(void);
+HW_UART3_GLOBE void SWIFT_UART3_IntHandler(void);
 
-HW_OLED_GLOBE void SWIFT_UART3_INT_Switch(INT8U switch_set);
+HW_UART3_GLOBE void SWIFT_UART3_INT_Switch(INT8U switch_set);
 
-HW_OLED_GLOBE void SWIFT_UART3_Init(INT32U BaudRate);
+HW_UART3_GLOBE void SWIFT_UART3_Init(INT32U BaudRate);
 
-HW_OLED_GLOBE void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen);
+HW_UART3_GLOBE void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen);
 
-HW_OLED_GLOBE void SWIFT_UART3_RecvBuff(INT8U *buff, INT32U *bufflen);
+HW_UART3_GLOBE void SWIFT_UART3_RecvBuff(INT8U *buff, INT32U *bufflen);
+
+HW_UART3_GLOBE INT32S SWIFT_USART3_GETC(void);
+
+HW_UART3_GLOBE INT32S SWIFT_USART3_TSTC(void);
 

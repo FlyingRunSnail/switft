@@ -15,6 +15,7 @@
                                ((INT32U)((c) & 0xff) << 8) | \
                                 (INT32U)((d) & 0xff))
 
+APP_TOOL_GLOBE INT8S TOOL_BatteryFrameCheck(INT8U *buf, INT32U len);
 
 APP_TOOL_GLOBE INT8U TOOL_CheckSum8BitGet(INT8U *buff, INT32U len);
 

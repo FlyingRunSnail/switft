@@ -40,6 +40,7 @@ CFLAGS += -I$(BASEDIR)/uCOS/uCOS-III/Source/
 CFLAGS += -I$(BASEDIR)/uCOS/uCOS-III/Ports/ARM-Cortex-M3/Generic/GNU/
 CFLAGS += -I$(BASEDIR)/BSP/inc/
 CFLAGS += -I$(BASEDIR)/BSP/bsp_stm32F2X7/inc/
+CFLAGS += -I$(BASEDIR)/uCOS/uCOS-SHELL/inc/
 
 # Default to STM32F40_41xxx if no device is passed
 ifeq ($(DEVICE_DEF), )

@@ -46,7 +46,7 @@
 #include <math.h>
 #include "cli.h"
 #include <app_shell.h>
-
+#include "def.h"
 
 /*********************************************************************************************************
   EVENT(ITC)    事件(任务间通信)
@@ -205,9 +205,68 @@ static  void  TaskShell(void *p_arg)
 ************************************************************/
 static  void  TaskEthRelink(void *p_arg)
 {
+    INT8U buf[34] = {0};
+    INT32U len = 0;
+    INT32U i;
+    INT8S ret;
+
+typedef struct st_battery_base_info
+{
+     unsigned short total_voltage;
+     unsigned short current;
+     unsigned short remainder_capcity;
+     unsigned short std_capcity;
+     unsigned short recycle_times;
+     unsigned short manufacture_date;
+     unsigned short proportionate_status;
+     unsigned short proportionate_status_h;
+     unsigned short protect_status;
+     unsigned char  software_ver;
+     unsigned char  rsoc;
+     unsigned char  fet_ctrl_status;
+     unsigned char  bat_cnt;
+     unsigned char  ntc_cnt;
+
+}battery_base_info_t;
+
+    battery_base_info_t *bbi;
+
     while(1)
     {
-		BSP_Delay_ms(250);
+		//BSP_Delay_ms(250);
+        buf[len] = SWIFT_USART3_GETC();
+        len = len + 1;
+        if (len == 34)
+        {
+#if 0
+            for (i = 0; i < len; i++)
+            {
+                printf("0x%02x ", buf[i]);
+            }
+#endif
+            ret = TOOL_BatteryFrameCheck(buf, len);
+            if (ret == 0)
+            {
+                bbi = (battery_base_info_t *)&buf[4];
+   
+                printf("total_voltage:          0x%04x\r\n", ntohs(bbi->total_voltage));
+                printf("current:                0x%04x\r\n", ntohs(bbi->current));
+                printf("remainder_capcity:      0x%04x\r\n", ntohs(bbi->remainder_capcity));
+                printf("std_capcity:            0x%04x\r\n", ntohs(bbi->std_capcity));
+                printf("recycle_times:          0x%04x\r\n", ntohs(bbi->recycle_times));
+                printf("manufacture_date:       0x%04x\r\n", ntohs(bbi->manufacture_date));
+                printf("proportionate_status:   0x%04x\r\n", ntohs(bbi->proportionate_status));
+                printf("proportionate_status_h: 0x%04x\r\n", ntohs(bbi->proportionate_status_h));
+                printf("protect_status:         0x%04x\r\n", ntohs(bbi->protect_status));
+                printf("software_ver:           0x%02x\r\n", bbi->software_ver);
+                printf("rsoc:                   0x%02x\r\n", bbi->rsoc);
+                printf("fet_ctrl_status:        0x%02x\r\n", bbi->fet_ctrl_status);
+                printf("bat_cnt:                0x%02x\r\n", bbi->bat_cnt);
+                printf("ntc_cnt:                0x%02x\r\n", bbi->ntc_cnt);
+            }
+
+            len = 0;
+        }
     }
 }
 
@@ -245,7 +304,7 @@ static  void  TaskCreate (void)
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  (OS_ERR     *)&err);     
                
-#if 0
+#if 1
     OSTaskCreate((OS_TCB     *)&TaskEthRelinkTCB,                /* Create the start task                                    */
                  (CPU_CHAR   *)"Task EthRelink",
                  (OS_TASK_PTR ) TaskEthRelink,

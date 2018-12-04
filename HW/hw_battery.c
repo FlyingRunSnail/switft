@@ -2,6 +2,7 @@
 #define HW_BATTERY_DEF
 
 #include <hw_battery.h>
+#include <exports.h>
 
 
 /***********************************************************
@@ -68,12 +69,18 @@ static void HW_Battery_Buf_Dump(INT8U *buf, INT32U len)
 ************************************************************/
 void HW_BATTERY_Read(INT8U *buf, INT32U len)
 {
-    HW_Battery_Read_Enable();
-    BSP_Delay_ms(1);
+    INT32U i = 0;
+    INT8U rcv[34] = {0};
+    //HW_Battery_Read_Enable();
 
     HW_Battery_Send_Read_Req();
-    SWIFT_UART3_RecvBuff(buf, &len);
 
-    HW_Battery_Buf_Dump(buf, len);
+    //BSP_Delay_ms(100);
+        
+    //SWIFT_UART3_RecvBuff(rcv, &i);
+
+    //printf("i: %08x\r\n", i);
+
+    //HW_Battery_Buf_Dump(rcv, i);
 }
 

@@ -613,6 +613,7 @@ APP_TRACE_INFO	APP/inc/app_cfg.h	110;"	d
 APP_TRACE_LEVEL	APP/inc/app_cfg.h	102;"	d
 APP_UDP_Sendto	lwip-1.4.1/src/core/udpecho.c	/^void APP_UDP_Sendto(INT8U *pbuff,INT32U len)$/;"	f
 APSR_Type	Lib/CMSIS/core_cm3.h	/^} APSR_Type;$/;"	t	typeref:union:__anon94
+AP_RCV_BUF_LEN	APP/src/cmd_ap.c	8;"	d	file:
 AR	APP/Makefile	/^AR=$(BINPATH)arm-none-eabi-ar$/;"	m
 AR	BSP/Makefile	/^AR=$(BINPATH)arm-none-eabi-ar$/;"	m
 AR	HW/Makefile	/^AR=$(BINPATH)arm-none-eabi-ar$/;"	m
@@ -920,6 +921,7 @@ B4_READ_DATA	HW/ic_n25q128.c	25;"	d	file:
 B4_SECTOR_ERASE	HW/ic_n25q128.c	51;"	d	file:
 B4_SUBSECTOR_ERASE	HW/ic_n25q128.c	48;"	d	file:
 BASEDIR	Makefile	/^BASEDIR := $(abspath .\/)$/;"	m
+BATTERY_REQ_BUF_LEN	HW/hw_battery.c	38;"	d	file:
 BCMP	lwip-1.4.1/src/netif/ppp/ppp_impl.h	212;"	d
 BCOPY	lwip-1.4.1/src/netif/ppp/ppp_impl.h	213;"	d
 BCR_FACCEN_SET	Lib/STM32F2xx_StdPeriph_Driver/src/stm32f2xx_fsmc.c	49;"	d	file:
@@ -7979,6 +7981,7 @@ GPSConf	APP/inc/devdef.h	/^	strGPSConf 	GPSConf;$/;"	m	struct:_strGPSInfo_
 GPSData	APP/inc/devdef.h	/^	strGPSData	GPSData;$/;"	m	struct:_strGPSInfo_
 GPSInfo	APP/inc/devdef.h	/^	strGPSInfo			GPSInfo;$/;"	m	struct:_strDeviceInfo_
 GPSStat	APP/inc/devdef.h	/^	strGPSStat	GPSStat;$/;"	m	struct:_strGPSInfo_
+GPS_BUF_LEN	APP/src/main.c	196;"	d	file:
 GTPR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint16_t GTPR;       \/*!< USART Guard time and prescaler register, Address offset: 0x18 *\/$/;"	m	struct:__anon89
 Get7Bits	lwip-1.4.1/src/netif/ppp/chpms.c	/^Get7Bits( u_char *input, int startBit)$/;"	f	file:
 GetMask	lwip-1.4.1/src/netif/ppp/ppp.c	/^GetMask(u32_t addr)$/;"	f
@@ -8106,6 +8109,7 @@ HW_BATTERY_GLOBE	HW/hw_battery.h	6;"	d
 HW_BATTERY_Init	HW/hw_battery.c	/^void HW_BATTERY_Init(void)$/;"	f
 HW_BATTERY_READ_PIN	HW/hw_battery.h	13;"	d
 HW_BATTERY_READ_PIN_PORT	HW/hw_battery.h	12;"	d
+HW_BATTERY_Read	HW/hw_battery.c	/^void HW_BATTERY_Read(INT8U *buf, INT32U len)$/;"	f
 HW_BAT_Init	HW/hw_power.c	/^static void HW_BAT_Init(void)$/;"	f	file:
 HW_BAT_Off	HW/hw_power.c	/^void HW_BAT_Off(void)$/;"	f
 HW_BAT_On	HW/hw_power.c	/^void HW_BAT_On(void)$/;"	f
@@ -8113,17 +8117,6 @@ HW_BAT_PIN	HW/hw_power.h	16;"	d
 HW_BAT_PIN_PORT	HW/hw_power.h	15;"	d
 HW_BEACON_GLOBE	HW/hw_uart1.h	4;"	d
 HW_BEACON_GLOBE	HW/hw_uart1.h	6;"	d
-HW_BEACON_GLOBE	HW/hw_uart2.h	4;"	d
-HW_BEACON_GLOBE	HW/hw_uart2.h	6;"	d
-HW_BEACON_GLOBE	HW/hw_uart5.h	3;"	d
-HW_BEACON_GLOBE	HW/hw_uart5.h	5;"	d
-HW_BEACON_GLOBE	HW/hw_uart6.h	6;"	d
-HW_BEACON_GLOBE	HW/hw_uart6.h	8;"	d
-HW_BEACON_UARTX	HW/hw_uart6.h	20;"	d
-HW_BEACON_UART_RX_PIN	HW/hw_uart6.h	18;"	d
-HW_BEACON_UART_RX_PIN_PORT	HW/hw_uart6.h	17;"	d
-HW_BEACON_UART_TX_PIN	HW/hw_uart6.h	15;"	d
-HW_BEACON_UART_TX_PIN_PORT	HW/hw_uart6.h	14;"	d
 HW_BUZZER_DEF	HW/hw_buzzer.c	4;"	d	file:
 HW_BUZZER_Flick	HW/hw_buzzer.c	/^void HW_BUZZER_Flick(void)$/;"	f
 HW_BUZZER_GLOBE	HW/hw_buzzer.h	4;"	d
@@ -8133,8 +8126,8 @@ HW_BUZZER_Off	HW/hw_buzzer.c	/^void HW_BUZZER_Off(void)$/;"	f
 HW_BUZZER_On	HW/hw_buzzer.c	/^void HW_BUZZER_On(void)$/;"	f
 HW_BUZZER_PIN	HW/hw_buzzer.h	13;"	d
 HW_BUZZER_PIN_PORT	HW/hw_buzzer.h	12;"	d
+HW_Battery_Buf_Dump	HW/hw_battery.c	/^static void HW_Battery_Buf_Dump(INT8U *buf, INT32U len)$/;"	f	file:
 HW_Battery_Rcv_Data	HW/hw_battery.c	/^static void HW_Battery_Rcv_Data(INT8U *buf, INT32U len)$/;"	f	file:
-HW_Battery_Read	HW/hw_battery.c	/^void HW_Battery_Read(battery_id_t id, battery_base_info_t *bbi)$/;"	f
 HW_Battery_Read_Enable	HW/hw_battery.c	/^static void HW_Battery_Read_Enable(void)$/;"	f	file:
 HW_Battery_Send_Read_Req	HW/hw_battery.c	/^static void HW_Battery_Send_Read_Req(void)$/;"	f	file:
 HW_EEPROM_DATA_PIN	HW/hw_eeprom.h	36;"	d
@@ -8186,8 +8179,6 @@ HW_MESH_Off	HW/hw_power.c	/^void HW_MESH_Off(void)$/;"	f
 HW_MESH_On	HW/hw_power.c	/^void HW_MESH_On(void)$/;"	f
 HW_MESH_PIN	HW/hw_power.h	25;"	d
 HW_MESH_PIN_PORT	HW/hw_power.h	24;"	d
-HW_OLED_GLOBE	HW/hw_uart3.h	5;"	d
-HW_OLED_GLOBE	HW/hw_uart3.h	7;"	d
 HW_PDU_GLOBE	HW/hw_uart4.h	5;"	d
 HW_PDU_GLOBE	HW/hw_uart4.h	7;"	d
 HW_PHY_DEF	HW/hw_phy.c	2;"	d	file:
@@ -8222,12 +8213,20 @@ HW_UART1	HW/hw_uart1.h	19;"	d
 HW_UART1_DEF	HW/hw_uart1.c	1;"	d	file:
 HW_UART1_INT_ID	HW/hw_uart1.h	20;"	d
 HW_UART2_DEF	HW/hw_uart2.c	2;"	d	file:
+HW_UART2_GLOBE	HW/hw_uart2.h	4;"	d
+HW_UART2_GLOBE	HW/hw_uart2.h	6;"	d
 HW_UART2_INT_ID	HW/hw_uart2.h	19;"	d
 HW_UART3_DEF	HW/hw_uart3.c	5;"	d	file:
+HW_UART3_GLOBE	HW/hw_uart3.h	5;"	d
+HW_UART3_GLOBE	HW/hw_uart3.h	7;"	d
 HW_UART4_DEF	HW/hw_uart4.c	4;"	d	file:
 HW_UART5_DEF	HW/hw_uart5.c	1;"	d	file:
+HW_UART5_GLOBE	HW/hw_uart5.h	3;"	d
+HW_UART5_GLOBE	HW/hw_uart5.h	5;"	d
 HW_UART5_INT_ID	HW/hw_uart5.h	18;"	d
 HW_UART6_DEF	HW/hw_uart6.c	2;"	d	file:
+HW_UART6_GLOBE	HW/hw_uart6.h	6;"	d
+HW_UART6_GLOBE	HW/hw_uart6.h	8;"	d
 HW_WTD_DEF	HW/hw_watchdog.c	2;"	d	file:
 HW_WTD_Feed	HW/hw_watchdog.c	/^void HW_WTD_Feed(void)$/;"	f
 HW_WTD_GLOBE	HW/hw_watchdog.h	3;"	d
@@ -13932,7 +13931,7 @@ SWIFTUART1BuffSize	HW/hw_uart1.c	6;"	d	file:
 SWIFTUART2Buff	HW/hw_uart2.c	/^INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];$/;"	v
 SWIFTUART2BuffSize	HW/hw_uart2.c	6;"	d	file:
 SWIFTUART3Buff	HW/hw_uart3.c	/^INT8U	SWIFTUART3Buff[SWIFTUART3BuffSize];$/;"	v
-SWIFTUART3BuffSize	HW/hw_uart3.c	12;"	d	file:
+SWIFTUART3BuffSize	HW/hw_uart3.c	13;"	d	file:
 SWIFTUART4Buff	HW/hw_uart4.c	/^INT8U	SWIFTUART4Buff[SWIFTUART4BuffSize];$/;"	v
 SWIFTUART4BuffSize	HW/hw_uart4.c	9;"	d	file:
 SWIFTUART5Buff	HW/hw_uart5.c	/^INT8U	SWIFTUART5Buff[SWIFTUART5BuffSize];$/;"	v
@@ -13958,15 +13957,14 @@ SWIFT_UART2	HW/hw_uart2.h	18;"	d
 SWIFT_UART2_Buff	HW/hw_uart2.c	/^str_UART_Buff		SWIFT_UART2_Buff;$/;"	v
 SWIFT_UART2_GPIO	HW/hw_uart2.c	/^static str_UART_GPIO_HARD	SWIFT_UART2_GPIO;$/;"	v	file:
 SWIFT_UART2_INT_Switch	HW/hw_uart2.c	/^void SWIFT_UART2_INT_Switch(INT8U switch_set)$/;"	f
-SWIFT_UART2_Init	HW/hw_uart2.c	/^void SWIFT_UART2_Init(INT32U	BaudRate)$/;"	f
+SWIFT_UART2_Init	HW/hw_uart2.c	/^void SWIFT_UART2_Init(INT32U BaudRate)$/;"	f
 SWIFT_UART2_IntHandler	HW/hw_uart2.c	/^void SWIFT_UART2_IntHandler(void)$/;"	f
-SWIFT_UART2_Predict_RevBytes	HW/hw_uart2.c	/^INT8U SWIFT_UART2_Predict_RevBytes=0;$/;"	v
 SWIFT_UART2_RX_PIN	HW/hw_uart2.h	16;"	d
 SWIFT_UART2_RX_PIN_PORT	HW/hw_uart2.h	15;"	d
 SWIFT_UART2_RecvBuff	HW/hw_uart2.c	/^void SWIFT_UART2_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
 SWIFT_UART2_RecvBuff_Clear	HW/hw_uart2.c	/^void SWIFT_UART2_RecvBuff_Clear(void)$/;"	f
 SWIFT_UART2_Rev_Sem	HW/hw_uart2.c	/^OS_SEM SWIFT_UART2_Rev_Sem;	$/;"	v
-SWIFT_UART2_Rev_Sem	HW/hw_uart2.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;$/;"	v
+SWIFT_UART2_Rev_Sem	HW/hw_uart2.h	/^HW_UART2_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;$/;"	v
 SWIFT_UART2_SendBuff	HW/hw_uart2.c	/^void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
 SWIFT_UART2_Send_Sem	HW/hw_uart2.c	/^OS_SEM SWIFT_UART2_Send_Sem;	$/;"	v
 SWIFT_UART2_TX_PIN	HW/hw_uart2.h	13;"	d
@@ -13983,7 +13981,7 @@ SWIFT_UART3_RX_PIN_PORT	HW/hw_uart3.h	13;"	d
 SWIFT_UART3_RecvBuff	HW/hw_uart3.c	/^void SWIFT_UART3_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
 SWIFT_UART3_RecvBuff_Clear	HW/hw_uart3.c	/^void SWIFT_UART3_RecvBuff_Clear(void)$/;"	f
 SWIFT_UART3_Rev_Sem	HW/hw_uart3.c	/^OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
-SWIFT_UART3_Rev_Sem	HW/hw_uart3.h	/^HW_OLED_GLOBE OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
+SWIFT_UART3_Rev_Sem	HW/hw_uart3.h	/^HW_UART3_GLOBE OS_SEM SWIFT_UART3_Rev_Sem;$/;"	v
 SWIFT_UART3_SendBuff	HW/hw_uart3.c	/^void SWIFT_UART3_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
 SWIFT_UART3_Send_Sem	HW/hw_uart3.c	/^OS_SEM SWIFT_UART3_Send_Sem;$/;"	v
 SWIFT_UART3_TX_PIN	HW/hw_uart3.h	11;"	d
@@ -14011,13 +14009,12 @@ SWIFT_UART5_GPIO	HW/hw_uart5.c	/^static str_UART_GPIO_HARD	SWIFT_UART5_GPIO;$/;"
 SWIFT_UART5_INT_Switch	HW/hw_uart5.c	/^void SWIFT_UART5_INT_Switch(INT8U switch_set)$/;"	f
 SWIFT_UART5_Init	HW/hw_uart5.c	/^void SWIFT_UART5_Init(INT32U	BaudRate)$/;"	f
 SWIFT_UART5_IntHandler	HW/hw_uart5.c	/^void SWIFT_UART5_IntHandler(void)$/;"	f
-SWIFT_UART5_Predict_RevBytes	HW/hw_uart5.c	/^INT8U SWIFT_UART5_Predict_RevBytes=0;$/;"	v
 SWIFT_UART5_RX_PIN	HW/hw_uart5.h	15;"	d
 SWIFT_UART5_RX_PIN_PORT	HW/hw_uart5.h	14;"	d
 SWIFT_UART5_RecvBuff	HW/hw_uart5.c	/^void SWIFT_UART5_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
 SWIFT_UART5_RecvBuff_Clear	HW/hw_uart5.c	/^void SWIFT_UART5_RecvBuff_Clear(void)$/;"	f
 SWIFT_UART5_Rev_Sem	HW/hw_uart5.c	/^OS_SEM SWIFT_UART5_Rev_Sem;	$/;"	v
-SWIFT_UART5_Rev_Sem	HW/hw_uart5.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART5_Rev_Sem;$/;"	v
+SWIFT_UART5_Rev_Sem	HW/hw_uart5.h	/^HW_UART5_GLOBE OS_SEM SWIFT_UART5_Rev_Sem;$/;"	v
 SWIFT_UART5_SendBuff	HW/hw_uart5.c	/^void SWIFT_UART5_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
 SWIFT_UART5_Send_Sem	HW/hw_uart5.c	/^OS_SEM SWIFT_UART5_Send_Sem;	$/;"	v
 SWIFT_UART5_TX_PIN	HW/hw_uart5.h	12;"	d
@@ -14028,13 +14025,26 @@ SWIFT_UART6_INT_ID	HW/hw_uart6.h	21;"	d
 SWIFT_UART6_INT_Switch	HW/hw_uart6.c	/^void SWIFT_UART6_INT_Switch(INT8U switch_set)$/;"	f
 SWIFT_UART6_Init	HW/hw_uart6.c	/^void SWIFT_UART6_Init(INT32U	BaudRate)$/;"	f
 SWIFT_UART6_IntHandler	HW/hw_uart6.c	/^void SWIFT_UART6_IntHandler(void)$/;"	f
+SWIFT_UART6_RX_PIN	HW/hw_uart6.h	18;"	d
+SWIFT_UART6_RX_PIN_PORT	HW/hw_uart6.h	17;"	d
 SWIFT_UART6_RecvBuff	HW/hw_uart6.c	/^void SWIFT_UART6_RecvBuff(INT8S *buff, INT32U *bufflen)$/;"	f
 SWIFT_UART6_Rev_Sem	HW/hw_uart6.c	/^OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
-SWIFT_UART6_Rev_Sem	HW/hw_uart6.h	/^HW_BEACON_GLOBE OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
+SWIFT_UART6_Rev_Sem	HW/hw_uart6.h	/^HW_UART6_GLOBE OS_SEM SWIFT_UART6_Rev_Sem;$/;"	v
 SWIFT_UART6_SendBuff	HW/hw_uart6.c	/^void SWIFT_UART6_SendBuff(INT8S *buff, INT32U bufflen)$/;"	f
 SWIFT_UART6_Send_Sem	HW/hw_uart6.c	/^OS_SEM SWIFT_UART6_Send_Sem;$/;"	v
+SWIFT_UART6_TX_PIN	HW/hw_uart6.h	15;"	d
+SWIFT_UART6_TX_PIN_PORT	HW/hw_uart6.h	14;"	d
+SWIFT_UART6_UARTX	HW/hw_uart6.h	20;"	d
 SWIFT_USART1_GETC	HW/hw_uart1.c	/^INT32S SWIFT_USART1_GETC(void)$/;"	f
 SWIFT_USART1_TSTC	HW/hw_uart1.c	/^INT32S SWIFT_USART1_TSTC(void)$/;"	f
+SWIFT_USART2_GETC	HW/hw_uart2.c	/^INT32S SWIFT_USART2_GETC(void)$/;"	f
+SWIFT_USART2_TSTC	HW/hw_uart2.c	/^INT32S SWIFT_USART2_TSTC(void)$/;"	f
+SWIFT_USART3_GETC	HW/hw_uart3.c	/^INT32S SWIFT_USART3_GETC(void)$/;"	f
+SWIFT_USART3_TSTC	HW/hw_uart3.c	/^INT32S SWIFT_USART3_TSTC(void)$/;"	f
+SWIFT_USART5_GETC	HW/hw_uart5.c	/^INT32S SWIFT_USART5_GETC(void)$/;"	f
+SWIFT_USART5_TSTC	HW/hw_uart5.c	/^INT32S SWIFT_USART5_TSTC(void)$/;"	f
+SWIFT_USART6_GETC	HW/hw_uart6.c	/^INT32S SWIFT_USART6_GETC(void)$/;"	f
+SWIFT_USART6_TSTC	HW/hw_uart6.c	/^INT32S SWIFT_USART6_TSTC(void)$/;"	f
 SWITFT_UART4_IntHandler	HW/hw_uart4.c	/^void SWITFT_UART4_IntHandler(void)$/;"	f
 SWTRIGR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t SWTRIGR;  \/*!< DAC software trigger register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon66
 SYNCHRO_TIMEOUT	Lib/STM32F2xx_StdPeriph_Driver/src/stm32f2xx_rtc.c	284;"	d	file:
@@ -14371,24 +14381,20 @@ SystemInit_ExtMemCtl	Lib/CMSIS/DeviceSupport/system_stm32f2xx.c	/^void SystemIni
 T	Lib/CMSIS/core_cm3.h	/^    uint32_t T:1;                        \/*!< bit:     24  Thumb bit        (read 0)          *\/$/;"	m	struct:__anon98::__anon99
 TAFCR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t TAFCR;   \/*!< RTC tamper and alternate function configuration register, Address offset: 0x40 *\/$/;"	m	struct:__anon85
 TAMP_STAMP_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  TAMP_STAMP_IRQn             = 2,      \/*!< Tamper and TimeStamp interrupts through the EXTI line             *\/$/;"	e	enum:IRQn
-TASK_AntennaRecordGoto_PRIO	APP/inc/main.h	28;"	d
-TASK_AntennaRecordGoto_STK_SIZE	APP/inc/main.h	45;"	d
-TASK_Beacon_PRIO	APP/inc/main.h	23;"	d
-TASK_Beacon_STK_SIZE	APP/inc/main.h	36;"	d
-TASK_Cabrage_ElecCoder_PRIO	APP/inc/main.h	25;"	d
-TASK_Cabrage_ElecCoder_STK_SIZE	APP/inc/main.h	34;"	d
-TASK_EthRelink_PRIO	APP/inc/main.h	19;"	d
-TASK_EthRelink_STK_SIZE	APP/inc/main.h	32;"	d
-TASK_Monitor_PRIO	APP/inc/main.h	22;"	d
-TASK_Monitor_STK_SIZE	APP/inc/main.h	37;"	d
-TASK_Polar_ElecCoder_PRIO	APP/inc/main.h	26;"	d
-TASK_Polar_ElecCoder_STK_SIZE	APP/inc/main.h	35;"	d
-TASK_Position_ElecCoder_PRIO	APP/inc/main.h	24;"	d
-TASK_Position_ElecCoder_STK_SIZE	APP/inc/main.h	33;"	d
-TASK_SHELL_PRIO	APP/inc/main.h	17;"	d
-TASK_SHELL_STK_SIZE	APP/inc/main.h	43;"	d
-TASK_START_PRIO	APP/inc/main.h	15;"	d
-TASK_START_STK_SIZE	APP/inc/main.h	41;"	d
+TASK_AP_PRIO	APP/inc/main.h	17;"	d
+TASK_AP_STK_SIZE	APP/inc/main.h	22;"	d
+TASK_D350_SHELL_PRIO	APP/inc/main.h	16;"	d
+TASK_D350_SHELL_STK_SIZE	APP/inc/main.h	21;"	d
+TASK_EthRelink_PRIO	APP/inc/main.h	14;"	d
+TASK_EthRelink_STK_SIZE	APP/inc/main.h	20;"	d
+TASK_GPS_PRIO	APP/inc/main.h	15;"	d
+TASK_GPS_STK_SIZE	APP/inc/main.h	24;"	d
+TASK_RESERVD_PRIO	APP/inc/main.h	18;"	d
+TASK_RESERVD_STK_SIZE	APP/inc/main.h	23;"	d
+TASK_SHELL_PRIO	APP/inc/main.h	13;"	d
+TASK_SHELL_STK_SIZE	APP/inc/main.h	26;"	d
+TASK_START_PRIO	APP/inc/main.h	12;"	d
+TASK_START_STK_SIZE	APP/inc/main.h	25;"	d
 TASK_STK_SIZE	lwip-1.4.1/port/STM32/include/arch/sys_arch.h	49;"	d
 TASK_STK_SIZE_1024	APP/inc/app_cfg.h	73;"	d
 TASK_STK_SIZE_128	APP/inc/app_cfg.h	76;"	d
@@ -14398,10 +14404,6 @@ TASK_STK_SIZE_4096	APP/inc/app_cfg.h	71;"	d
 TASK_STK_SIZE_512	APP/inc/app_cfg.h	74;"	d
 TASK_STK_SIZE_64	APP/inc/app_cfg.h	77;"	d
 TASK_STK_SIZE_8192	APP/inc/app_cfg.h	70;"	d
-TASK_SatGradientTrack_PRIO	APP/inc/main.h	29;"	d
-TASK_SatGradientTrack_STK_SIZE	APP/inc/main.h	39;"	d
-TASK_SatelliteTrack_PRIO	APP/inc/main.h	27;"	d
-TASK_SatelliteTrack_STK_SIZE	APP/inc/main.h	38;"	d
 TCBPtr	uCOS/uCOS-III/Source/os.h	/^    OS_TCB              *TCBPtr;$/;"	m	struct:os_pend_data
 TCPH_FLAGS	lwip-1.4.1/src/include/lwip/tcp_impl.h	175;"	d
 TCPH_FLAGS_SET	lwip-1.4.1/src/include/lwip/tcp_impl.h	178;"	d
@@ -15167,8 +15169,10 @@ TIM_UpdateSource_Regular	Lib/STM32F2xx_StdPeriph_Driver/inc/stm32f2xx_tim.h	809;
 TIR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t TIR;  \/*!< CAN TX mailbox identifier register *\/$/;"	m	struct:__anon61
 TLS_Tbl	uCOS/uCOS-III/Source/os.h	/^    OS_TLS               TLS_Tbl[OS_CFG_TLS_TBL_SIZE];$/;"	m	struct:os_tcb
 TMIDxR_TXRQ	Lib/STM32F2xx_StdPeriph_Driver/src/stm32f2xx_can.c	98;"	d	file:
+TOOL_BatteryFrameCheck	APP/src/app_tool.c	/^INT8S TOOL_BatteryFrameCheck(INT8U *buf, INT32U len)$/;"	f
 TOOL_Bytebuff2INT16Data	APP/src/app_tool.c	/^INT16U TOOL_Bytebuff2INT16Data(INT8U *buff,INT8U save_mode)$/;"	f
 TOOL_Bytebuff2INT32Data	APP/src/app_tool.c	/^INT32U TOOL_Bytebuff2INT32Data(INT8U *buff,INT8U save_mode)$/;"	f
+TOOL_CheckSum16BitGet	APP/src/app_tool.c	/^static INT16U TOOL_CheckSum16BitGet(INT8U *buf, INT32U len)$/;"	f	file:
 TOOL_CheckSum8BitGet	APP/src/app_tool.c	/^INT8U TOOL_CheckSum8BitGet(INT8U *buff, INT32U len)$/;"	f
 TOOL_DateTime2Bytebuff	APP/src/app_tool.c	/^ void TOOL_DateTime2Bytebuff(strSysDateTime SysDateTime,INT8U *buff,INT8U buff_len)$/;"	f
 TOOL_GetCPI_ID	APP/src/app_tool.c	/^void TOOL_GetCPI_ID(INT32U *IDbuff)  $/;"	f
@@ -15210,28 +15214,22 @@ TYPE_IP	lwip-1.4.1/src/netif/ppp/vj.h	78;"	d
 TYPE_UNCOMPRESSED_TCP	lwip-1.4.1/src/netif/ppp/vj.h	79;"	d
 TailPtr	uCOS/uCOS-III/Source/os.h	/^    OS_PEND_DATA        *TailPtr;$/;"	m	struct:os_pend_list
 TailPtr	uCOS/uCOS-III/Source/os.h	/^    OS_TCB              *TailPtr;                           \/* Pointer to last task          at selected priority     *\/$/;"	m	struct:os_rdy_list
-TaskAntennaRecordGotoStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskAntennaRecordGotoStk[TASK_AntennaRecordGoto_STK_SIZE];$/;"	v
-TaskAntennaRecordGotoTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskAntennaRecordGotoTCB;$/;"	v
-TaskBeaconStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskBeaconStk[TASK_Beacon_STK_SIZE];$/;"	v
-TaskBeaconTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskBeaconTCB;$/;"	v
-TaskCabrageElecCoderStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskCabrageElecCoderStk[TASK_Cabrage_ElecCoder_STK_SIZE];$/;"	v
-TaskCabrageElecCoderTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskCabrageElecCoderTCB;$/;"	v
+TaskAP	APP/src/main.c	/^static  void  TaskAP(void *p_arg)$/;"	f	file:
+TaskAPStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskAPStk[TASK_AP_STK_SIZE];$/;"	v
+TaskAPTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskAPTCB;$/;"	v
 TaskCreate	APP/src/main.c	/^static  void  TaskCreate (void)$/;"	f	file:
+TaskD350ShellStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskD350ShellStk[TASK_D350_SHELL_STK_SIZE];$/;"	v
+TaskD350ShellTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskD350ShellTCB;$/;"	v
 TaskEntryAddr	uCOS/uCOS-III/Source/os.h	/^    OS_TASK_PTR          TaskEntryAddr;                     \/* Pointer to task entry point address                    *\/$/;"	m	struct:os_tcb
 TaskEntryArg	uCOS/uCOS-III/Source/os.h	/^    void                *TaskEntryArg;                      \/* Argument passed to task when it was created            *\/$/;"	m	struct:os_tcb
 TaskEthRelink	APP/src/main.c	/^static  void  TaskEthRelink(void *p_arg)$/;"	f	file:
 TaskEthRelinkStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskEthRelinkStk[TASK_EthRelink_STK_SIZE];$/;"	v
 TaskEthRelinkTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskEthRelinkTCB;$/;"	v
-TaskMonitorStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskMonitorStk[TASK_Monitor_STK_SIZE];$/;"	v
-TaskMonitorTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskMonitorTCB;$/;"	v
-TaskPolarElecCoderStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskPolarElecCoderStk[TASK_Polar_ElecCoder_STK_SIZE];$/;"	v
-TaskPolarElecCoderTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskPolarElecCoderTCB;$/;"	v
-TaskPositionElecCoderStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskPositionElecCoderStk[TASK_Position_ElecCoder_STK_SIZE];$/;"	v
-TaskPositionElecCoderTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskPositionElecCoderTCB;$/;"	v
-TaskSatGradientTrackStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskSatGradientTrackStk[TASK_SatGradientTrack_STK_SIZE];$/;"	v
-TaskSatGradientTrackTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskSatGradientTrackTCB;$/;"	v
-TaskSatelliteTrackStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskSatelliteTrackStk[TASK_SatelliteTrack_STK_SIZE];$/;"	v
-TaskSatelliteTrackTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskSatelliteTrackTCB;$/;"	v
+TaskGPS	APP/src/main.c	/^static  void  TaskGPS(void *p_arg)$/;"	f	file:
+TaskGPSStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskGPSStk[TASK_GPS_STK_SIZE];$/;"	v
+TaskGPSTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskGPSTCB;$/;"	v
+TaskReservdStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskReservdStk[TASK_RESERVD_STK_SIZE];$/;"	v
+TaskReservdTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskReservdTCB;$/;"	v
 TaskShell	APP/src/main.c	/^static  void  TaskShell(void *p_arg)$/;"	f	file:
 TaskShellStk	APP/inc/main.h	/^MAIN_GLOBE CPU_STK	TaskShellStk[TASK_SHELL_STK_SIZE];$/;"	v
 TaskShellTCB	APP/inc/main.h	/^MAIN_GLOBE OS_TCB	TaskShellTCB;$/;"	v
@@ -15608,6 +15606,7 @@ _ETHERNETIF_H	lwip-1.4.1/src/include/netif/ethernetif.h	2;"	d
 _IO	lwip-1.4.1/src/include/lwip/sockets.h	244;"	d
 _IOR	lwip-1.4.1/src/include/lwip/sockets.h	246;"	d
 _IOW	lwip-1.4.1/src/include/lwip/sockets.h	248;"	d
+_KFIFO_H	APP/inc/kfifo.h	2;"	d
 __APP_CFG_H__	APP/inc/app_cfg.h	32;"	d
 __APP_SHELL__	APP/inc/app_shell.h	2;"	d
 __ARCH_SYS_ARCH_H__	lwip-1.4.1/port/STM32/include/arch/sys_arch.h	33;"	d
@@ -15626,6 +15625,8 @@ __CLZ	Lib/CMSIS/core_cmInstr.h	257;"	d
 __CM3_CMSIS_VERSION	Lib/CMSIS/core_cm3.h	71;"	d
 __CM3_CMSIS_VERSION_MAIN	Lib/CMSIS/core_cm3.h	69;"	d
 __CM3_CMSIS_VERSION_SUB	Lib/CMSIS/core_cm3.h	70;"	d
+__CMD_AP__	APP/inc/cmd_ap.h	2;"	d
+__CMD_BATTERY__	APP/inc/cmd_battery.h	2;"	d
 __CMD_BUZZER__	APP/inc/cmd_buzzer.h	2;"	d
 __CMD_D__	APP/inc/cmd_d.h	2;"	d
 __CMD_GPS__	APP/inc/cmd_gps.h	2;"	d
@@ -15819,6 +15820,10 @@ __get_xPSR	Lib/CMSIS/core_cmFunc.h	/^static __INLINE uint32_t __get_xPSR(void)$/
 __heap_base	Lib/CMSIS/startup/cstartup.s	/^__heap_base$/;"	l
 __heap_limit	Lib/CMSIS/startup/cstartup.s	/^__heap_limit$/;"	l
 __initial_sp	Lib/CMSIS/startup/cstartup.s	/^__initial_sp$/;"	l
+__kfifo_get	APP/src/kfifo.c	/^unsigned int __kfifo_get(struct kfifo *fifo,$/;"	f
+__kfifo_len	APP/src/kfifo.c	/^unsigned int __kfifo_len(struct kfifo *fifo)$/;"	f
+__kfifo_put	APP/src/kfifo.c	/^unsigned int __kfifo_put(struct kfifo *fifo, unsigned char *buffer, unsigned int len)$/;"	f
+__kfifo_reset	APP/src/kfifo.c	/^void __kfifo_reset(struct kfifo *fifo)$/;"	f
 __promptme	uCOS/uCOS-SHELL/src/cli_hush.c	/^	int __promptme;$/;"	m	struct:in_str	file:
 __set_BASEPRI	Lib/CMSIS/core_cmFunc.h	/^__attribute__( ( always_inline ) ) static __INLINE void __set_BASEPRI(uint32_t value)$/;"	f
 __set_BASEPRI	Lib/CMSIS/core_cmFunc.h	/^static __INLINE void __set_BASEPRI(uint32_t basePri)$/;"	f
@@ -15955,6 +15960,8 @@ antenna_polar	APP/inc/devdef.h	/^	FP32					antenna_polar;			\/\/ 天线极化角$/;"	
 antenna_polar_sta	APP/inc/devdef.h	/^	INT8U				antenna_polar_sta;				\/\/  	见ACU与PDU通信协议3.3.3$/;"	m	struct:_strSATseekerCurrSta_
 antenna_position	APP/inc/devdef.h	/^	FP32					antenna_position;		\/\/ 天线方位角$/;"	m	struct:_strSATseekerCurrSta_
 antenna_position_sta	APP/inc/devdef.h	/^	INT8U				antenna_position_sta;			\/\/  	见ACU与PDU通信协议3.3.1$/;"	m	struct:_strSATseekerCurrSta_
+ap_rcv_buf	APP/src/cmd_ap.c	/^static char ap_rcv_buf[AP_RCV_BUF_LEN] = {0};$/;"	v	file:
+ap_rcv_fifo	APP/src/cmd_ap.c	/^struct kfifo *ap_rcv_fifo;$/;"	v	typeref:struct:kfifo
 api_msg	lwip-1.4.1/src/include/lwip/api_msg.h	/^struct api_msg {$/;"	s
 api_msg_msg	lwip-1.4.1/src/include/lwip/api_msg.h	/^struct api_msg_msg {$/;"	s
 apiflags	lwip-1.4.1/src/include/lwip/api_msg.h	/^      u8_t apiflags;$/;"	m	struct:api_msg_msg::__anon135::__anon139
@@ -16054,6 +16061,7 @@ boot_file_name	lwip-1.4.1/src/include/lwip/dhcp.h	/^  char boot_file_name[DHCP_F
 buf	lwip-1.4.1/src/core/ipv4/ip_frag.c	/^static u8_t buf[LWIP_MEM_ALIGN_SIZE(IP_FRAG_MAX_MTU + MEM_ALIGNMENT - 1)];$/;"	v	file:
 buf	lwip-1.4.1/src/core/udpecho.c	/^static struct netbuf *buf;$/;"	v	typeref:struct:netbuf	file:
 buf	lwip-1.4.1/src/netif/ppp/md5.h	/^  u32_t buf[4];             \/* scratch buffer *\/$/;"	m	struct:__anon125
+buffer	APP/inc/kfifo.h	/^    unsigned char *buffer;    \/* the buffer holding the data *\/$/;"	m	struct:kfifo
 buffer	Lib/STM32F2x7_ETH_Driver/inc/stm32f2x7_eth.h	/^  u32 buffer;$/;"	m	struct:__anon114
 buzzer_switch	APP/inc/devdef.h	/^	INT8U		buzzer_switch;$/;"	m	struct:_strBuzzerInfo_
 cachehit	lwip-1.4.1/src/include/lwip/stats.h	/^  STAT_COUNTER cachehit;$/;"	m	struct:stats_proto
@@ -16099,6 +16107,7 @@ cifdefaultroute	lwip-1.4.1/src/netif/ppp/ppp.c	/^cifdefaultroute(int pd, u32_t l
 cilen	lwip-1.4.1/src/netif/ppp/fsm.h	/^  int  (*cilen)(fsm*);                              \/* Length of our Configuration Information *\/$/;"	m	struct:fsm_callbacks
 cis_received	lwip-1.4.1/src/netif/ppp/ipcp.c	/^static int cis_received[NUM_PPP];      \/* # Conf-Reqs received *\/$/;"	v	file:
 clear_ctrlc	uCOS/uCOS-SHELL/src/console.c	/^void clear_ctrlc(void)$/;"	f
+clear_rcv_fifo	APP/src/cmd_ap.c	/^static void clear_rcv_fifo(void)$/;"	f	file:
 cli_init	uCOS/uCOS-SHELL/src/cli.c	/^void cli_init(void)$/;"	f
 cli_loop	uCOS/uCOS-SHELL/src/cli.c	/^void cli_loop(void)$/;"	f
 cli_readline	uCOS/uCOS-SHELL/src/cli_readline.c	/^int cli_readline(const char *const prompt)$/;"	f
@@ -16116,7 +16125,9 @@ closesocket	lwip-1.4.1/src/include/lwip/sockets.h	349;"	d
 cls	lwip-1.4.1/src/core/dns.c	/^  u16_t cls;$/;"	m	struct:dns_answer	file:
 cls	lwip-1.4.1/src/core/dns.c	/^  u16_t cls;$/;"	m	struct:dns_query	file:
 cmd	uCOS/uCOS-SHELL/inc/command.h	/^	int		(*cmd)(struct cmd_tbl_s *, int, int, char * const []);$/;"	m	struct:cmd_tbl_s
+cmd_ap_init	APP/src/cmd_ap.c	/^int cmd_ap_init(void)$/;"	f
 cmd_auto_complete	uCOS/uCOS-SHELL/src/command.c	/^int cmd_auto_complete(const char *const prompt, char *buf, int *np, int *colp)$/;"	f
+cmd_battery_init	APP/src/cmd_battery.c	/^int cmd_battery_init(void)$/;"	f
 cmd_buzzer_init	APP/src/cmd_buzzer.c	/^int cmd_buzzer_init(void)$/;"	f
 cmd_call	uCOS/uCOS-SHELL/src/command.c	/^static int cmd_call(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
 cmd_d_init	APP/src/cmd_d.c	/^int cmd_d_init(void)$/;"	f
@@ -16338,6 +16349,8 @@ dns_table_entry	lwip-1.4.1/src/core/dns.c	/^struct dns_table_entry {$/;"	s	file:
 dns_timer	lwip-1.4.1/src/core/timers.c	/^dns_timer(void *arg)$/;"	f	file:
 dns_tmr	lwip-1.4.1/src/core/dns.c	/^dns_tmr(void)$/;"	f
 dnsaddr	lwip-1.4.1/src/netif/ppp/ipcp.h	/^  u32_t   dnsaddr[2];        \/* Primary and secondary MS DNS entries *\/$/;"	m	struct:ipcp_options
+do_ap	APP/src/cmd_ap.c	/^static int do_ap(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
+do_battery	APP/src/cmd_battery.c	/^static int do_battery(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
 do_bind	lwip-1.4.1/src/api/api_msg.c	/^do_bind(struct api_msg_msg *msg)$/;"	f
 do_buzzer	APP/src/cmd_buzzer.c	/^static int do_buzzer(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
 do_close	lwip-1.4.1/src/api/api_msg.c	/^do_close(struct api_msg_msg *msg)$/;"	f
@@ -16547,6 +16560,7 @@ get_object_def_pc	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^  void (*get_obje
 get_object_def_q	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^  void (*get_object_def_q)(void* addr_inf, u8_t rid, u8_t ident_len, s32_t *ident);$/;"	m	struct:mib_external_node
 get_objid	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^  void (*get_objid)(void* addr_inf, u8_t level, u16_t idx, s32_t *sub_id);$/;"	m	struct:mib_external_node
 get_pap_passwd	lwip-1.4.1/src/netif/ppp/auth.c	/^get_pap_passwd(int unit, char *user, char *passwd)$/;"	f	file:
+get_rcv_fifo	APP/src/cmd_ap.c	/^static void get_rcv_fifo(void)$/;"	f	file:
 get_secret	lwip-1.4.1/src/netif/ppp/auth.c	/^get_secret(int unit, char *client, char *server, char *secret, int *secret_len, int save_addrs)$/;"	f
 get_socket	lwip-1.4.1/src/api/sockets.c	/^get_socket(int s)$/;"	f	file:
 get_tcpflags	lwip-1.4.1/src/netif/ppp/ipcp.c	1380;"	d	file:
@@ -16740,6 +16754,7 @@ igmp_tmr	lwip-1.4.1/src/core/ipv4/igmp.c	/^igmp_tmr(void)$/;"	f
 illegal	lwip-1.4.1/src/include/lwip/stats.h	/^  STAT_COUNTER illegal;$/;"	m	struct:stats_mem
 imr_interface	lwip-1.4.1/src/include/lwip/sockets.h	/^    struct in_addr imr_interface; \/* local IP address of interface *\/$/;"	m	struct:ip_mreq	typeref:struct:ip_mreq::in_addr
 imr_multiaddr	lwip-1.4.1/src/include/lwip/sockets.h	/^    struct in_addr imr_multiaddr; \/* IP multicast address of group *\/$/;"	m	struct:ip_mreq	typeref:struct:ip_mreq::in_addr
+in	APP/inc/kfifo.h	/^    unsigned int in;    \/* data is added at offset (in % size) *\/$/;"	m	struct:kfifo
 in	lwip-1.4.1/src/netif/ppp/md5.h	/^  unsigned char in[64];     \/* input buffer *\/$/;"	m	struct:__anon125
 inACCM	lwip-1.4.1/src/netif/ppp/ppp.c	/^  ext_accm inACCM;              \/* Async-Ctl-Char-Map for input. *\/$/;"	m	struct:PPPControlRx_s	file:
 inEscaped	lwip-1.4.1/src/netif/ppp/ppp.c	/^  char inEscaped;               \/* Escape next character. *\/$/;"	m	struct:PPPControlRx_s	file:
@@ -16984,6 +16999,7 @@ iprtetable_node	lwip-1.4.1/src/core/snmp/mib2.c	/^struct mib_node* iprtetable_no
 iprtetree_root	lwip-1.4.1/src/core/snmp/mib2.c	/^struct mib_list_rootnode iprtetree_root = {$/;"	v	typeref:struct:mib_list_rootnode
 is_assignment	uCOS/uCOS-SHELL/src/cli_hush.c	/^static int is_assignment(const char *s)$/;"	f	file:
 is_digit	uCOS/uCOS-SHELL/src/vsprintf.c	189;"	d	file:
+is_power_of_2	APP/src/kfifo.c	8;"	d	file:
 isdigit	lwip-1.4.1/src/core/ipv4/ip_addr.c	116;"	d	file:
 islower	lwip-1.4.1/src/core/ipv4/ip_addr.c	118;"	d	file:
 isprint	lwip-1.4.1/src/core/ipv4/ip_addr.c	115;"	d	file:
@@ -16995,6 +17011,14 @@ keep_cnt	lwip-1.4.1/src/include/lwip/tcp.h	/^  u32_t keep_cnt;$/;"	m	struct:tcp_
 keep_cnt_sent	lwip-1.4.1/src/include/lwip/tcp.h	/^  u8_t keep_cnt_sent;$/;"	m	struct:tcp_pcb
 keep_idle	lwip-1.4.1/src/include/lwip/tcp.h	/^  u32_t keep_idle;$/;"	m	struct:tcp_pcb
 keep_intvl	lwip-1.4.1/src/include/lwip/tcp.h	/^  u32_t keep_intvl;$/;"	m	struct:tcp_pcb
+kfifo	APP/inc/kfifo.h	/^struct kfifo {$/;"	s
+kfifo_alloc	APP/src/kfifo.c	/^struct kfifo *kfifo_alloc(unsigned char *buffer, unsigned int size)$/;"	f
+kfifo_free	APP/src/kfifo.c	/^void kfifo_free(struct kfifo *fifo)$/;"	f
+kfifo_get	APP/src/kfifo.c	/^unsigned int kfifo_get(struct kfifo *fifo,$/;"	f
+kfifo_init	APP/src/kfifo.c	/^struct kfifo *kfifo_init(unsigned char *buffer, unsigned int size)$/;"	f
+kfifo_len	APP/src/kfifo.c	/^unsigned int kfifo_len(struct kfifo *fifo)$/;"	f
+kfifo_put	APP/src/kfifo.c	/^unsigned int kfifo_put(struct kfifo *fifo,$/;"	f
+kfifo_reset	APP/src/kfifo.c	/^void kfifo_reset(struct kfifo *fifo)$/;"	f
 l_linger	lwip-1.4.1/src/include/lwip/sockets.h	/^       int l_linger;               \/* linger time *\/$/;"	m	struct:linger
 l_onoff	lwip-1.4.1/src/include/lwip/sockets.h	/^       int l_onoff;                \/* option on\/off *\/$/;"	m	struct:linger
 lastXMit	lwip-1.4.1/src/netif/ppp/ppp.c	/^  u_long lastXMit;              \/* Time of last transmission. *\/$/;"	m	struct:PPPControl_s	file:
@@ -17287,6 +17311,7 @@ mib_ram_array_node	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^struct mib_ram_a
 mib_scalar_node	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^typedef struct mib_node mib_scalar_node;$/;"	t	typeref:struct:mib_node
 min	APP/inc/devdef.h	/^	INT8U	min;$/;"	m	struct:_strGPSData_
 min	APP/inc/devdef.h	/^	INT8U 			min;$/;"	m	struct:_strSysDateTime_
+min	APP/inc/kfifo.h	12;"	d
 mode	lwip-1.4.1/src/netif/ppp/ppp.c	/^  enum NPmode mode;$/;"	m	struct:npioctl	typeref:enum:npioctl::NPmode	file:
 mode_sta	APP/inc/devdef.h	/^	INT8U		mode_sta;		\/\/ 模式状态，分自动模式和手动模式和空闲，0x00空闲，0x01手动，0x02自动$/;"	m	struct:_strDevAdmin_
 modify_memory	APP/src/cmd_m.c	/^static int modify_memory(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
@@ -17617,6 +17642,7 @@ os_var__c	uCOS/uCOS-III/Source/os_var.c	/^const  CPU_CHAR  *os_var__c = "$Id: $"
 our_ipaddr	lwip-1.4.1/src/netif/ppp/ppp.h	/^  ip_addr_t our_ipaddr, his_ipaddr, netmask, dns1, dns2;$/;"	m	struct:ppp_addrs
 our_name	lwip-1.4.1/src/netif/ppp/ppp_impl.h	/^  char our_name   [MAXNAMELEN   + 1]; \/* Our name for authentication purposes *\/$/;"	m	struct:ppp_settings
 ouraddr	lwip-1.4.1/src/netif/ppp/ipcp.h	/^  u32_t   ouraddr, hisaddr;  \/* Addresses in NETWORK BYTE ORDER *\/$/;"	m	struct:ipcp_options
+out	APP/inc/kfifo.h	/^    unsigned int out;    \/* data is extracted from off. (out % size) *\/$/;"	m	struct:kfifo
 outACCM	lwip-1.4.1/src/netif/ppp/ppp.c	/^  ext_accm outACCM;             \/* Async-Ctl-Char-Map for output. *\/$/;"	m	struct:PPPControl_s	file:
 outpacket_buf	lwip-1.4.1/src/netif/ppp/ppp.c	/^u_char outpacket_buf[NUM_PPP][PPP_MRU+PPP_HDRLEN];$/;"	v
 output	lwip-1.4.1/src/include/lwip/netif.h	/^  netif_output_fn output;$/;"	m	struct:netif
@@ -18073,6 +18099,7 @@ sin_zero	lwip-1.4.1/src/include/lwip/sockets.h	/^  char sin_zero[8];$/;"	m	struc
 sio_fd_t	lwip-1.4.1/src/include/lwip/sio.h	/^typedef void * sio_fd_t;$/;"	t
 sip	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  ip_addr_t sip;$/;"	m	struct:snmp_msg_pstat
 sip_raw	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u8_t sip_raw[4];$/;"	m	struct:snmp_msg_trap
+size	APP/inc/kfifo.h	/^    unsigned int size;    \/* the size of the allocated buffer *\/$/;"	m	struct:kfifo
 size_t	uCOS/uCOS-SHELL/src/cli_hush.c	/^typedef unsigned int size_t; $/;"	t	file:
 skip_atoi	uCOS/uCOS-SHELL/src/vsprintf.c	/^static int skip_atoi(const char **s)$/;"	f	file:
 slipif_init	lwip-1.4.1/src/netif/slipif.c	/^slipif_init(struct netif *netif)$/;"	f

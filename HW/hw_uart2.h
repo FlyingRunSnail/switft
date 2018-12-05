@@ -1,9 +1,9 @@
 
 
 #ifdef HW_UART2_DEF
-	#define HW_BEACON_GLOBE
+	#define HW_UART2_GLOBE
 #else
-	#define HW_BEACON_GLOBE		extern
+	#define HW_UART2_GLOBE		extern
 #endif
 
 #include <bsp_uart.h>
@@ -18,17 +18,21 @@
 #define 	SWIFT_UART2					USART2								
 #define		HW_UART2_INT_ID				BSP_INT_ID_USART2	
 
-HW_BEACON_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;
+HW_UART2_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;
 
-HW_BEACON_GLOBE void SWIFT_UART2_IntHandler(void);
+HW_UART2_GLOBE void SWIFT_UART2_IntHandler(void);
 
-HW_BEACON_GLOBE void SWIFT_UART2_INT_Switch(INT8U switch_set);
+HW_UART2_GLOBE void SWIFT_UART2_INT_Switch(INT8U switch_set);
 
-HW_BEACON_GLOBE void SWIFT_UART2_Init(INT32U	BaudRate);
+HW_UART2_GLOBE void SWIFT_UART2_Init(INT32U	BaudRate);
 
-HW_BEACON_GLOBE void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen);
+HW_UART2_GLOBE void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen);
 
-HW_BEACON_GLOBE void SWIFT_UART2_RecvBuff(INT8U *buff, INT32U *bufflen);
+HW_UART2_GLOBE void SWIFT_UART2_RecvBuff(INT8U *buff, INT32U *bufflen);
 
-HW_BEACON_GLOBE void SWIFT_UART2_RecvBuff_Clear(void);
+HW_UART2_GLOBE void SWIFT_UART2_RecvBuff_Clear(void);
+
+HW_UART2_GLOBE INT32S SWIFT_USART2_GETC(void);
+ 
+HW_UART2_GLOBE INT32S SWIFT_USART2_TSTC(void);
 

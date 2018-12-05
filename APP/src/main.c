@@ -47,21 +47,11 @@
 #include "cli.h"
 #include <app_shell.h>
 #include "def.h"
+#include "kfifo.h"
 
-/*********************************************************************************************************
-  EVENT(ITC)    事件(任务间通信)
-*********************************************************************************************************/
-
-
-/*
-*********************************************************************************************************
-*                                       LOCAL GLOBAL VARIABLES
-*********************************************************************************************************
-*/
-
-/* ----------------- APPLICATION GLOBALS ------------------ */
-
-
+extern struct kfifo *ap_rcv_fifo;
+extern struct kfifo *gps_rcv_fifo;
+extern struct kfifo *battery_fifo;
 /*
 *********************************************************************************************************
 *                                            LOCAL DEFINES
@@ -178,7 +168,7 @@ static  void  TaskStart (void *p_arg)
 
 /***********************************************************
 **name: TaskShell
-**describe:   设备接收调试串口的命令，分解命令，以及处理命令
+**describe: debug shell task
 **input:            
 **output:   none
 **return: none
@@ -190,6 +180,98 @@ static  void  TaskShell(void *p_arg)
     while (DEF_TRUE) 
     {         
         cli_loop();
+    }
+}
+
+/***********************************************************
+**name: TaskGPS
+**describe:   设备接收调试串口的命令，分解命令，以及处理命令
+**input:            
+**output:   none
+**return: none
+**autor:  andiman
+**date:
+************************************************************/
+static  void  TaskGPS(void *p_arg)
+{
+#define GPS_BUF_LEN (256)
+    INT32U in = 0;
+    INT8U tmp = 0;
+    INT8U buf[GPS_BUF_LEN] = {0};
+
+    while (DEF_TRUE) 
+    {         
+        tmp = SWIFT_USART5_GETC();
+        if (tmp == '$')
+        {
+            in = 0;
+        }
+
+        buf[in] = tmp;
+        in++;
+        if (in >= GPS_BUF_LEN)
+        {
+            in = GPS_BUF_LEN;
+        }
+
+        if(buf[0] == '$' && buf[4] == 'M' && buf[5] == 'C')
+        {
+            if (tmp == '\n')
+            {
+                kfifo_put(gps_rcv_fifo, buf, in);
+                in = 0;
+
+                BSP_Delay_ms(10);
+            }
+        }
+    }
+}
+
+/***********************************************************
+**name: TaskAP
+**describe:   设备接收调试串口的命令，分解命令，以及处理命令
+**input:            
+**output:   none
+**return: none
+**autor:  andiman
+**date:
+************************************************************/
+static  void  TaskAP(void *p_arg)
+{
+    INT8U tmp = 0;
+#if 0
+#define AP_BUF_LEN (256)
+    INT32U in = 0;
+    INT8U buf[AP_BUF_LEN] = {0};
+#endif
+
+    while (DEF_TRUE) 
+    {         
+        tmp = SWIFT_USART6_GETC();
+
+        //buf[in] = tmp;
+        //in++;
+
+        if (ap_rcv_fifo)
+        {
+            kfifo_put(ap_rcv_fifo, &tmp, 1);
+        }
+
+        //printf("%c", tmp);
+
+#if 0
+        if (tmp == '#')
+        {
+            in = 0;
+            buf[in] = '\0';
+            printf("ap rcv: %s\r\n", (INT8U *)buf); 
+        }
+
+        if (in >= AP_BUF_LEN)
+        {
+            in = AP_BUF_LEN;
+        }
+#endif
     }
 }
 
@@ -210,33 +292,14 @@ static  void  TaskEthRelink(void *p_arg)
     INT32U i;
     INT8S ret;
 
-typedef struct st_battery_base_info
-{
-     unsigned short total_voltage;
-     unsigned short current;
-     unsigned short remainder_capcity;
-     unsigned short std_capcity;
-     unsigned short recycle_times;
-     unsigned short manufacture_date;
-     unsigned short proportionate_status;
-     unsigned short proportionate_status_h;
-     unsigned short protect_status;
-     unsigned char  software_ver;
-     unsigned char  rsoc;
-     unsigned char  fet_ctrl_status;
-     unsigned char  bat_cnt;
-     unsigned char  ntc_cnt;
-
-}battery_base_info_t;
-
-    battery_base_info_t *bbi;
-
     while(1)
     {
 		//BSP_Delay_ms(250);
         buf[len] = SWIFT_USART3_GETC();
         len = len + 1;
-        if (len == 34)
+        
+        //printf("len: %d\r\n", len);
+        if (len >= 34)
         {
 #if 0
             for (i = 0; i < len; i++)
@@ -244,25 +307,19 @@ typedef struct st_battery_base_info
                 printf("0x%02x ", buf[i]);
             }
 #endif
+            //printf("len: %d\r\n", len);
             ret = TOOL_BatteryFrameCheck(buf, len);
             if (ret == 0)
             {
-                bbi = (battery_base_info_t *)&buf[4];
-   
-                printf("total_voltage:          0x%04x\r\n", ntohs(bbi->total_voltage));
-                printf("current:                0x%04x\r\n", ntohs(bbi->current));
-                printf("remainder_capcity:      0x%04x\r\n", ntohs(bbi->remainder_capcity));
-                printf("std_capcity:            0x%04x\r\n", ntohs(bbi->std_capcity));
-                printf("recycle_times:          0x%04x\r\n", ntohs(bbi->recycle_times));
-                printf("manufacture_date:       0x%04x\r\n", ntohs(bbi->manufacture_date));
-                printf("proportionate_status:   0x%04x\r\n", ntohs(bbi->proportionate_status));
-                printf("proportionate_status_h: 0x%04x\r\n", ntohs(bbi->proportionate_status_h));
-                printf("protect_status:         0x%04x\r\n", ntohs(bbi->protect_status));
-                printf("software_ver:           0x%02x\r\n", bbi->software_ver);
-                printf("rsoc:                   0x%02x\r\n", bbi->rsoc);
-                printf("fet_ctrl_status:        0x%02x\r\n", bbi->fet_ctrl_status);
-                printf("bat_cnt:                0x%02x\r\n", bbi->bat_cnt);
-                printf("ntc_cnt:                0x%02x\r\n", bbi->ntc_cnt);
+                //printf("frame check ok\r\n");
+                if (battery_fifo)
+                {
+                    kfifo_put(battery_fifo, buf, len);
+                }
+            }
+            else
+            {
+                printf("frame check failed\r\n");
             }
 
             len = 0;
@@ -289,8 +346,13 @@ typedef struct st_battery_base_info
 static  void  TaskCreate (void)
 {
     OS_ERR  err;
-                 
-    OSTaskCreate((OS_TCB     *)&TaskShellTCB,                /* Create the start task                                    */
+    struct shell_ops
+    {
+        int (*USART_GETC)(void);
+        void (*UART_Send)(unsigned char *, unsigned int);
+    };
+
+    OSTaskCreate((OS_TCB     *)&TaskShellTCB,                /* Create debug shell task                                    */
                  (CPU_CHAR   *)"Task Shell",
                  (OS_TASK_PTR ) TaskShell,
                  (void       *) 0,
@@ -303,9 +365,51 @@ static  void  TaskCreate (void)
                  (void       *) 0,
                  (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
                  (OS_ERR     *)&err);     
-               
+#if 0               
+    OSTaskCreate((OS_TCB     *)&TaskD350ShellTCB,                /* Create d350 shell task                                    */
+                 (CPU_CHAR   *)"Task D350 Shell",
+                 (OS_TASK_PTR ) TaskShell,
+                 (void       *) &task[1],
+                 (OS_PRIO     ) TASK_D350_SHELL_PRIO,
+                 (CPU_STK    *)&TaskD350ShellStk[0],
+                 (CPU_STK     )(TASK_D350_SHELL_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) TASK_D350_SHELL_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
+#endif     
+
+    OSTaskCreate((OS_TCB     *)&TaskGPSTCB,                /* Create the GPS task                                    */
+                 (CPU_CHAR   *)"Task GPS",
+                 (OS_TASK_PTR )TaskGPS,
+                 (void       *) 0,
+                 (OS_PRIO     ) TASK_GPS_PRIO,
+                 (CPU_STK    *)&TaskGPSStk[0],
+                 (CPU_STK     )(TASK_GPS_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) TASK_GPS_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
+
+    OSTaskCreate((OS_TCB     *)&TaskAPTCB,                /* Create the GPS task                                    */
+                 (CPU_CHAR   *)"Task AP",
+                 (OS_TASK_PTR )TaskAP,
+                 (void       *) 0,
+                 (OS_PRIO     ) TASK_AP_PRIO,
+                 (CPU_STK    *)&TaskAPStk[0],
+                 (CPU_STK     )(TASK_AP_STK_SIZE / 10u),
+                 (CPU_STK_SIZE) TASK_AP_STK_SIZE,
+                 (OS_MSG_QTY  ) 0,
+                 (OS_TICK     ) 0,
+                 (void       *) 0,
+                 (OS_OPT      )(OS_OPT_TASK_STK_CHK | OS_OPT_TASK_STK_CLR),
+                 (OS_ERR     *)&err);
 #if 1
-    OSTaskCreate((OS_TCB     *)&TaskEthRelinkTCB,                /* Create the start task                                    */
+    OSTaskCreate((OS_TCB     *)&TaskEthRelinkTCB,                /* Create the Battery task                                    */
                  (CPU_CHAR   *)"Task EthRelink",
                  (OS_TASK_PTR ) TaskEthRelink,
                  (void       *) 0,

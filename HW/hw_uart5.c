@@ -2,7 +2,7 @@
 
 #include <hw_uart5.h>
 
-#define		SWIFTUART5BuffSize		32
+#define    SWIFTUART5BuffSize   200
 
 //  UART5
 static str_UART_GPIO_HARD	SWIFT_UART5_GPIO;
@@ -10,9 +10,6 @@ INT8U	SWIFTUART5Buff[SWIFTUART5BuffSize];
 str_UART_Buff		SWIFT_UART5_Buff;
 OS_SEM SWIFT_UART5_Send_Sem;	
 OS_SEM SWIFT_UART5_Rev_Sem;	
-
-INT8U SWIFT_UART5_Predict_RevBytes=0;
-
 
 /***********************************************************
 **name:	SWIFT_UART5_IntHandler
@@ -27,18 +24,10 @@ void SWIFT_UART5_IntHandler(void)
 {
 	if (USART_GetITStatus(SWIFT_UART5_GPIO.USARTx, USART_IT_RXNE) != RESET)
 	{
-		
-		SWIFT_UART5_Buff.pbuff[SWIFT_UART5_Buff.write_p++] = USART_ReceiveData(SWIFT_UART5_GPIO.USARTx);
-		if( SWIFT_UART5_Buff.write_p >= SWIFTUART5BuffSize )
-			SWIFT_UART5_Buff.write_p = 0;
-		
-		if( (SWIFT_UART5_Buff.write_p >= SWIFT_UART5_Predict_RevBytes ) &&
-			(SWIFT_UART5_Predict_RevBytes > 0))
-			BSP_OS_Sem_Post(&SWIFT_UART5_Rev_Sem);
+        USART_ClearITPendingBit(SWIFT_UART5_GPIO.USARTx, USART_IT_RXNE);
+        BSP_OS_Sem_Post(&SWIFT_UART5_Rev_Sem);
 	}
 }
-
-
 
 /***********************************************************
 **name:	SWIFT_UART5_INT_Switch
@@ -105,7 +94,7 @@ void SWIFT_UART5_Init(INT32U	BaudRate)
 	SWIFT_UART5_INT_Switch(ENABLE);
 
 	SWIFT_UART5_Buff.pbuff = SWIFTUART5Buff;
-	memset(SWIFT_UART5_Buff.pbuff,0,32);
+	memset(SWIFT_UART5_Buff.pbuff,0,SWIFTUART5BuffSize);
 	SWIFT_UART5_Buff.write_p = 0;
 	SWIFT_UART5_Buff.read_p  = 0;
 
@@ -162,5 +151,16 @@ void SWIFT_UART5_RecvBuff_Clear(void)
 	memset(SWIFT_UART5_Buff.pbuff,0,SWIFTUART5BuffSize);
 	SWIFT_UART5_Buff.write_p = 0;
 	SWIFT_UART5_Buff.read_p = 0;
+}
+
+INT32S SWIFT_USART5_GETC(void)
+{
+    BSP_OS_Sem_Pend(&SWIFT_UART5_Rev_Sem, 0);
+    return BSP_UART_RCV(SWIFT_UART5_GPIO.USARTx);
+}
+ 
+INT32S SWIFT_USART5_TSTC(void)
+{
+    return BSP_UART_TST(SWIFT_UART5_GPIO.USARTx);
 }
 

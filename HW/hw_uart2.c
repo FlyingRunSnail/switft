@@ -3,7 +3,7 @@
 
 #include <hw_uart2.h>
 
-#define		SWIFTUART2BuffSize		32
+#define    SWIFTUART2BuffSize (32)
 
 // UART2
 static str_UART_GPIO_HARD	SWIFT_UART2_GPIO;
@@ -11,8 +11,6 @@ INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];
 str_UART_Buff		SWIFT_UART2_Buff;
 OS_SEM SWIFT_UART2_Send_Sem;	
 OS_SEM SWIFT_UART2_Rev_Sem;	
-
-INT8U SWIFT_UART2_Predict_RevBytes=0;
 
 /***********************************************************
 **name:	SWIFT_UART2_IntHandler
@@ -26,13 +24,9 @@ INT8U SWIFT_UART2_Predict_RevBytes=0;
 void SWIFT_UART2_IntHandler(void)
 {
 	if (USART_GetITStatus(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE) != RESET)
-	{
-		SWIFT_UART2_Buff.pbuff[SWIFT_UART2_Buff.write_p++] = USART_ReceiveData(SWIFT_UART2_GPIO.USARTx);
-		if( SWIFT_UART2_Buff.write_p >= SWIFTUART2BuffSize )
-			SWIFT_UART2_Buff.write_p = 0;
-		if( (SWIFT_UART2_Buff.write_p >= SWIFT_UART2_Predict_RevBytes ) &&
-			(	SWIFT_UART2_Predict_RevBytes > 0))
-			BSP_OS_Sem_Post(&SWIFT_UART2_Rev_Sem);
+    {
+        USART_ClearITPendingBit(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE);
+        BSP_OS_Sem_Post(&SWIFT_UART2_Rev_Sem);
 	}
 }
 
@@ -68,9 +62,8 @@ void SWIFT_UART2_INT_Switch(INT8U switch_set)
 **autor:  andiman
 **date:
 ************************************************************/
-void SWIFT_UART2_Init(INT32U	BaudRate)
+void SWIFT_UART2_Init(INT32U BaudRate)
 {
-
 	GPIO_InitTypeDef GPIO_InitStructure;
 	
 	SWIFT_UART2_GPIO.GPIOx[UART_GPIO_TX_INDEX] = SWIFT_UART2_TX_PIN_PORT;
@@ -100,14 +93,13 @@ void SWIFT_UART2_Init(INT32U	BaudRate)
 	SWIFT_UART2_INT_Switch(ENABLE);
 
 	SWIFT_UART2_Buff.pbuff = SWIFTUART2Buff;
-	memset(SWIFT_UART2_Buff.pbuff,0,32);
+	memset(SWIFT_UART2_Buff.pbuff,0,SWIFTUART2BuffSize);
 	SWIFT_UART2_Buff.write_p = 0;
 	SWIFT_UART2_Buff.read_p  = 0;
 
 	BSP_OS_Sem_Creat(&SWIFT_UART2_Rev_Sem,"Uart2_Rcv_Sem",0);
 
 	BSP_OS_Sem_Creat(&SWIFT_UART2_Send_Sem,"Uart2_SndSem",1);
-
 }
 
 /***********************************************************
@@ -125,7 +117,6 @@ void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen)
 	SWIFT_UART2_RecvBuff_Clear();
 	BSP_UART_Send(SWIFT_UART2_GPIO.USARTx, buff,bufflen);
 	BSP_OS_Sem_Post(&SWIFT_UART2_Send_Sem);
-	
 }
 
 /***********************************************************
@@ -158,5 +149,16 @@ void SWIFT_UART2_RecvBuff_Clear(void)
 	memset(SWIFT_UART2_Buff.pbuff,0,SWIFTUART2BuffSize);
 	SWIFT_UART2_Buff.write_p = 0;
 	SWIFT_UART2_Buff.read_p = 0;
+}
+
+INT32S SWIFT_USART2_GETC(void)
+{
+    BSP_OS_Sem_Pend(&SWIFT_UART2_Rev_Sem, 0); 
+    return BSP_UART_RCV(SWIFT_UART2_GPIO.USARTx);
+}
+
+INT32S SWIFT_USART2_TSTC(void)
+{
+    return BSP_UART_TST(SWIFT_UART2_GPIO.USARTx);
 }
 

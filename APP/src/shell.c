@@ -10,6 +10,7 @@
 #include "cmd_power.h"
 #include "cmd_gps.h"
 #include "cmd_battery.h"
+#include "cmd_ap.h"
 
 
 
@@ -37,6 +38,7 @@ int APP_Shell_Init(void)
 	cmd_power_init();
 	cmd_gps_init();
 	cmd_battery_init();
+	cmd_ap_init();
 
 	cli_init();
 	

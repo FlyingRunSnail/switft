@@ -174,11 +174,21 @@ void  BSP_Init (void)
 
     HW_GPS_Init();
 
+    // to GPS
+    SWIFT_UART5_Init(9600);
+
     HW_PHY_Rst_Init();
 
     HW_BATTERY_Init();
 
+    // to Battery
     SWIFT_UART3_Init(9600);
+
+    // to D350
+    SWIFT_UART2_Init(115200);
+
+    // to AP
+    SWIFT_UART6_Init(57600);
 
 	//DS1302_Init();
 	

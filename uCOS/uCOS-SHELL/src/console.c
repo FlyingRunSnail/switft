@@ -8,27 +8,28 @@
 #include <stdio.h>
 #include "console.h"
 #include "command.h"
-#include "hw_uart1.h"
+//#include "hw_uart1.h"
+#include "hw_uart2.h"
 
 int cgetc(void)
 {
-	return SWIFT_USART1_GETC();
+	return SWIFT_USART2_GETC();
 }
 
 int ctstc(void)
 {
-	return SWIFT_USART1_TSTC();
+	return SWIFT_USART2_TSTC();
 }
 
 void cputc(char c)
 {
-	SWIFT_UART1_SendBuff(&c, 1);
+	SWIFT_UART2_SendBuff(&c, 1);
 }
 
 void cputs(char *s)
 {
 	/* Send directly to the handler */
-	SWIFT_UART1_SendBuff(s, strlen(s));
+	SWIFT_UART2_SendBuff(s, strlen(s));
 }
 
 #ifdef __GNUC__

@@ -63,6 +63,7 @@ SRCS = hw_uart6.c \
 	hw_led.c \
 	hw_uart3.c \
 	hw_uart4.c \
+	hw_uart_dma.c \
 	hw_spiflash.c \
 	hw_watchdog.c \
 	ic_ad7814.c \

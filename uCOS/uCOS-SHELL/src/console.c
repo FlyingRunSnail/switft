@@ -11,7 +11,12 @@
 //#include "hw_uart1.h"
 #include "hw_uart2.h"
 
-int cgetc(void)
+int cangetc(void)
+{
+   BSP_OS_Sem_Pend(&SWIFT_UART2_Rev_Sem, 0); 
+}
+
+char cgetc(void)
 {
 	return SWIFT_USART2_GETC();
 }

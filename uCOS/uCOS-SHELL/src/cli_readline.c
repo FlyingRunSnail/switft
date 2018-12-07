@@ -494,10 +494,17 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
 	}
 	col = plen;
 
+    while (1)
+    {
+    cangetc();
+
 	for (;;) {
         
-		//c = getc();
+        //cangetc();
 		c = cgetc();
+
+        if (c == 0xff)
+            break;
 
 		/*
 		 * Special character handling
@@ -577,6 +584,7 @@ int cli_readline_into_buffer(const char *const prompt, char *buffer,
 			}
 		}
 	}
+    }
 }
 
 #if 0

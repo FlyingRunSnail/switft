@@ -2,6 +2,11 @@
 #define HW_UART2_DEF
 
 #include <hw_uart2.h>
+#include <hw_uart_dma.h>
+#include "kfifo.h"
+
+extern INT8U uart2_dma_buf[USART2_DMA_BUF_LEN];
+struct kfifo *uart2_rcv_fifo;
 
 #define    SWIFTUART2BuffSize (32)
 
@@ -11,6 +16,9 @@ INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];
 str_UART_Buff		SWIFT_UART2_Buff;
 OS_SEM SWIFT_UART2_Send_Sem;	
 OS_SEM SWIFT_UART2_Rev_Sem;	
+
+#define UART2_BUF_LEN (256)
+INT8U uart2_buf[UART2_BUF_LEN] = {0};
 
 /***********************************************************
 **name:	SWIFT_UART2_IntHandler
@@ -23,10 +31,22 @@ OS_SEM SWIFT_UART2_Rev_Sem;
 ************************************************************/
 void SWIFT_UART2_IntHandler(void)
 {
-	if (USART_GetITStatus(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE) != RESET)
+    INT16U tmp;
+
+	//if (USART_GetITStatus(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE) != RESET)
+	if (USART_GetITStatus(SWIFT_UART2_GPIO.USARTx, USART_IT_IDLE) != RESET)
     {
-        USART_ClearITPendingBit(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE);
-        BSP_OS_Sem_Post(&SWIFT_UART2_Rev_Sem);
+        tmp = SWIFT_UART2_GPIO.USARTx->SR;
+        tmp = SWIFT_UART2_GPIO.USARTx->DR;
+        (void)tmp;
+
+        //USART_ClearITPendingBit(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE);
+        USART_ClearITPendingBit(SWIFT_UART2_GPIO.USARTx, USART_IT_IDLE);
+
+        //关闭DMA,防止处理其间有数据
+        DMA_Cmd(DMA1_Stream5, DISABLE);
+
+        //BSP_OS_Sem_Post(&SWIFT_UART2_Rev_Sem);
 	}
 }
 
@@ -43,7 +63,8 @@ void SWIFT_UART2_INT_Switch(INT8U switch_set)
 {
 	if( switch_set == ENABLE)
 	{
-		USART_ITConfig(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE, ENABLE);
+		//USART_ITConfig(SWIFT_UART2_GPIO.USARTx, USART_IT_RXNE, ENABLE);
+		USART_ITConfig(SWIFT_UART2_GPIO.USARTx, USART_IT_IDLE, ENABLE);
 		BSP_IntVectSet(HW_UART2_INT_ID, SWIFT_UART2_IntHandler);
 		BSP_IntEn(HW_UART2_INT_ID);
 	}
@@ -96,6 +117,12 @@ void SWIFT_UART2_Init(INT32U BaudRate)
 	memset(SWIFT_UART2_Buff.pbuff,0,SWIFTUART2BuffSize);
 	SWIFT_UART2_Buff.write_p = 0;
 	SWIFT_UART2_Buff.read_p  = 0;
+
+    /* uart2 dma buf */
+    memset(uart2_buf, 0, UART2_BUF_LEN);
+    uart2_rcv_fifo = kfifo_alloc(uart2_buf, UART2_BUF_LEN);
+
+    HW_DMA_Rx_Config(USART2, DMA1_Stream5,  DMA1_Stream5_IRQn, DMA_Channel_4, &(USART2->DR), uart2_dma_buf, USART2_DMA_BUF_LEN);
 
 	BSP_OS_Sem_Creat(&SWIFT_UART2_Rev_Sem,"Uart2_Rcv_Sem",0);
 
@@ -151,14 +178,30 @@ void SWIFT_UART2_RecvBuff_Clear(void)
 	SWIFT_UART2_Buff.read_p = 0;
 }
 
-INT32S SWIFT_USART2_GETC(void)
+char SWIFT_USART2_GETC(void)
 {
-    BSP_OS_Sem_Pend(&SWIFT_UART2_Rev_Sem, 0); 
-    return BSP_UART_RCV(SWIFT_UART2_GPIO.USARTx);
+    char xch;
+
+    INT32U len = kfifo_len(uart2_rcv_fifo);
+
+    if (len > 0)
+    {
+        kfifo_get(uart2_rcv_fifo, &xch, 1);
+        return xch;
+    }
+
+    return 0xff;
 }
 
 INT32S SWIFT_USART2_TSTC(void)
 {
-    return BSP_UART_TST(SWIFT_UART2_GPIO.USARTx);
+    //return BSP_UART_TST(SWIFT_UART2_GPIO.USARTx);
+    INT32U len = kfifo_len(uart2_rcv_fifo);
+    if (len > 0)
+    {
+        return 1;
+    }
+
+    return 0;
 }
 

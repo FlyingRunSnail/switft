@@ -7,7 +7,7 @@
 
 int do_reset(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
-	printf("Resetting the board...\n");
+	printf("Resetting the board...\r\n");
 
 	BSP_SoftReset();
 

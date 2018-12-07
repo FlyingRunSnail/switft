@@ -25,8 +25,8 @@
 ************************************************************/
 int APP_Shell_Init(void)
 {
-	// init uart1 as debug com
-	SWIFT_UART1_Init(115200);
+	// init uart2 as debug com
+	SWIFT_UART2_Init(115200);
 
 	cmd_help_init();
 	cmd_ver_init();

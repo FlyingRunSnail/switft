@@ -10,3 +10,4 @@ build/*
 SI/
 MDK_PROJECT/
 *.un~
+tags

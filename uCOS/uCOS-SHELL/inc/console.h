@@ -10,7 +10,8 @@
 extern char console_buffer[];
 
 /* common/console.c */
-int cgetc(void);
+int cangetc(void);
+char cgetc(void);
 int ctstc(void);
 void cputc(char c);
 void cputs(char *s);

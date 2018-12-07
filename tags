@@ -921,6 +921,7 @@ B4_READ_DATA	HW/ic_n25q128.c	25;"	d	file:
 B4_SECTOR_ERASE	HW/ic_n25q128.c	51;"	d	file:
 B4_SUBSECTOR_ERASE	HW/ic_n25q128.c	48;"	d	file:
 BASEDIR	Makefile	/^BASEDIR := $(abspath .\/)$/;"	m
+BATTERY_BUF_LEN	APP/src/cmd_battery.c	29;"	d	file:
 BATTERY_REQ_BUF_LEN	HW/hw_battery.c	38;"	d	file:
 BCMP	lwip-1.4.1/src/netif/ppp/ppp_impl.h	212;"	d
 BCOPY	lwip-1.4.1/src/netif/ppp/ppp_impl.h	213;"	d
@@ -4792,21 +4793,25 @@ DMA1_Stream0_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1070;"	d
 DMA1_Stream0_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream0_IRQn           = 11,     \/*!< DMA1 Stream 0 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream1	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1170;"	d
 DMA1_Stream1_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1071;"	d
+DMA1_Stream1_IRQHandler	HW/hw_uart_dma.c	/^void DMA1_Stream1_IRQHandler(void) $/;"	f
 DMA1_Stream1_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream1_IRQn           = 12,     \/*!< DMA1 Stream 1 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream2	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1171;"	d
 DMA1_Stream2_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1072;"	d
 DMA1_Stream2_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream2_IRQn           = 13,     \/*!< DMA1 Stream 2 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream3	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1172;"	d
 DMA1_Stream3_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1073;"	d
+DMA1_Stream3_IRQHandler	HW/hw_uart_dma.c	/^void DMA1_Stream3_IRQHandler(void) $/;"	f
 DMA1_Stream3_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream3_IRQn           = 14,     \/*!< DMA1 Stream 3 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream4	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1173;"	d
 DMA1_Stream4_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1074;"	d
 DMA1_Stream4_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream4_IRQn           = 15,     \/*!< DMA1 Stream 4 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream5	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1174;"	d
 DMA1_Stream5_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1075;"	d
+DMA1_Stream5_IRQHandler	HW/hw_uart_dma.c	/^void DMA1_Stream5_IRQHandler(void) $/;"	f
 DMA1_Stream5_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream5_IRQn           = 16,     \/*!< DMA1 Stream 5 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream6	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1175;"	d
 DMA1_Stream6_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1076;"	d
+DMA1_Stream6_IRQHandler	HW/hw_uart_dma.c	/^void DMA1_Stream6_IRQHandler(void) $/;"	f
 DMA1_Stream6_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA1_Stream6_IRQn           = 17,     \/*!< DMA1 Stream 6 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA1_Stream7	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1176;"	d
 DMA1_Stream7_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1077;"	d
@@ -4830,12 +4835,14 @@ DMA2_Stream4_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1083;"	d
 DMA2_Stream4_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA2_Stream4_IRQn           = 60,     \/*!< DMA2 Stream 4 global Interrupt                                    *\/$/;"	e	enum:IRQn
 DMA2_Stream5	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1183;"	d
 DMA2_Stream5_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1084;"	d
+DMA2_Stream5_IRQHandler	HW/hw_uart_dma.c	/^void DMA2_Stream5_IRQHandler(void) $/;"	f
 DMA2_Stream5_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA2_Stream5_IRQn           = 68,     \/*!< DMA2 Stream 5 global interrupt                                    *\/$/;"	e	enum:IRQn
 DMA2_Stream6	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1184;"	d
 DMA2_Stream6_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1085;"	d
 DMA2_Stream6_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA2_Stream6_IRQn           = 69,     \/*!< DMA2 Stream 6 global interrupt                                    *\/$/;"	e	enum:IRQn
 DMA2_Stream7	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1185;"	d
 DMA2_Stream7_BASE	Lib/CMSIS/DeviceSupport/stm32f2xx.h	1086;"	d
+DMA2_Stream7_IRQHandler	HW/hw_uart_dma.c	/^void DMA2_Stream7_IRQHandler(void)$/;"	f
 DMA2_Stream7_IRQn	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  DMA2_Stream7_IRQn           = 70,     \/*!< DMA2 Stream 7 global interrupt                                    *\/$/;"	e	enum:IRQn
 DMABMR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t DMABMR;$/;"	m	struct:__anon71
 DMACHRBAR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t DMACHRBAR;$/;"	m	struct:__anon71
@@ -7981,7 +7988,8 @@ GPSConf	APP/inc/devdef.h	/^	strGPSConf 	GPSConf;$/;"	m	struct:_strGPSInfo_
 GPSData	APP/inc/devdef.h	/^	strGPSData	GPSData;$/;"	m	struct:_strGPSInfo_
 GPSInfo	APP/inc/devdef.h	/^	strGPSInfo			GPSInfo;$/;"	m	struct:_strDeviceInfo_
 GPSStat	APP/inc/devdef.h	/^	strGPSStat	GPSStat;$/;"	m	struct:_strGPSInfo_
-GPS_BUF_LEN	APP/src/main.c	196;"	d	file:
+GPS_BUF_LEN	APP/src/main.c	197;"	d	file:
+GPS_RCV_BUF_LEN	APP/src/cmd_gps.c	7;"	d	file:
 GTPR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint16_t GTPR;       \/*!< USART Guard time and prescaler register, Address offset: 0x18 *\/$/;"	m	struct:__anon89
 Get7Bits	lwip-1.4.1/src/netif/ppp/chpms.c	/^Get7Bits( u_char *input, int startBit)$/;"	f	file:
 GetMask	lwip-1.4.1/src/netif/ppp/ppp.c	/^GetMask(u32_t addr)$/;"	f
@@ -8130,6 +8138,9 @@ HW_Battery_Buf_Dump	HW/hw_battery.c	/^static void HW_Battery_Buf_Dump(INT8U *buf
 HW_Battery_Rcv_Data	HW/hw_battery.c	/^static void HW_Battery_Rcv_Data(INT8U *buf, INT32U len)$/;"	f	file:
 HW_Battery_Read_Enable	HW/hw_battery.c	/^static void HW_Battery_Read_Enable(void)$/;"	f	file:
 HW_Battery_Send_Read_Req	HW/hw_battery.c	/^static void HW_Battery_Send_Read_Req(void)$/;"	f	file:
+HW_DMA_Enable	HW/hw_uart_dma.c	/^void HW_DMA_Enable(DMA_Stream_TypeDef *DMA_Streamx, unsigned short ndtr)$/;"	f
+HW_DMA_Rx_Config	HW/hw_uart_dma.c	/^void HW_DMA_Rx_Config(USART_TypeDef *USART, DMA_Stream_TypeDef *DMA_Streamx, unsigned char irq_ch, unsigned int chx, unsigned int par, unsigned int mar, unsigned short ndtr)$/;"	f
+HW_DMA_Tx_Config	HW/hw_uart_dma.c	/^void HW_DMA_Tx_Config(DMA_Stream_TypeDef *DMA_Streamx, unsigned char irq_ch, unsigned int chx, unsigned int par, unsigned int mar, unsigned short ndtr)$/;"	f
 HW_EEPROM_DATA_PIN	HW/hw_eeprom.h	36;"	d
 HW_EEPROM_DATA_PIN_PORT	HW/hw_eeprom.h	35;"	d
 HW_EEPROM_DEF	HW/hw_eeprom.c	3;"	d	file:
@@ -8212,9 +8223,13 @@ HW_SPIFLASH_WriteByte	HW/hw_spiflash.c	/^INT8U HW_SPIFLASH_WriteByte(INT8U data)
 HW_UART1	HW/hw_uart1.h	19;"	d
 HW_UART1_DEF	HW/hw_uart1.c	1;"	d	file:
 HW_UART1_INT_ID	HW/hw_uart1.h	20;"	d
+HW_UART2_DEF	HW/hw_dma.c	2;"	d	file:
 HW_UART2_DEF	HW/hw_uart2.c	2;"	d	file:
+HW_UART2_GLOBE	HW/hw_dma.h	4;"	d
+HW_UART2_GLOBE	HW/hw_dma.h	6;"	d
 HW_UART2_GLOBE	HW/hw_uart2.h	4;"	d
 HW_UART2_GLOBE	HW/hw_uart2.h	6;"	d
+HW_UART2_INT_ID	HW/hw_dma.h	19;"	d
 HW_UART2_INT_ID	HW/hw_uart2.h	19;"	d
 HW_UART3_DEF	HW/hw_uart3.c	5;"	d	file:
 HW_UART3_GLOBE	HW/hw_uart3.h	5;"	d
@@ -10276,6 +10291,7 @@ MSR	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t              MSR;     
 MS_CHAP_RESPONSE_LEN	lwip-1.4.1/src/netif/ppp/chap.h	81;"	d
 MS_ChapResponse	lwip-1.4.1/src/netif/ppp/chpms.c	/^} MS_ChapResponse;$/;"	t	typeref:struct:__anon122	file:
 MULTIPLE_IO_READ_ID	HW/ic_n25q128.c	18;"	d	file:
+MYDMA_Rx_Config	HW/hw_dma.c	/^void MYDMA_Rx_Config(USART_TypeDef *USART, DMA_Stream_TypeDef *DMA_Streamx, u8 irq_ch, u32 chx, u32 par, u32 mar, u16 ndtr)$/;"	f
 MakeKey	lwip-1.4.1/src/netif/ppp/chpms.c	/^MakeKey( u_char *key,    \/* IN  56 bit DES key missing parity bits *\/$/;"	f	file:
 Match	uCOS/uCOS-III/Source/os.h	/^    OS_TICK              Match;                             \/* Timer expires when OSTmrTickCtr matches this value     *\/$/;"	m	struct:os_tmr
 Math_Init	uCOS/uC-LIB/lib_math.c	/^void  Math_Init (void)$/;"	f
@@ -13928,7 +13944,9 @@ SWAP_BYTES_IN_WORD	lwip-1.4.1/src/include/ipv4/lwip/inet_chksum.h	47;"	d
 SWIER	Lib/CMSIS/DeviceSupport/stm32f2xx.h	/^  __IO uint32_t SWIER;  \/*!< EXTI Software interrupt event register,  Address offset: 0x10 *\/$/;"	m	struct:__anon72
 SWIFTUART1Buff	HW/hw_uart1.c	/^INT8U	SWIFTUART1Buff[SWIFTUART1BuffSize];$/;"	v
 SWIFTUART1BuffSize	HW/hw_uart1.c	6;"	d	file:
+SWIFTUART2Buff	HW/hw_dma.c	/^INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];$/;"	v
 SWIFTUART2Buff	HW/hw_uart2.c	/^INT8U	SWIFTUART2Buff[SWIFTUART2BuffSize];$/;"	v
+SWIFTUART2BuffSize	HW/hw_dma.c	6;"	d	file:
 SWIFTUART2BuffSize	HW/hw_uart2.c	6;"	d	file:
 SWIFTUART3Buff	HW/hw_uart3.c	/^INT8U	SWIFTUART3Buff[SWIFTUART3BuffSize];$/;"	v
 SWIFTUART3BuffSize	HW/hw_uart3.c	13;"	d	file:
@@ -13953,21 +13971,31 @@ SWIFT_UART1_SendBuff	HW/hw_uart1.c	/^void SWIFT_UART1_SendBuff(INT8U *buff, INT3
 SWIFT_UART1_Send_Sem	HW/hw_uart1.c	/^OS_SEM SWIFT_UART1_Send_Sem;	$/;"	v
 SWIFT_UART1_TX_PIN	HW/hw_uart1.h	14;"	d
 SWIFT_UART1_TX_PIN_PORT	HW/hw_uart1.h	13;"	d
+SWIFT_UART2	HW/hw_dma.h	18;"	d
 SWIFT_UART2	HW/hw_uart2.h	18;"	d
+SWIFT_UART2_Buff	HW/hw_dma.c	/^str_UART_Buff		SWIFT_UART2_Buff;$/;"	v
 SWIFT_UART2_Buff	HW/hw_uart2.c	/^str_UART_Buff		SWIFT_UART2_Buff;$/;"	v
+SWIFT_UART2_GPIO	HW/hw_dma.c	/^static str_UART_GPIO_HARD	SWIFT_UART2_GPIO;$/;"	v	file:
 SWIFT_UART2_GPIO	HW/hw_uart2.c	/^static str_UART_GPIO_HARD	SWIFT_UART2_GPIO;$/;"	v	file:
 SWIFT_UART2_INT_Switch	HW/hw_uart2.c	/^void SWIFT_UART2_INT_Switch(INT8U switch_set)$/;"	f
 SWIFT_UART2_Init	HW/hw_uart2.c	/^void SWIFT_UART2_Init(INT32U BaudRate)$/;"	f
 SWIFT_UART2_IntHandler	HW/hw_uart2.c	/^void SWIFT_UART2_IntHandler(void)$/;"	f
+SWIFT_UART2_RX_PIN	HW/hw_dma.h	16;"	d
 SWIFT_UART2_RX_PIN	HW/hw_uart2.h	16;"	d
+SWIFT_UART2_RX_PIN_PORT	HW/hw_dma.h	15;"	d
 SWIFT_UART2_RX_PIN_PORT	HW/hw_uart2.h	15;"	d
 SWIFT_UART2_RecvBuff	HW/hw_uart2.c	/^void SWIFT_UART2_RecvBuff(INT8U *buff, INT32U *bufflen)$/;"	f
 SWIFT_UART2_RecvBuff_Clear	HW/hw_uart2.c	/^void SWIFT_UART2_RecvBuff_Clear(void)$/;"	f
+SWIFT_UART2_Rev_Sem	HW/hw_dma.c	/^OS_SEM SWIFT_UART2_Rev_Sem;	$/;"	v
+SWIFT_UART2_Rev_Sem	HW/hw_dma.h	/^HW_UART2_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;$/;"	v
 SWIFT_UART2_Rev_Sem	HW/hw_uart2.c	/^OS_SEM SWIFT_UART2_Rev_Sem;	$/;"	v
 SWIFT_UART2_Rev_Sem	HW/hw_uart2.h	/^HW_UART2_GLOBE OS_SEM SWIFT_UART2_Rev_Sem;$/;"	v
 SWIFT_UART2_SendBuff	HW/hw_uart2.c	/^void SWIFT_UART2_SendBuff(INT8U *buff, INT32U bufflen)$/;"	f
+SWIFT_UART2_Send_Sem	HW/hw_dma.c	/^OS_SEM SWIFT_UART2_Send_Sem;	$/;"	v
 SWIFT_UART2_Send_Sem	HW/hw_uart2.c	/^OS_SEM SWIFT_UART2_Send_Sem;	$/;"	v
+SWIFT_UART2_TX_PIN	HW/hw_dma.h	13;"	d
 SWIFT_UART2_TX_PIN	HW/hw_uart2.h	13;"	d
+SWIFT_UART2_TX_PIN_PORT	HW/hw_dma.h	12;"	d
 SWIFT_UART2_TX_PIN_PORT	HW/hw_uart2.h	12;"	d
 SWIFT_UART3	HW/hw_uart3.h	16;"	d
 SWIFT_UART3_Buff	HW/hw_uart3.c	/^str_UART_Buff		SWIFT_UART3_Buff;$/;"	v
@@ -15649,6 +15677,7 @@ __DMB	Lib/CMSIS/core_cmInstr.h	89;"	d
 __DSB	Lib/CMSIS/core_cmInstr.h	/^__attribute__( ( always_inline ) ) static __INLINE void __DSB(void)$/;"	f
 __DSB	Lib/CMSIS/core_cmInstr.h	81;"	d
 __EXPORTS_H__	uCOS/uCOS-SHELL/inc/exports.h	2;"	d
+__HW_DMA_H	HW/hw_uart_dma.h	2;"	d
 __HW_UART6__	HW/hw_uart6.h	3;"	d
 __I	Lib/CMSIS/core_cm3.h	108;"	d
 __I	Lib/CMSIS/core_cm3.h	110;"	d
@@ -16039,8 +16068,10 @@ b_reset	uCOS/uCOS-SHELL/src/cli_hush.c	/^static void b_reset(o_string *o)$/;"	f	
 backlog	lwip-1.4.1/src/include/lwip/api_msg.h	/^      u8_t backlog;$/;"	m	struct:api_msg_msg::__anon135::__anon143
 backlog	lwip-1.4.1/src/include/lwip/tcp.h	/^  u8_t backlog;$/;"	m	struct:tcp_pcb_listen
 bad_ip_adrs	lwip-1.4.1/src/netif/ppp/auth.c	/^bad_ip_adrs(u32_t addr)$/;"	f
-bat_cnt	HW/hw_battery.h	/^    INT8U  bat_cnt;$/;"	m	struct:st_battery_base_info
-battery_base_info_t	HW/hw_battery.h	/^}battery_base_info_t;$/;"	t	typeref:struct:st_battery_base_info
+bat_cnt	APP/src/cmd_battery.c	/^     unsigned char  bat_cnt;$/;"	m	struct:st_battery_base_info	file:
+battery_base_info_t	APP/src/cmd_battery.c	/^}battery_base_info_t;$/;"	t	typeref:struct:st_battery_base_info	file:
+battery_buf	APP/src/cmd_battery.c	/^char battery_buf[BATTERY_BUF_LEN] = {0};$/;"	v
+battery_fifo	APP/src/cmd_battery.c	/^struct kfifo *battery_fifo;$/;"	v	typeref:struct:kfifo
 battery_id_t	HW/hw_battery.h	/^}battery_id_t;$/;"	t	typeref:enum:__anon1
 bc	lwip-1.4.1/src/include/lwip/api_msg.h	/^    } bc;$/;"	m	union:api_msg_msg::__anon135	typeref:struct:api_msg_msg::__anon135::__anon137
 beacon_rxpower_db	APP/inc/devdef.h	/^	FP32 				beacon_rxpower_db;$/;"	m	struct:_strSATseekerCurrSta_
@@ -16208,7 +16239,7 @@ ctrlc_disabled	uCOS/uCOS-SHELL/src/console.c	/^static int ctrlc_disabled = 0;	\/
 ctrlc_was_pressed	uCOS/uCOS-SHELL/src/console.c	/^static int ctrlc_was_pressed = 0;$/;"	v	file:
 ctstc	uCOS/uCOS-SHELL/src/console.c	/^int ctstc(void)$/;"	f
 ctx	lwip-1.4.1/src/include/lwip/tcpip.h	/^      void *ctx;$/;"	m	struct:tcpip_msg::__anon126::__anon128
-current	HW/hw_battery.h	/^    INT16S current;$/;"	m	struct:st_battery_base_info
+current	APP/src/cmd_battery.c	/^     unsigned short current;$/;"	m	struct:st_battery_base_info	file:
 current_header	lwip-1.4.1/src/core/ipv4/ip.c	/^const struct ip_hdr *current_header;$/;"	v	typeref:struct:ip_hdr
 current_iphdr_dest	lwip-1.4.1/src/core/ipv4/ip.c	/^ip_addr_t current_iphdr_dest;$/;"	v
 current_iphdr_src	lwip-1.4.1/src/core/ipv4/ip.c	/^ip_addr_t current_iphdr_src;$/;"	v
@@ -16485,7 +16516,7 @@ fd	lwip-1.4.1/src/netif/ppp/ppp.c	/^  sio_fd_t fd;$/;"	m	struct:PPPControlRx_s	f
 fd_bits	lwip-1.4.1/src/include/lwip/sockets.h	/^          unsigned char fd_bits [(FD_SETSIZE+7)\/8];$/;"	m	struct:fd_set
 fd_set	lwip-1.4.1/src/include/lwip/sockets.h	/^        } fd_set;$/;"	t	typeref:struct:fd_set
 fd_set	lwip-1.4.1/src/include/lwip/sockets.h	/^  typedef struct fd_set {$/;"	s
-fet_ctrl_status	HW/hw_battery.h	/^    INT8U  fet_ctrl_status;$/;"	m	struct:st_battery_base_info
+fet_ctrl_status	APP/src/cmd_battery.c	/^     unsigned char  fet_ctrl_status;$/;"	m	struct:st_battery_base_info	file:
 file	lwip-1.4.1/src/core/memp.c	/^  const char *file;$/;"	m	struct:memp	file:
 final_printf	uCOS/uCOS-SHELL/src/cli_hush.c	237;"	d	file:
 find_cmd	uCOS/uCOS-SHELL/src/command.c	/^cmd_tbl_t *find_cmd(const char *cmd)$/;"	f
@@ -16546,6 +16577,7 @@ gain_range_flag	APP/inc/devdef.h	/^	INT8U		gain_range_flag;		\/\/ 天线增益范围标
 gate	APP/inc/devdef.h	/^	INT32U	gate;$/;"	m	struct:_strNetWork_
 gen_trap	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u32_t gen_trap;$/;"	m	struct:snmp_msg_trap
 get	uCOS/uCOS-SHELL/src/cli_hush.c	/^	int (*get) (struct in_str *);$/;"	m	struct:in_str	file:
+get_gps_info	APP/src/cmd_gps.c	/^static void get_gps_info(void)$/;"	f	file:
 get_idle_time	lwip-1.4.1/src/netif/ppp/ppp.c	/^get_idle_time(int u, struct ppp_idle *ip)$/;"	f
 get_iphl	lwip-1.4.1/src/netif/ppp/ipcp.c	1376;"	d	file:
 get_ipoff	lwip-1.4.1/src/netif/ppp/ipcp.c	1377;"	d	file:
@@ -16583,6 +16615,8 @@ gethostbyname_r_helper	lwip-1.4.1/src/api/netdb.c	/^struct gethostbyname_r_helpe
 getpeername	lwip-1.4.1/src/include/lwip/sockets.h	352;"	d
 getsockname	lwip-1.4.1/src/include/lwip/sockets.h	351;"	d
 getsockopt	lwip-1.4.1/src/include/lwip/sockets.h	354;"	d
+gps_rcv_buf	APP/src/cmd_gps.c	/^static char gps_rcv_buf[GPS_RCV_BUF_LEN] = {0};$/;"	v	file:
+gps_rcv_fifo	APP/src/cmd_gps.c	/^struct kfifo *gps_rcv_fifo;$/;"	v	typeref:struct:kfifo
 group	uCOS/uCOS-SHELL/src/cli_hush.c	/^	struct pipe *group;			\/* if non-NULL, first in group or subshell *\/$/;"	m	struct:child_prog	typeref:struct:child_prog::pipe	file:
 group_address	lwip-1.4.1/src/include/ipv4/lwip/igmp.h	/^  ip_addr_t          group_address;$/;"	m	struct:igmp_group
 group_state	lwip-1.4.1/src/include/ipv4/lwip/igmp.h	/^  u8_t               group_state;$/;"	m	struct:igmp_group
@@ -17215,7 +17249,7 @@ main	lwip-1.4.1/test/unit/lwip_unittests.c	/^int main()$/;"	f
 make_argv	uCOS/uCOS-SHELL/src/command.c	/^static int make_argv(char *s, int argvsz, char *argv[])$/;"	f	file:
 make_list_in	uCOS/uCOS-SHELL/src/cli_hush.c	/^static char **make_list_in(char **inp, char *name)$/;"	f	file:
 make_string	uCOS/uCOS-SHELL/src/cli_hush.c	/^static char *make_string(char **inp, int *nonnull)$/;"	f	file:
-manufacture_date	HW/hw_battery.h	/^    INT16U manufacture_date;$/;"	m	struct:st_battery_base_info
+manufacture_date	APP/src/cmd_battery.c	/^     unsigned short manufacture_date;$/;"	m	struct:st_battery_base_info	file:
 map	uCOS/uCOS-SHELL/src/cli_hush.c	/^static char map[256];$/;"	v	file:
 mapset	uCOS/uCOS-SHELL/src/cli_hush.c	/^static void mapset(const unsigned char *set, int code)$/;"	f	file:
 mask	APP/inc/devdef.h	/^	INT32U 	mask;$/;"	m	struct:_strNetWork_
@@ -17552,7 +17586,7 @@ nptr	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^  struct mib_node *nptr;$/;"	m
 nptr	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^  struct mib_node* const *nptr;$/;"	m	struct:mib_array_node
 nrtx	lwip-1.4.1/src/include/lwip/tcp.h	/^  u8_t nrtx;    \/* number of retransmissions *\/$/;"	m	struct:tcp_pcb
 nse	lwip-1.4.1/src/core/snmp/mib_structs.c	/^struct nse$/;"	s	file:
-ntc_cnt	HW/hw_battery.h	/^    INT8U  ntc_cnt; $/;"	m	struct:st_battery_base_info
+ntc_cnt	APP/src/cmd_battery.c	/^     unsigned char  ntc_cnt;$/;"	m	struct:st_battery_base_info	file:
 ntohl	lwip-1.4.1/src/include/lwip/def.h	74;"	d
 ntohl	lwip-1.4.1/src/include/lwip/def.h	80;"	d
 ntohs	lwip-1.4.1/src/include/lwip/def.h	71;"	d
@@ -17835,9 +17869,9 @@ printf	uCOS/uCOS-SHELL/src/console.c	/^int printf(const char *fmt, ...)$/;"	f
 printpkt	lwip-1.4.1/src/netif/ppp/ppp_impl.h	/^    int  (*printpkt) (u_char *pkt, int len,$/;"	m	struct:protent
 progs	uCOS/uCOS-SHELL/src/cli_hush.c	/^	struct child_prog *progs;	\/* array of commands in pipe *\/$/;"	m	struct:pipe	typeref:struct:pipe::child_prog	file:
 promptmode	uCOS/uCOS-SHELL/src/cli_hush.c	/^	int promptmode;$/;"	m	struct:in_str	file:
-proportionate_status	HW/hw_battery.h	/^    INT16U proportionate_status;$/;"	m	struct:st_battery_base_info
-proportionate_status_h	HW/hw_battery.h	/^    INT16U proportionate_status_h;$/;"	m	struct:st_battery_base_info
-protect_status	HW/hw_battery.h	/^    INT16U protect_status;$/;"	m	struct:st_battery_base_info
+proportionate_status	APP/src/cmd_battery.c	/^     unsigned short proportionate_status;$/;"	m	struct:st_battery_base_info	file:
+proportionate_status_h	APP/src/cmd_battery.c	/^     unsigned short proportionate_status_h;$/;"	m	struct:st_battery_base_info	file:
+protect_status	APP/src/cmd_battery.c	/^     unsigned short protect_status;$/;"	m	struct:st_battery_base_info	file:
 protent	lwip-1.4.1/src/netif/ppp/ppp_impl.h	/^struct protent {$/;"	s
 proterr	lwip-1.4.1/src/include/lwip/stats.h	/^  STAT_COUNTER proterr;          \/* Protocol error. *\/$/;"	m	struct:stats_igmp
 proterr	lwip-1.4.1/src/include/lwip/stats.h	/^  STAT_COUNTER proterr;          \/* Protocol error. *\/$/;"	m	struct:stats_proto
@@ -17919,13 +17953,13 @@ recved_bytes	lwip-1.4.1/test/unit/tcp/tcp_helper.h	/^  u32_t recved_bytes;$/;"	m
 recved_bytes_after_close	lwip-1.4.1/test/unit/tcp/tcp_helper.h	/^  u32_t recved_bytes_after_close;$/;"	m	struct:test_tcp_counters
 recvfrom	lwip-1.4.1/src/include/lwip/sockets.h	357;"	d
 recvmbox	lwip-1.4.1/src/include/lwip/api.h	/^  sys_mbox_t recvmbox;$/;"	m	struct:netconn
-recycle_times	HW/hw_battery.h	/^    INT16U recycle_times;$/;"	m	struct:st_battery_base_info
+recycle_times	APP/src/cmd_battery.c	/^     unsigned short recycle_times;$/;"	m	struct:st_battery_base_info	file:
 ref	lwip-1.4.1/src/include/lwip/pbuf.h	/^  u16_t ref;$/;"	m	struct:pbuf
 refuse_chap	lwip-1.4.1/src/netif/ppp/ppp_impl.h	/^  u_int  refuse_chap       : 1;       \/* Don't wanna auth. ourselves with CHAP *\/$/;"	m	struct:ppp_settings
 refuse_pap	lwip-1.4.1/src/netif/ppp/ppp_impl.h	/^  u_int  refuse_pap        : 1;       \/* Don't wanna auth. ourselves with PAP *\/$/;"	m	struct:ppp_settings
 refused_data	lwip-1.4.1/src/include/lwip/tcp.h	/^  struct pbuf *refused_data; \/* Data previously received but not yet taken by upper layer *\/$/;"	m	struct:tcp_pcb	typeref:struct:tcp_pcb::pbuf
 rejci	lwip-1.4.1/src/netif/ppp/fsm.h	/^  int  (*rejci)(fsm*, u_char*, int);                \/* Reject our Configuration Information *\/$/;"	m	struct:fsm_callbacks
-remainder_capcity	HW/hw_battery.h	/^    INT16U remainder_capcity;$/;"	m	struct:st_battery_base_info
+remainder_capcity	APP/src/cmd_battery.c	/^     unsigned short remainder_capcity;$/;"	m	struct:st_battery_base_info	file:
 remote_name	lwip-1.4.1/src/netif/ppp/ppp_impl.h	/^  char remote_name[MAXNAMELEN   + 1]; \/* Peer's name for authentication *\/$/;"	m	struct:ppp_settings
 remote_port	lwip-1.4.1/src/include/lwip/tcp.h	/^  u16_t remote_port;$/;"	m	struct:tcp_pcb
 remote_port	lwip-1.4.1/src/include/lwip/udp.h	/^  u16_t local_port, remote_port;$/;"	m	struct:udp_pcb
@@ -17953,7 +17987,7 @@ rhl	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  struct snmp_resp_header_lengths r
 rid	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  s32_t rid;$/;"	m	struct:snmp_msg_pstat
 ridlen	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u16_t ridlen;$/;"	m	struct:snmp_resp_header_lengths
 ridlenlen	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u8_t ridlenlen;$/;"	m	struct:snmp_resp_header_lengths
-rsoc	HW/hw_battery.h	/^    INT8U  rsoc;$/;"	m	struct:st_battery_base_info
+rsoc	APP/src/cmd_battery.c	/^     unsigned char  rsoc;$/;"	m	struct:st_battery_base_info	file:
 rstate	lwip-1.4.1/src/netif/ppp/vj.h	/^  struct cstate rstate[MAX_SLOTS]; \/* receive connection states *\/$/;"	m	struct:vjcompress	typeref:struct:vjcompress::cstate
 rt	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u8_t rt;$/;"	m	struct:snmp_msg_pstat
 rterr	lwip-1.4.1/src/include/lwip/stats.h	/^  STAT_COUNTER rterr;            \/* Routing error. *\/$/;"	m	struct:stats_proto
@@ -18076,6 +18110,7 @@ set_value_q	lwip-1.4.1/src/include/lwip/snmp_structs.h	/^  void (*set_value_q)(u
 setsockopt	lwip-1.4.1/src/include/lwip/sockets.h	353;"	d
 setup_string_in_str	uCOS/uCOS-SHELL/src/cli_hush.c	/^static void setup_string_in_str(struct in_str *i, const char *s)$/;"	f	file:
 setup_tcp	lwip-1.4.1/src/api/api_msg.c	/^setup_tcp(struct netconn *conn)$/;"	f	file:
+show_battery_info	APP/src/cmd_battery.c	/^static void show_battery_info(void)$/;"	f	file:
 show_memory	APP/src/cmd_d.c	/^static int show_memory(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
 show_version	APP/src/cmd_ver.c	/^static int show_version(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])$/;"	f	file:
 shut	lwip-1.4.1/src/include/lwip/api_msg.h	/^      u8_t shut;$/;"	m	struct:api_msg_msg::__anon135::__anon141
@@ -18499,7 +18534,7 @@ socket	lwip-1.4.1/src/include/lwip/sockets.h	360;"	d
 sockets	lwip-1.4.1/src/api/sockets.c	/^static struct lwip_sock sockets[NUM_SOCKETS];$/;"	v	typeref:struct:lwip_sock	file:
 socklen_t	lwip-1.4.1/src/include/lwip/sockets.h	/^typedef u32_t socklen_t;$/;"	t
 softver	APP/inc/devdef.h	/^	INT8U			softver[16];$/;"	m	struct:_strVersion_
-software_ver	HW/hw_battery.h	/^    INT8U  software_ver;$/;"	m	struct:st_battery_base_info
+software_ver	APP/src/cmd_battery.c	/^     unsigned char  software_ver;$/;"	m	struct:st_battery_base_info	file:
 sp	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u16_t sp;$/;"	m	struct:snmp_msg_pstat
 sp	uCOS/uCOS-SHELL/src/cli_hush.c	/^	int sp;				\/* number of SPECIAL_VAR_SYMBOL *\/$/;"	m	struct:child_prog	file:
 spc_trap	lwip-1.4.1/src/include/lwip/snmp_msg.h	/^  u32_t spc_trap;$/;"	m	struct:snmp_msg_trap
@@ -18507,7 +18542,7 @@ sprintf	uCOS/uCOS-SHELL/src/vsprintf.c	/^int sprintf(char *buf, const char *fmt,
 src	lwip-1.4.1/src/include/ipv6/lwip/ip.h	/^  struct ip_addr src, dest;          \/* source and destination IP addresses *\/$/;"	m	struct:ip_hdr	typeref:struct:ip_hdr::ip_addr
 src_flag	APP/inc/devdef.h	/^	INT32U 			src_flag;			\/\/ 时间源， 0x00表示自动获取， 0x01表示手动设置，0x02表示GPS获取$/;"	m	struct:_strSysDateTime_
 ssthresh	lwip-1.4.1/src/include/lwip/tcp.h	/^  u16_t ssthresh;$/;"	m	struct:tcp_pcb
-st_battery_base_info	HW/hw_battery.h	/^typedef struct st_battery_base_info$/;"	s
+st_battery_base_info	APP/src/cmd_battery.c	/^typedef struct st_battery_base_info$/;"	s	file:
 stack	uCOS/uCOS-SHELL/src/cli_hush.c	/^	struct p_context *stack;$/;"	m	struct:p_context	typeref:struct:p_context::p_context	file:
 starting	lwip-1.4.1/src/netif/ppp/fsm.h	/^  void (*starting)(fsm*);                           \/* Called when we want the lower layer *\/$/;"	m	struct:fsm_callbacks
 state	lwip-1.4.1/src/core/dns.c	/^  u8_t  state;$/;"	m	struct:dns_table_entry	file:
@@ -18544,7 +18579,7 @@ stats_proto	lwip-1.4.1/src/include/lwip/stats.h	/^struct stats_proto {$/;"	s
 stats_sys	lwip-1.4.1/src/include/lwip/stats.h	/^struct stats_sys {$/;"	s
 stats_syselem	lwip-1.4.1/src/include/lwip/stats.h	/^struct stats_syselem {$/;"	s
 status_callback	lwip-1.4.1/src/include/lwip/netif.h	/^  netif_status_callback_fn status_callback;$/;"	m	struct:netif
-std_capcity	HW/hw_battery.h	/^    INT16U std_capcity;$/;"	m	struct:st_battery_base_info
+std_capcity	APP/src/cmd_battery.c	/^     unsigned short std_capcity;$/;"	m	struct:st_battery_base_info	file:
 stderr	uCOS/uCOS-SHELL/inc/command.h	28;"	d
 stdin	uCOS/uCOS-SHELL/inc/command.h	26;"	d
 stdout	uCOS/uCOS-SHELL/inc/command.h	27;"	d
@@ -18936,7 +18971,7 @@ toport_chksum	lwip-1.4.1/src/include/lwip/netbuf.h	/^  u16_t toport_chksum;$/;"	
 tot_len	lwip-1.4.1/src/include/lwip/pbuf.h	/^  u16_t tot_len;$/;"	m	struct:pbuf
 total_size	APP/inc/devdef.h	/^	INT32U		total_size;$/;"	m	struct:_strEEPROMInfo_
 total_size	APP/inc/devdef.h	/^	INT32U		total_size;$/;"	m	struct:_strSPIFlashInfo_
-total_voltage	HW/hw_battery.h	/^    INT16U total_voltage;$/;"	m	struct:st_battery_base_info
+total_voltage	APP/src/cmd_battery.c	/^     unsigned short total_voltage;$/;"	m	struct:st_battery_base_info	file:
 trailing_strtol	uCOS/uCOS-SHELL/src/vsprintf.c	/^long trailing_strtol(const char *str)$/;"	f
 trailing_strtoln	uCOS/uCOS-SHELL/src/vsprintf.c	/^long trailing_strtoln(const char *str, const char *end)$/;"	f
 trap_dst	lwip-1.4.1/src/core/snmp/msg_out.c	/^struct snmp_trap_dst trap_dst[SNMP_TRAP_DESTINATIONS];$/;"	v	typeref:struct:snmp_trap_dst
